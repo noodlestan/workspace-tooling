@@ -19,6 +19,14 @@
     "lint:fix": "turbo run lint:fix",
     "test": "turbo run test"
   },
+  "bin": {
+    "noodlestan/esbuild-cli": "cli/esbuild-cli/bin/build.mjs",
+    "noodlestan/esbuild-cli-watch": "cli/esbuild-cli/bin/watch.mjs"
+  },
+  "dependencies": {
+    "esbuild": "0.28.0",
+    "esbuild-plugin-file-path-extensions": "^2.1.4"
+  },
   "devDependencies": {
     "@noodlestan/eslint-config": "0.0.7",
     "eslint": "8.57.1",
