@@ -1,0 +1,17 @@
+# Module
+
+## Package Script Set: Esbuild CLI Scripts
+
+**Scripts:**
+
+- Package Script: Lint
+  - Purpose: Check formatting and JavaScript lint.
+  - Command: `prettier . -c && eslint --ext .mjs .`
+
+- Package Script: Lint Fix
+  - Purpose: Fix formatting and JavaScript lint issues.
+  - Command: `prettier . -c --write && eslint --ext .mjs . --fix`
+
+- Package Script: Test
+  - Purpose: Run package validation.
+  - Command: `npm run lint`

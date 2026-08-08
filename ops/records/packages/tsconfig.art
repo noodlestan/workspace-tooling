@@ -6,6 +6,21 @@
 
 **Description:** Shared tsconfig presets (libs and cli variants) consumed by every project repo.
 
+**Author:** Noodlestan Collective
+
+**License:** MIT
+
+**Private:** false
+
+**PublishConfig:**
+
+- Access: public
+
+**Files:**
+
+- `cli`
+- `libs`
+
 **Path:** `configs/tsconfig/`
 
 **Canonical Name:** `@noodlestan/tsconfig`

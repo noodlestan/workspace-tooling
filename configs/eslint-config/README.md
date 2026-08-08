@@ -57,7 +57,7 @@ Run `npm run lint`. It will lint the example files provided.
 
 ### Committing
 
-Make sure the `pre-commit` hook was executed. It runs automatically before every commit and lints all code. Under the hood it runs `npm run lint` and `npm run ci`. Run these to inspect details of eventual errors.
+Make sure the `pre-commit` hook was executed. It runs automatically before every commit and lints all code. Under the hood it runs `npm run lint:silent`.
 
 ## MIT License
 

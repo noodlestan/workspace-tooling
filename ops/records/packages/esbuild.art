@@ -6,6 +6,28 @@
 
 **Description:** Wraps esbuild with file-path-extensions plugin. Provides `esbuild-cli` (build) and `esbuild-cli-watch` (watch) bins.
 
+**Author:** Noodlestan Collective
+
+**License:** MIT
+
+**Private:** false
+
+**PublishConfig:**
+
+- Access: public
+
+**Files:**
+
+- `bin`
+- `src`
+- `LICENSE-MIT`
+- `README.md`
+
+**Bins:**
+
+- `noodlestan/esbuild-cli`: `./bin/build.mjs`
+- `noodlestan/esbuild-cli-watch`: `./bin/watch.mjs`
+
 **Path:** `cli/esbuild-cli/`
 
 **Canonical Name:** `@noodlestan/esbuild`
@@ -22,6 +44,6 @@
 
 **Scripts:**
 
-- Package Script Set: Common Scripts
+- Package Script Set: Esbuild CLI Scripts
 
 **PackageFile:** package.json

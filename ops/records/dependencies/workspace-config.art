@@ -1,0 +1,9 @@
+# Module
+
+## Package Dependency: ESLint Config
+
+**Canonical Name:** `@noodlestan/eslint-config`
+
+**Purpose:** Shared Noodlestan ESLint and Prettier configuration.
+
+**Version:** `0.0.7`

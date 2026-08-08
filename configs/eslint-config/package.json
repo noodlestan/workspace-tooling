@@ -14,6 +14,8 @@
   },
   "files": [
     "src",
+    ".eslintrc.cjs",
+    "README.md",
     "LICENSE-MIT"
   ],
   "scripts": {

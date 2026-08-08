@@ -12,6 +12,9 @@ Every Noodlestan project repo consumes these packages so that no repo builds thr
 | `@noodlestan/eslint-config` | `configs/eslint-config` | Noodlestan's opinionated style guide configuration (ESLint + Prettier). |
 | `@noodlestan/tsconfig` | `configs/tsconfig` | Base TypeScript configurations (libs and cli variants). |
 
+The declared namespaced esbuild bins are linked by npm as `esbuild-cli` and
+`esbuild-cli-watch`.
+
 ## Getting started
 
 First make sure you are using the correct node version by running `nvm use`.

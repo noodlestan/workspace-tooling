@@ -1,0 +1,17 @@
+# Module
+
+## Package Script Set: ESLint Config Scripts
+
+**Scripts:**
+
+- Package Script: Lint
+  - Purpose: Check formatting and lint.
+  - Command: `prettier . -c && eslint .`
+
+- Package Script: Lint Silent
+  - Purpose: Check formatting and lint without normal log output.
+  - Command: `prettier . -c --log-level silent && eslint .`
+
+- Package Script: Test
+  - Purpose: Run package validation.
+  - Command: `npm run lint`

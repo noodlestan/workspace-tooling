@@ -6,8 +6,8 @@
 
 ```json
 "scripts": {
-  "build": "noodlestan/esbuild-cli",
-  "watch": "noodlestan/esbuild-cli-watch"
+  "build": "esbuild-cli",
+  "watch": "esbuild-cli-watch"
 }
 ```
 

@@ -4,7 +4,11 @@
 
 **Purpose:** Build tooling for Noodlestan workspaces.
 
-**Description:** Tooling for workspaces: checkout orchestration, build, lint, configs, scaffolding, and more. A build-tooling monorepo: an esbuild CLI wrapper plus the base eslint and typescript configs. Every project repo consumes it, so no repo builds through the workspace.
+**Description:** A build-tooling monorepo containing an esbuild CLI wrapper plus base ESLint and TypeScript configurations. Every project repo consumes it, so no repo builds through the workspace.
+
+**Remote:** `git@github.com:noodlestan/workspace-tooling.git`
+
+**Canonical Name:** `noodlestan/workspace-tooling`
 
 **Path:** `./`
 
@@ -12,10 +16,31 @@
 
 **packageManager:** npm@10.2.3
 
+**Private:** true
+
+**Author:** Noodlestan Collective
+
+**Engines:**
+
+- Node: 24.15.0
+
 **Namespaces:**
 
 - Namespace: CLI
 - Namespace: Configs
+
+**Workspaces:**
+
+- `cli/*`
+- `configs/*`
+
+**Dependencies:**
+
+- Runtime:
+  - Package Dependency Set: Build Tools
+- Dev:
+  - Package Dependency Set: Project Tools
+  - Package Dependency: ESLint Config
 
 **Scaffolders:**
 
@@ -23,13 +48,37 @@
 
 **PackageFile:** package.json
 
+**Setup:**
+
+Run at root of repository, not per package:
+
+```bash
+npm ci # to install dependencies.
+```
+
+**Verification:**
+
+Run per package modified:
+
+```bash
+npm run lint:fix # to fix formatting issues automatically
+npm run lint # to report other issues
+npm run build
+npm run test
+```
+
+**Bin:**
+
+- `noodlestan/esbuild-cli`: `cli/esbuild-cli/bin/build.mjs`
+- `noodlestan/esbuild-cli-watch`: `cli/esbuild-cli/bin/watch.mjs`
+
 **Scripts:**
 
 - Package Script Set: Root Lifecycle
 
 **License.Short**
 
-Copyright (c) 2026 [Noodlestan](https://noodlestan.org/).
+Copyright (c) 2024 [Noodlestan](https://noodlestan.org/).
 
 Published under a [MIT license](https://noodlestan.mit-license.org/).
 
@@ -37,7 +86,7 @@ Published under a [MIT license](https://noodlestan.mit-license.org/).
 
 MIT License https://noodlestan.mit-license.org/
 
-Copyright (c) 2026 Noodlestan https://noodlestan.org/
+Copyright (c) 2024 Noodlestan https://noodlestan.org/
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

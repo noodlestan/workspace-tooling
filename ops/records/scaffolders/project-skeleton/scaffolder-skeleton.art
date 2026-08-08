@@ -4,6 +4,6 @@
 
 **Purpose:** Scaffolds project root dotfiles.
 
-**Source:** `./skeleton`
+**Source:** `./skeleton` (relative to this record)
 
 **Target:** `{{%path}}`

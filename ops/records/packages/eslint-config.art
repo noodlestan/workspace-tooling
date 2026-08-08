@@ -6,6 +6,34 @@
 
 **Description:** Shared ESLint + Prettier configuration consumed by every project repo.
 
+**Author:** Noodlestan Collective
+
+**License:** MIT
+
+**Private:** false
+
+**PublishConfig:**
+
+- Access: public
+
+**Files:**
+
+- `src`
+- `.eslintrc.cjs`
+- `README.md`
+- `LICENSE-MIT`
+
+**Main:** `.eslintrc.cjs`
+
+**Repository:**
+
+- Type: git
+- URL: `git+https://github.com/noodlestan/eslint-config`
+
+**Engines:**
+
+- Node: `24.15.0`
+
 **Path:** `configs/eslint-config/`
 
 **Canonical Name:** `@noodlestan/eslint-config`
@@ -22,9 +50,11 @@
   - Package Dependency: ESLint
   - Package Dependency: Prettier
   - Package Dependency: TypeScript
+- Dev:
+  - Package Dependency Set: ESLint Config Dev Tools
 
 **Scripts:**
 
-- Package Script Set: Common Scripts
+- Package Script Set: ESLint Config Scripts
 
 **PackageFile:** package.json

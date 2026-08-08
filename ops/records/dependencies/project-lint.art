@@ -8,6 +8,14 @@
 
 **Version:** `10.1.8`
 
+## Package Dependency: TypeScript ESLint Plugin
+
+**Canonical Name:** `@typescript-eslint/eslint-plugin`
+
+**Purpose:** TypeScript-aware ESLint rules.
+
+**Version:** `8.11.0`
+
 ## Package Dependency: ESLint Config Standard
 
 **Canonical Name:** `eslint-config-standard`
@@ -61,6 +69,7 @@
 **Dependencies:**
 
 - Package Dependency: ESLint Config Prettier
+- Package Dependency: TypeScript ESLint Plugin
 - Package Dependency: ESLint Config Standard
 - Package Dependency: ESLint Plugin Import
 - Package Dependency: ESLint Plugin JSX A11y

@@ -1,0 +1,60 @@
+# Module
+
+## Package Dependency: Types ESLint
+
+**Canonical Name:** `@types/eslint`
+
+**Purpose:** ESLint type definitions.
+
+**Version:** `9.6.1`
+
+## Package Dependency: Types Node
+
+**Canonical Name:** `@types/node`
+
+**Purpose:** Node.js type definitions.
+
+**Version:** `25.9.3`
+
+## Package Dependency: TypeScript ESLint Parser
+
+**Canonical Name:** `@typescript-eslint/parser`
+
+**Purpose:** TypeScript parser for ESLint.
+
+**Version:** `8.61.0`
+
+## Package Dependency: Lefthook
+
+**Canonical Name:** `lefthook`
+
+**Purpose:** Git hooks manager.
+
+**Version:** `2.1.9`
+
+## Package Dependency: ESLint
+
+**Canonical Name:** `eslint`
+
+**Purpose:** JavaScript linter.
+
+**Version:** `8.57.1`
+
+## Package Dependency: Solid JS
+
+**Canonical Name:** `solid-js`
+
+**Purpose:** SolidJS test fixture dependency.
+
+**Version:** `1.9.13`
+
+## Package Dependency Set: ESLint Config Dev Tools
+
+**Dependencies:**
+
+- Package Dependency: Types ESLint
+- Package Dependency: Types Node
+- Package Dependency: TypeScript ESLint Parser
+- Package Dependency: Lefthook
+- Package Dependency: ESLint
+- Package Dependency: Solid JS
