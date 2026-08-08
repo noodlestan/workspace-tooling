@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext"],
+    "rootDir": ".",
+    "allowJs": true,
+    // module
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    // strict
+    "strict": true,
+    "noImplicitAny": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    // root specific
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["cli/", "configs/"],
+  "exclude": ["**/node_modules/", "**/dist/", "**/coverage/"]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@noodlestan/workspace-tooling",
+  "version": "0.0.11",
+  "description": "Build tooling for Noodlestan packages: esbuild CLI wrapper, ESLint config, and base TypeScript configs.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "npm@10.2.3",
+  "workspaces": [
+    "cli/*",
+    "configs/*"
+  ],
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "@noodlestan/eslint-config": "0.0.7",
+    "eslint": "8.57.1",
+    "lefthook": "2.1.9",
+    "prettier": "3.8.4",
+    "turbo": "2.9.18",
+    "typescript": "5.9.3"
+  }
+}
