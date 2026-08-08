@@ -1,0 +1,25 @@
+# Module
+
+## Package: Tsconfig
+
+**Purpose:** Base TypeScript configurations for Noodlestan packages.
+
+**Description:** Shared tsconfig presets (libs and cli variants) consumed by every project repo.
+
+**Path:** `configs/tsconfig/`
+
+**Canonical Name:** `@noodlestan/tsconfig`
+
+**Version:** `0.0.11`
+
+**Language:** JSON
+
+**Dependencies:**
+
+- (none — config-only package)
+
+**Scripts:**
+
+- (none — config-only package)
+
+**PackageFile:** package.json

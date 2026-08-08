@@ -1,0 +1,30 @@
+# Module
+
+## Package: ESLint Config
+
+**Purpose:** Noodlestan's opinionated style guide configuration.
+
+**Description:** Shared ESLint + Prettier configuration consumed by every project repo.
+
+**Path:** `configs/eslint-config/`
+
+**Canonical Name:** `@noodlestan/eslint-config`
+
+**Version:** `0.0.7`
+
+**Language:** JavaScript (CJS)
+
+**Dependencies:**
+
+- Runtime:
+  - Package Dependency Set: Project Lint
+- Peer:
+  - Package Dependency: ESLint
+  - Package Dependency: Prettier
+  - Package Dependency: TypeScript
+
+**Scripts:**
+
+- Package Script Set: Common Scripts
+
+**PackageFile:** package.json

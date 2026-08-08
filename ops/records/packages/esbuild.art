@@ -1,0 +1,27 @@
+# Module
+
+## Package: Esbuild CLI
+
+**Purpose:** esbuild build/watch wrapper for Noodlestan packages.
+
+**Description:** Wraps esbuild with file-path-extensions plugin. Provides `esbuild-cli` (build) and `esbuild-cli-watch` (watch) bins.
+
+**Path:** `cli/esbuild-cli/`
+
+**Canonical Name:** `@noodlestan/esbuild`
+
+**Version:** `0.0.11`
+
+**Language:** JavaScript (ESM)
+
+**Dependencies:**
+
+- Runtime:
+  - Package Dependency: Esbuild
+  - Package Dependency: Esbuild Plugin File Path Extensions
+
+**Scripts:**
+
+- Package Script Set: Common Scripts
+
+**PackageFile:** package.json

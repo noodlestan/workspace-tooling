@@ -1,0 +1,17 @@
+# Module
+
+## Package Script Set: Common Scripts
+
+**Scripts:**
+
+- Package Script: Lint
+  - Purpose: Check formatting and lint
+  - Command: `prettier . -c && eslint .`
+
+- Package Script: Lint Fix
+  - Purpose: Fix formatting and lint issues
+  - Command: `prettier . -c --write && eslint . --fix`
+
+- Package Script: Test
+  - Purpose: Run tests
+  - Command: `npm run lint`

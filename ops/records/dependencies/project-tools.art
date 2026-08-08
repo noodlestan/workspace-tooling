@@ -1,0 +1,51 @@
+# Module
+
+## Package Dependency: ESLint
+
+**Canonical Name:** `eslint`
+
+**Purpose:** JavaScript linter.
+
+**Version:** `8.57.1`
+
+## Package Dependency: Prettier
+
+**Canonical Name:** `prettier`
+
+**Purpose:** Code formatter.
+
+**Version:** `3.8.4`
+
+## Package Dependency: TypeScript
+
+**Canonical Name:** `typescript`
+
+**Purpose:** TypeScript compiler.
+
+**Version:** `5.9.3`
+
+## Package Dependency: Turbo
+
+**Canonical Name:** `turbo`
+
+**Purpose:** Incremental build system.
+
+**Version:** `2.9.18`
+
+## Package Dependency: Lefthook
+
+**Canonical Name:** `lefthook`
+
+**Purpose:** Git hooks manager.
+
+**Version:** `2.1.9`
+
+## Package Dependency Set: Project Tools
+
+**Dependencies:**
+
+- Package Dependency: ESLint
+- Package Dependency: Prettier
+- Package Dependency: TypeScript
+- Package Dependency: Turbo
+- Package Dependency: Lefthook

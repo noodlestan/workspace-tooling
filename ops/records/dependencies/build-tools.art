@@ -1,0 +1,24 @@
+# Module
+
+## Package Dependency: Esbuild
+
+**Canonical Name:** `esbuild`
+
+**Purpose:** JavaScript bundler and minifier.
+
+**Version:** `0.28.0`
+
+## Package Dependency: Esbuild Plugin File Path Extensions
+
+**Canonical Name:** `esbuild-plugin-file-path-extensions`
+
+**Purpose:** Adds file extension resolution to esbuild.
+
+**Version:** `^2.1.4`
+
+## Package Dependency Set: Build Tools
+
+**Dependencies:**
+
+- Package Dependency: Esbuild
+- Package Dependency: Esbuild Plugin File Path Extensions
