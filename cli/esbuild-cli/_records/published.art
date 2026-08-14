@@ -1,0 +1,16 @@
+## Published: Esbuild
+
+**Canonical Name:** `@noodlestan/esbuild`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`
+
+**Version:** `0.0.11`
+
+**Prerequisites:**
+
+- Build artifacts exist in `dist/`
+- All dependencies published
+
+**Publish Command:** `cd $WORKSPACE/repos/workspace-tooling/cli/esbuild-cli && npm publish --access public`

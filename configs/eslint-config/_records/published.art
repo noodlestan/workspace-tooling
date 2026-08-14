@@ -1,0 +1,16 @@
+## Published: Eslint Config
+
+**Canonical Name:** `@noodlestan/eslint-config`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`
+
+**Version:** `0.0.7`
+
+**Prerequisites:**
+
+- Build artifacts exist in `dist/`
+- All dependencies published
+
+**Publish Command:** `cd $WORKSPACE/repos/workspace-tooling/configs/eslint-config && npm publish --access public`

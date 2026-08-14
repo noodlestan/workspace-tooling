@@ -1,0 +1,16 @@
+## Published: Tsconfig
+
+**Canonical Name:** `@noodlestan/tsconfig`
+
+**Registry:** `https://registry.npmjs.org`
+
+**Access:** `public`
+
+**Version:** `0.0.11`
+
+**Prerequisites:**
+
+- Build artifacts exist in `dist/`
+- All dependencies published
+
+**Publish Command:** `cd $WORKSPACE/repos/workspace-tooling/configs/tsconfig && npm publish --access public`
