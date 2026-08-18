@@ -8,7 +8,7 @@ We are an open collective of people dedicated to the design and software crafts:
 
 **👐 Your contribution is welcome! 👐**
 
-If would like to share your ideas, report a bug, ask for improvements - or simply say hi! 👋 - don't hesitate to join us on [Noodlestan's Discord](https://discord.gg/b8DkbJSF9z) or to drop us a line at `hello@noodlestan.org`.
+If would like to share your ideas, report a bug, ask for improvements — or simply say hi! 👋 - don't hesitate to join us on [Noodlestan's Discord](https://discord.gg/b8DkbJSF9z) or to drop us a line at `hello@noodlestan.org`.
 
 ## About Noodlestan's style guide
 
