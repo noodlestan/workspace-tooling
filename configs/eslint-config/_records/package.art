@@ -6,11 +6,17 @@
 
 **Description:** Shared ESLint + Prettier configuration consumed by every project repo.
 
+**Path:** `configs/eslint-config/`
+
+**Version:** `0.0.7`
+
+**Private:** `false`
+
+**Published:** `true`
+
 **Author:** Noodlestan Collective
 
 **License:** MIT
-
-**Private:** false
 
 **PublishConfig:**
 
@@ -34,11 +40,7 @@
 
 - Node: `24.15.0`
 
-**Path:** `configs/eslint-config/`
-
 **Canonical Name:** `@noodlestan/eslint-config`
-
-**Version:** `0.0.7`
 
 **Language:** JavaScript (CJS)
 

@@ -6,11 +6,17 @@
 
 **Description:** Shared tsconfig presets (libs and cli variants) consumed by every project repo.
 
+**Path:** `configs/tsconfig/`
+
+**Version:** `0.0.11`
+
+**Private:** `trie`
+
+**Published:** `false`
+
 **Author:** Noodlestan Collective
 
 **License:** MIT
-
-**Private:** false
 
 **PublishConfig:**
 
@@ -21,11 +27,7 @@
 - `cli`
 - `libs`
 
-**Path:** `configs/tsconfig/`
-
 **Canonical Name:** `@noodlestan/tsconfig`
-
-**Version:** `0.0.11`
 
 **Language:** JSON
 
