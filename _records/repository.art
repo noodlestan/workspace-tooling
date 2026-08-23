@@ -1,0 +1,56 @@
+# Module
+
+## Repository: Workspace Tooling
+
+**Purpose:** Host and manage the workspace tooling related packages.
+
+**Description:** Build tooling for Noodlestan packages: esbuild CLI wrapper, ESLint config, and base TypeScript configs.
+
+**Owner:** Project: Artificial
+
+**Author:** Noodlestan Collective
+
+**Remote:** `git@github.com:noodlestan/workspace-tooling.git`
+
+**Consumers:**
+
+- Repository: Artificial
+- Repository: Conventions
+- Repository: Management
+- Repository: No Comply
+- Repository: Ops
+- Repository: Purrception
+- Repository: Purrfect
+- Repository: Purrpose
+- Repository: Purrtrait
+
+**Private:** `true`
+
+**Workspaces:** None
+
+**Language:** Typescript
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** package.json
+
+**Dependencies:**
+
+- Runtime:
+  - TBD
+- Dev:
+  - TBD
+
+**Scripts:**
+
+- Package Script Set: Root Lifecycle
+
+**Scaffolders:**
+
+- Scaffolder Skeleton: Project Root
+
+**License:** License: Noodlestan 2026 MIT

@@ -1,26 +1,26 @@
 # Module
 
-## Package: Esbuild CLI
+## Package: ESBuild CLI
 
-**Purpose:** esbuild build/watch wrapper for Noodlestan packages.
+**Purpose:** ESBuild build/watch wrapper for Noodlestan packages.
 
 **Description:** Wraps esbuild with file-path-extensions plugin. Provides `esbuild-cli` (build) and `esbuild-cli-watch` (watch) bins.
 
-**Path:** `cli/esbuild-cli/`
+**Owner:** Project: Artificial
 
-**Version:** `0.0.11`
-
-**Private:** `false`
-
-**Published:** `true`
+**Namespace:** Namespace: Art Domains
 
 **Author:** Noodlestan Collective
 
-**License:** MIT
+**Path:** `art-domains/cli/workspace/`
 
-**PublishConfig:**
+**Canonical Name:** `@art-domains/workspace-cli`
 
-- Access: public
+**Published:** `true`
+
+**Private:** `false`
+
+**Deployment:** NPM Package Deployment: ESBuild CLI
 
 **Files:**
 
@@ -29,14 +29,20 @@
 - `LICENSE-MIT`
 - `README.md`
 
-**Bins:**
+**Language:** TypeScript
+
+**Bin:**
 
 - `noodlestan/esbuild-cli`: `./bin/build.mjs`
 - `noodlestan/esbuild-cli-watch`: `./bin/watch.mjs`
 
-**Canonical Name:** `@noodlestan/esbuild`
+**Engines:**
 
-**Language:** JavaScript (ESM)
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
 
 **Dependencies:**
 
@@ -48,4 +54,4 @@
 
 - Package Script Set: Esbuild CLI Scripts
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT

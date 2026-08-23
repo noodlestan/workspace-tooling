@@ -1,42 +1,48 @@
 # Module
 
-## Package: Tsconfig
+## Package: TS Config
 
 **Purpose:** Base TypeScript configurations for Noodlestan packages.
 
 **Description:** Shared tsconfig presets (libs and cli variants) consumed by every project repo.
 
-**Path:** `configs/tsconfig/`
+**Owner:** Project: Artificial
 
-**Version:** `0.0.11`
-
-**Private:** `trie`
-
-**Published:** `false`
+**Namespace:** `@noodlestan`
 
 **Author:** Noodlestan Collective
 
-**License:** MIT
+**Path:** `configs/tsconfig/`
 
-**PublishConfig:**
+**Canonical Name:** `@noodlestan/tsconfig`
 
-- Access: public
+**Published:** `true`
+
+**Private:** `false`
+
+**Deployment:** NPM Package Deployment: TS Config CLI
 
 **Files:**
 
 - `cli`
 - `libs`
 
-**Canonical Name:** `@noodlestan/tsconfig`
-
 **Language:** JSON
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
 
 **Dependencies:**
 
-- (none — config-only package)
+- None
 
 **Scripts:**
 
-- (none — config-only package)
+- None
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT

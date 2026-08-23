@@ -1,16 +1,17 @@
-## NPM Deployment: Esbuild
+# Module
 
-**Canonical Name:** `@noodlestan/esbuild`
+## NPM Package Deployment: ESBuild CLI
+
+**Owner:** ## Package: ESBuild CLI
+
+**Status:** `DEPLOYED`
+
+**Build:** Deployment Build: NPM Command
+
+**Deploy:** Deployment Command: NPM Package CLI
+
+**Canonical Name:** `@art-domains/workspace-cli`
 
 **Registry:** `https://registry.npmjs.org`
 
 **Access:** `public`
-
-**Version:** `0.0.11`
-
-**Prerequisites:**
-
-- Build artifacts exist in `dist/`
-- All dependencies published
-
-**Publish Command:** `cd $WORKSPACE/checkouts/workspace-tooling/cli/esbuild-cli && npm publish --access public`

@@ -6,21 +6,21 @@
 
 **Description:** Shared ESLint + Prettier configuration consumed by every project repo.
 
-**Path:** `configs/eslint-config/`
+**Owner:** Project: Artificial
 
-**Version:** `0.0.7`
-
-**Private:** `false`
-
-**Published:** `true`
+**Namespace:** `@noodlestan`
 
 **Author:** Noodlestan Collective
 
-**License:** MIT
+**Path:** `configs/eslint-config/`
 
-**PublishConfig:**
+**Canonical Name:** `@noodlestan/eslint-config`
 
-- Access: public
+**Published:** `true`
+
+**Private:** `false`
+
+**Deployment:** NPM Package Deployment: ESLint Config
 
 **Files:**
 
@@ -29,34 +29,29 @@
 - `README.md`
 - `LICENSE-MIT`
 
-**Main:** `.eslintrc.cjs`
-
-**Repository:**
-
-- Type: git
-- URL: `git+https://github.com/noodlestan/eslint-config`
+**Language:** JavaScript (CJS)
 
 **Engines:**
 
-- Node: `24.15.0`
+- Node: `>= 22`
 
-**Canonical Name:** `@noodlestan/eslint-config`
+**PackageManager:** `npm@10.2.3`
 
-**Language:** JavaScript (CJS)
+**PackageFile:** `package.json`
 
 **Dependencies:**
 
 - Runtime:
-  - Package Dependency Set: Project Lint
+    - Package Dependency Set: Project Lint
 - Peer:
-  - Package Dependency: ESLint
-  - Package Dependency: Prettier
-  - Package Dependency: TypeScript
+    - Package Dependency: ESLint
+    - Package Dependency: Prettier
+    - Package Dependency: TypeScript
 - Dev:
-  - Package Dependency Set: ESLint Config Dev Tools
+    - Package Dependency Set: ESLint Config Dev Tools
 
 **Scripts:**
 
 - Package Script Set: ESLint Config Scripts
 
-**PackageFile:** package.json
+**License:** License: Noodlestan 2026 MIT
