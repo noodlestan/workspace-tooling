@@ -28,7 +28,7 @@
     "esbuild-plugin-file-path-extensions": "^2.1.4"
   },
   "devDependencies": {
-    "@noodlestan/eslint-config": "0.0.7",
+    "@noodlestan/eslint-config": "0.0.8",
     "eslint": "8.57.1",
     "lefthook": "2.1.9",
     "prettier": "3.8.4",
