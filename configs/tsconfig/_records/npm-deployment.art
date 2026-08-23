@@ -1,4 +1,4 @@
-## Published: Tsconfig
+## NPM Deployment: Tsconfig
 
 **Canonical Name:** `@noodlestan/tsconfig`
 
@@ -13,4 +13,4 @@
 - Build artifacts exist in `dist/`
 - All dependencies published
 
-**Publish Command:** `cd $WORKSPACE/repos/workspace-tooling/configs/tsconfig && npm publish --access public`
+**Publish Command:** `cd $WORKSPACE/checkouts/workspace-tooling/configs/tsconfig && npm publish --access public`

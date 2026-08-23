@@ -1,4 +1,4 @@
-## Published: Eslint Config
+## NPM Deployment: Eslint Config
 
 **Canonical Name:** `@noodlestan/eslint-config`
 
@@ -13,4 +13,4 @@
 - Build artifacts exist in `dist/`
 - All dependencies published
 
-**Publish Command:** `cd $WORKSPACE/repos/workspace-tooling/configs/eslint-config && npm publish --access public`
+**Publish Command:** `cd $WORKSPACE/checkouts/workspace-tooling/configs/eslint-config && npm publish --access public`
