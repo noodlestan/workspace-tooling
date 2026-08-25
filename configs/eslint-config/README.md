@@ -2,14 +2,6 @@
 
 > Noodlestan's opinionated style guide configuration (ESLint + Prettier).
 
-## Noodlestan 🐘 Collective
-
-We are an open collective of people dedicated to the design and software crafts: UX, design, code, web, 3d, audio, the works. Learn more about us and our projects at [Noodlestan.org](https://noodlestan.org).
-
-**👐 Your contribution is welcome! 👐**
-
-If would like to share your ideas, report a bug, ask for improvements — or simply say hi! 👋 - don't hesitate to join us on [Noodlestan's Discord](https://discord.gg/b8DkbJSF9z) or to drop us a line at `hello@noodlestan.org`.
-
 ## About Noodlestan's style guide
 
 This style guide targets Noodlestan's web stack, mostly based on [Solid JS](https://www.solidjs.com/) and [Astro](https://docs.astro.build) / [Starlight](https://starlight.astro.build/) for documentation and sandboxes.
@@ -59,7 +51,7 @@ Run `npm run lint`. It will lint the example files provided.
 
 Make sure the `pre-commit` hook was executed. It runs automatically before every commit and lints all code. Under the hood it runs `npm run lint:silent`.
 
-## MIT License
+## License
 
 Copyright (c) 2024 [Noodlestan](https://noodlestan.org/).
 

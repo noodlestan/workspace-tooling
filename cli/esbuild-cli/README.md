@@ -15,7 +15,7 @@
 
 This library is NOT built.
 
-## MIT License
+## License
 
 Copyright (c) 2024 [Noodlestan](https://noodlestan.org/).
 
