@@ -1,12 +1,12 @@
-# Noodlestan Workspace Tooling
+# Workspace Tooling
 
-Build tooling for Noodlestan packages: an esbuild CLI wrapper plus the base ESLint and TypeScript configurations. Every project repo consumes these packages so that no repo builds through the workspace.
+Build tooling for Noodlestan workspaces.
 
 ## Recommended Reading
 
-Agents SHOULD scan these files for definitions and resource locations when faced with uncertainty or ambiguity that may result from missing resources.
+Agents SHOULD scan these files for relevant clarifications when faced with ambiguity or omissions that may result from missing definitions.
 
-- `_guide.md` — this file: system overview, layout, records, and operating instructions.
+- `_guide.md` — this file: system overview, layout, setup, verification.
 - `_records/project.art` — the project record.
 - `_records/repository.art` — the repository record.
 
@@ -43,7 +43,7 @@ Records are co-located with the resources they describe in `_records/` directori
 
 ## Operating Instructions
 
-#### Operating Instructions: Setting Up
+### Operating Instructions: Setting Up
 
 **Instructions:**
 
@@ -53,7 +53,7 @@ Run from the repository root (monorepo):
 npm ci # to install dependencies.
 ```
 
-#### Operating Instructions: Verifying Commit
+### Operating Instructions: Verifying Commit
 
 **Instructions:**
 
@@ -63,7 +63,7 @@ Runs automatically on pre-commit hook (from the repository root):
 npm run lint # lint all packages
 ```
 
-#### Operating Instructions: Verifying Completion
+### Operating Instructions: Verifying Completion
 
 **Instructions:**
 

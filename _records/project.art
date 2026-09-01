@@ -12,6 +12,8 @@
 
 **Repository:** Repository: Workspace Tooling
 
+**Code:** https://github.com/noodlestan/workspace-tooling
+
 **Resources:**
 
 - Package: ESBuild CLI
@@ -19,5 +21,7 @@
 - Package: TS Config
 
 **Private:** `true`
+
+**Management:** Managed under Project: Management; packages are consumed by every project repository.
 
 **License:** License: Noodlestan 2026 MIT
