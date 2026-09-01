@@ -47,13 +47,3 @@ Run from this package directory:
 npm run lint # to report other issues (prettier, eslint)
 npm run test # to run all tests
 ```
-
-### Operating Instructions: Verifying Completion
-
-**Instructions:**
-
-Run from this package directory:
-
-```bash
-npm run lint && npm run test # lint and test
-```
