@@ -1,12 +1,12 @@
 # Module
 
-## Project: Workspace Tooling
+## Project: Noodlestan Workspace Tooling
 
 **Purpose:** Build tooling for Noodlestan workspaces.
 
-**Description:** A build-tooling monorepo containing an esbuild CLI wrapper plus base ESLint and TypeScript configurations. Every project repo consumes it, so no repo builds through the workspace.
+**Description:** Esbuild CLI wrapper, ESLint config, and base TypeScript configs.
 
-**Owner:** Project: Management
+**Owner:** Project: Noodlestan Management
 
 **Author:** Noodlestan Collective
 
@@ -22,6 +22,6 @@
 
 **Private:** `true`
 
-**Management:** Managed under Project: Management; packages are consumed by every project repository.
+**Management:** Uses Workflow: Planning Work with one backlog per package.
 
 **License:** License: Noodlestan 2026 MIT

@@ -1,8 +1,8 @@
 # Noodlestan Workspace Tooling
 
-> Build tooling for Noodlestan packages: an esbuild CLI wrapper plus the base ESLint and TypeScript configurations.
+> Build tooling for Noodlestan workspaces.
 
-Every Noodlestan project repo consumes these packages so that no repo builds through the workspace. Cross-repo dependencies resolve via git URLs until a repo is stable.
+Esbuild CLI wrapper, ESLint config, and base TypeScript configs.
 
 ## Packages
 

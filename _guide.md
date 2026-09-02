@@ -1,6 +1,10 @@
-# Workspace Tooling
+# Guide: Workspace Tooling
 
-Build tooling for Noodlestan workspaces.
+> Host and manage the workspace tooling related packages and their planning artefacts.
+
+Monorepo containing build tools and configs for Noodlestan workspaces and their backlogs.
+
+Uses Workflow: Planning Work with one backlog per package.
 
 ## Recommended Reading
 

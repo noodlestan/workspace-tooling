@@ -2,11 +2,11 @@
 
 ## Repository: Workspace Tooling
 
-**Purpose:** Host and manage the workspace tooling related packages.
+**Purpose:** Host and manage the workspace tooling related packages and their planning artefacts.
 
-**Description:** Build tooling for Noodlestan packages: esbuild CLI wrapper, ESLint config, and base TypeScript configs.
+**Description:** Monorepo containing build tools and configs for Noodlestan workspaces and their backlogs.
 
-**Owner:** Project: Artificial
+**Owner:** Project: Noodlestan Workspace Tooling
 
 **Author:** Noodlestan Collective
 
