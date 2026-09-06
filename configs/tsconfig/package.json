@@ -11,5 +11,11 @@
   "files": [
     "cli",
     "libs"
-  ]
+  ],
+  "scripts": {
+    "lint": "prettier . -c",
+    "lint:fix": "prettier . -c --write",
+    "test": "echo no tests yet",
+    "ci": "npm run lint"
+  }
 }

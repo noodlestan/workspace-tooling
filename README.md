@@ -21,11 +21,12 @@ First make sure you are using the correct node version by running `nvm use`.
 
 Install dependencies with `npm install`.
 
-- `npm run lint` - Check formatting (ESLint + Prettier).
-- `npm run build` - Build all packages.
-- `npm run test` - Run tests.
+- `npm run turbo lint` - Check formatting (Prettier + ESLint) in all packages.
+- `npm run turbo test` - Run tests in all packages.
+- `npm run turbo build` - Build all packages.
+- `npm run ci` - Full build.
 
-Pre-commit hooks (via lefthook) run the repo's lint.
+Pre-commit hooks (via lefthook) run the repo's `ci` on every package.
 
 ## License
 

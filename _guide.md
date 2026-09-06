@@ -38,10 +38,6 @@ Records are co-located with the resources they describe in `_records/` directori
 
 - **Project:** `_records/project.art`
 - **Repository:** `_records/repository.art`
-- **License:** `_records/license.art`
-- **Dependencies:** `_records/dependencies/`
-- **Scaffolders:** `_records/scaffolders/`
-- **Scripts:** `_records/scripts/`
 - **Packages:** `{package-path}/_records/package.art`
 - **NPM Deployments:** `{package-path}/_records/npm-deployment.art`
 

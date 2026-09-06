@@ -21,7 +21,8 @@
   "scripts": {
     "lint": "prettier . -c && eslint --ext .mjs .",
     "lint:fix": "prettier . -c --write && eslint --ext .mjs . --fix",
-    "test": "npm run lint"
+    "test": "echo no tests yet",
+    "ci": "npm run lint"
   },
   "dependencies": {
     "esbuild": "0.28.0",

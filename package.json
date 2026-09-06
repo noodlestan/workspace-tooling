@@ -14,11 +14,14 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "turbo run build",
-    "lint": "prettier . -c && turbo run lint",
-    "lint:fix": "prettier . -c --write && turbo run lint:fix",
-    "test": "turbo run test",
-    "ci": "turbo run lint && npm run build && npm run test"
+    "turbo": "turbo",
+    "dev": "turbo run dev --ui tui",
+    "clean": "turbo run build:clean",
+    "lint": "prettier . -c ",
+    "lint:fix": "prettier . -c --write ",
+    "extract": "echo no purrception yet",
+    "ci:root": "npm run lint",
+    "ci": "npm run ci:root && turbo run ci"
   },
   "bin": {
     "noodlestan/esbuild-cli": "cli/esbuild-cli/bin/build.mjs",
