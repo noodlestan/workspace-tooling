@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/esbuild",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "esbuild build/watch wrapper for Noodlestan packages",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -9,8 +9,8 @@
     "access": "public"
   },
   "bin": {
-    "noodlestan/esbuild-cli": "./bin/build.mjs",
-    "noodlestan/esbuild-cli-watch": "./bin/watch.mjs"
+    "esbuild-cli": "./bin/build.mjs",
+    "esbuild-cli-watch": "./bin/watch.mjs"
   },
   "files": [
     "bin",
