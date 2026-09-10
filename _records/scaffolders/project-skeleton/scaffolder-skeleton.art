@@ -1,9 +1,0 @@
-# Module
-
-## Scaffolder Skeleton: Project Root
-
-**Purpose:** Scaffolds project root dotfiles.
-
-**Source:** `./skeleton` (relative to this record)
-
-**Target:** `{{%path}}`
