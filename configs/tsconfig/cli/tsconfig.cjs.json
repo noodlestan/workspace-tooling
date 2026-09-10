@@ -1,9 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
+    // "rootDir": "src/",
+    // "outDir": "dist/cjs/",
     "declarationMap": true,
-    "sourceMap": true,
     "emitDeclarationOnly": true
   }
+  // "include": ["src/"]
 }

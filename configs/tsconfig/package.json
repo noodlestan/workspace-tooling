@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/tsconfig",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "Base typescript configurations for Noodlestan packages (libs and cli variants)",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -10,7 +10,8 @@
   },
   "files": [
     "cli",
-    "libs"
+    "libs",
+    "workspace"
   ],
   "scripts": {
     "lint": "prettier . -c",

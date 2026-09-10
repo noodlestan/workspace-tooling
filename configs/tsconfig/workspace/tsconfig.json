@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    // "rootDir": ".",
+    "target": "ESNext",
+    "module": "ESNext",
+    "noEmit": true,
+    // strict
+    "strict": true,
+    "noImplicitAny": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true
+  }
+  // "include": ["cli/", "libs/", "**/*.config.ts"],
+  // "exclude": ["**/node_modules/", "**/dist/", "**/coverage/"]
+}

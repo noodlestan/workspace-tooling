@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
-    "skipLibCheck": true, // problems in vitest, @vitest/utils, svgo
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    // strict
     "strict": true,
     "noImplicitAny": true,
-    "jsxImportSource": "solid-js",
-    "jsx": "preserve"
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true
   }
+  // "include": ["src/", "**/*.config.ts"],
+  // "exclude": ["**/node_modules/", "**/dist/", "**/coverage/"]
 }

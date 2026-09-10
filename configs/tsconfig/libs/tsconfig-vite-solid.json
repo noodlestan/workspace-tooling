@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig-vite.json",
+  "compilerOptions": {
+    // "rootDir": "src/",
+    "types": ["vite/client"],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "jsxImportSource": "solid-js",
+    "jsx": "preserve",
+    "skipLibCheck": true // Problematic: vitest, @vitest/utils, svgo
+  }
+  // "include": ["src/"]
+}
