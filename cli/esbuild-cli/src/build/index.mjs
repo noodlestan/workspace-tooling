@@ -12,6 +12,11 @@ export const createBuild = (options = {}, defaults = {}) => {
   const config = {
     ...defaults,
     ...options,
+    define: {
+      ...(defaults.define ?? {}),
+      ...(options.define ?? {}),
+      __BUILD_VERSION__: JSON.stringify(pkg.version),
+    },
     external: [
       ...new Set([...inferredExternal, ...(defaults.external ?? []), ...(options.external ?? [])]),
     ],
