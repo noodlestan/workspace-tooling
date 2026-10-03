@@ -1,0 +1,32 @@
+{
+  "name": "@noodlestan/prettier-config",
+  "version": "0.0.1",
+  "description": "Noodlestan's base Prettier formatting configuration.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./src/index.cjs",
+  "exports": {
+    ".": "./src/index.cjs",
+    "./json": "./src/index.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "_guide.md",
+    "README.md",
+    "LICENSE-MIT"
+  ],
+  "scripts": {
+    "lint": "prettier . -c",
+    "lint:fix": "prettier . -c --write",
+    "test": "echo no tests yet",
+    "ci": "npm run lint"
+  },
+  "peerDependencies": {
+    "prettier": "^3.8.4"
+  }
+}

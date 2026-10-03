@@ -18,6 +18,7 @@
 
 - Package: ESBuild CLI
 - Package: ESLint Config
+- Package: Prettier Config
 - Package: TS Config
 
 **Private:** `true`

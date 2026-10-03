@@ -1,0 +1,17 @@
+# Module
+
+## Package Script Set: Prettier Config Scripts
+
+**Scripts:**
+
+- Package Script: Lint
+  - Purpose: Check formatting.
+  - Command: `prettier . -c`
+
+- Package Script: Test
+  - Purpose: Run package validation.
+  - Command: `echo no tests yet`
+
+- Package Script: CI
+  - Purpose: Run package validation in continuous integration.
+  - Command: `npm run lint`

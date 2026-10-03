@@ -1,0 +1,51 @@
+# Module
+
+## Package: Prettier Config
+
+**Purpose:** Noodlestan's canonical base Prettier formatting configuration.
+
+**Description:** Shared Prettier configuration consumed by every project repo.
+
+**Owner:** Project: Artificial
+
+**Namespace:** `@noodlestan`
+
+**Author:** Noodlestan Collective
+
+**Path:** `configs/prettier-config/`
+
+**Canonical Name:** `@noodlestan/prettier-config`
+
+**Published:** `true`
+
+**Private:** `false`
+
+**Deployment:** NPM Package Deployment: Prettier Config
+
+**Files:**
+
+- `src`
+- `_guide.md`
+- `README.md`
+- `LICENSE-MIT`
+
+**Language:** JavaScript (CJS)
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
+
+**Dependencies:**
+
+- Peer:
+    - Package Dependency: Prettier
+
+**Scripts:**
+
+- Package Script Set: Prettier Config Scripts
+
+**License:** License: Noodlestan 2024 MIT

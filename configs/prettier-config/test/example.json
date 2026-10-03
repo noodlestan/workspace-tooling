@@ -1,0 +1,7 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A fixture proving the canonical base rules: two-space indentation, double-quoted JSON strings, and a print width of one hundred columns.",
+  "prettier": "@noodlestan/prettier-config"
+}
