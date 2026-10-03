@@ -6,7 +6,7 @@ Backlog plans live in `_backlog/` and contain delegatable instructions. This fil
 
 ## ACTIONABLE
 
-- **Plan: Add Prettier Config** — `_backlog/3-now/plan-add-prettier-config/plan.md` carries `DRAFT` status while all 4 iterations are `READY`; its `.mjs` re-indent claim contradicts the plan's own zero-diff evidence.
+- **Plan: Add Prettier Config** — `_backlog/3-now/plan-add-prettier-config/plan.md` is `READY`; all 4 iterations `READY` with instruction files written. Next move is to delegate `scaffold-prettier-config` to `agent-worker`.
 
 ## PENDING
 

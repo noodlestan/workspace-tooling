@@ -2,7 +2,7 @@
 
 **Id:** `add-prettier-config`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -137,7 +137,7 @@ None.
 
 **Changes:**
 
-- Add `_backlog/` with `3-now/` and `4-next/` lanes holding the plans.
+- Add `_backlog/` state directories `0-archive` through `9-inbox`, with `3-now/` and `4-next/` holding the plans.
 - Create `$PROJECT/configs/prettier-config/` and `$PROJECT/configs/prettier-config-astro/`.
 - Extend `$PROJECT/_records/dependencies/project-lint.art` with the Prettier plugin dependencies.
 - Update `$PROJECT/_guide.md` projects table and `$PROJECT/README.md`.
@@ -236,12 +236,12 @@ Execution is coordinated from `$WORKSPACE`. Monorepo work runs in `$PROJECT` on 
 
 ## Items:
 
-| Iteration / Instructions                                                                                            | Status     |
-| ------------------------------------------------------------------------------------------------------------------- | ---------- |
-| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `PLANNING` |
-| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `PLANNING` |
-| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `PLANNING` |
-| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `PLANNING` |
+| Iteration / Instructions                                                                                            | Status  |
+| ------------------------------------------------------------------------------------------------------------------- | ------- |
+| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `READY` |
+| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `READY` |
+| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `READY` |
+| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `READY` |
 
 ### Iteration: Scaffold Prettier Config
 
@@ -383,7 +383,6 @@ scaffold(prettier-config-astro): Create `@noodlestan/prettier-config-astro` for 
 tooling(noodlestan-web): Adopt `@noodlestan/prettier-config` through the `prettier` field.
 
 - Delete `.prettierrc` and set `prettier` in `package.json` instead.
-- Re-indent `.mjs` files from spaces to tabs, now covered by the shared overrides.
 - Document the `prettier` field in `_guide.md`.
 ```
 
@@ -538,7 +537,7 @@ npm run ci # lint, test and build
 
 ### Knowledge to Update
 
-- `$PROJECT/_guide.md` — add both packages to the Projects table and point the Workspace Tooling root backlog at `_backlog`.
+- `$PROJECT/_guide.md` — add both packages to the Projects table. The backlog pointer at `_backlog/` is already recorded.
 - `$PROJECT/_records/project.art` — add `Package: Prettier Config` and `Package: Prettier Config Astro` to `resources`.
 - `$PROJECT/README.md` — document both packages and how a consumer adopts them.
 
