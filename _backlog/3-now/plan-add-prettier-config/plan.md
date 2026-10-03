@@ -236,12 +236,12 @@ Execution is coordinated from `$WORKSPACE`. Monorepo work runs in `$PROJECT` on 
 
 ## Items:
 
-| Iteration / Instructions                                                                                            | Status    |
-| ------------------------------------------------------------------------------------------------------------------- | --------- |
-| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE`    |
-| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `DONE`    |
-| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `WORKING` |
-| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `READY`   |
+| Iteration / Instructions                                                                                            | Status  |
+| ------------------------------------------------------------------------------------------------------------------- | ------- |
+| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE`  |
+| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `DONE`  |
+| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `DONE`  |
+| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `READY` |
 
 ### Iteration: Scaffold Prettier Config
 
@@ -346,13 +346,15 @@ scaffold(prettier-config-astro): Create `@noodlestan/prettier-config-astro` for 
 
 **Id:** `adopt-base-config-in-web`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Purpose:** Prove the base package is a drop-in replacement for the hand-written `$WEB/.prettierrc`.
 
 **Description:** Link the package into `$WEB/node_modules/@noodlestan/`, replace `$WEB/.prettierrc` with a `prettier` field in `$WEB/package.json`, run `npm run lint`, and confirm a clean result. The shipped base rules are byte-identical to the `$WEB` hand-written `.prettierrc` — both already list `*.mjs` in the `overrides` array — so adopting the package must produce **zero** file changes and `All matched files use Prettier code style!` on the first run. Any diff at all means the shipped package is not equivalent and must be corrected in `$PROJECT`, never papered over in `$WEB`.
 
 **Instructions:** `./plan-add-prettier-config/instructions/adopt-base-config-in-web.md`
+
+**Report:** `./plan-add-prettier-config/instructions/adopt-base-config-in-web__report.md`
 
 **Changes:**
 
@@ -373,9 +375,9 @@ scaffold(prettier-config-astro): Create `@noodlestan/prettier-config-astro` for 
 
 #### Commits:
 
-| ID                      | Repository / Checkout / Branch                  | Policy   | Hash  | Status     |
-| ----------------------- | ----------------------------------------------- | -------- | ----- | ---------- |
-| `adopt-prettier-config` | Noodlestan Web / `$WEB` / `add-prettier-config` | `NOPUSH` | (TBD) | `AUTHORED` |
+| ID                      | Repository / Checkout / Branch                  | Policy   | Hash      | Status      |
+| ----------------------- | ----------------------------------------------- | -------- | --------- | ----------- |
+| `adopt-prettier-config` | Noodlestan Web / `$WEB` / `add-prettier-config` | `NOPUSH` | `342054f` | `COMMITTED` |
 
 ##### Commit: `adopt-prettier-config`
 
@@ -454,7 +456,7 @@ tooling(noodlestan-web): Pin `@noodlestan/prettier-config` to the published rele
 
 ### Next
 
-Iterations `scaffold-prettier-config` and `scaffold-prettier-config-astro` are `DONE`, at `838dfc1` and `bb136f8` (neither pushed). Next move is to delegate `adopt-base-config-in-web` to `agent-worker`.
+Iterations `scaffold-prettier-config`, `scaffold-prettier-config-astro`, and `adopt-base-config-in-web` are `DONE`, at `838dfc1`, `bb136f8`, and `342054f` (none pushed). Next move is to delegate `publish-and-pin` to `agent-worker`, which stops at its crew gate.
 
 ## Operating Instructions
 
@@ -556,4 +558,5 @@ npm run ci # lint, test and build
 ### Feedback
 
 - Iteration `scaffold-prettier-config` completed at `838dfc1`; `npm run ci` at `$PROJECT` passes and `@noodlestan/prettier-config` resolves through the workspace link.
+- Iteration `adopt-base-config-in-web` completed at `342054f` in `$WEB`. Equivalence is proven: `$WEB/.prettierrc` and `$PROJECT/configs/prettier-config/src/index.json` were byte-identical (`sha256 39c28bb1…`), and `npm run lint` passed with zero reformatting on the first run, exactly as `## Evidence` predicted. The local `node_modules/@noodlestan/prettier-config` symlink is the prescribed live-test mechanism; the `devDependencies` declaration belongs to `publish-and-pin`.
 - Iteration `scaffold-prettier-config-astro` completed at `bb136f8`; `npm run ci` passes for all 5 packages. The worker added one unplanned field — `"prettier": "./src/index.cjs"` in `$PROJECT/configs/prettier-config-astro/package.json` — because Prettier's resolution picked up `$PROJECT/.prettierrc` for the `test/component.astro` fixture, so the package's own config was never loaded and the `astro` parser was unavailable. The instruction's prescribed causes were both false; editing the root `.prettierrc` instead was correctly rejected as out of scope. Worth capturing in a follow-up: `npm install` must precede `npm ci` when a scaffolding iteration adds a workspace package.
