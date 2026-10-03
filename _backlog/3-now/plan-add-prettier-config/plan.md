@@ -236,12 +236,12 @@ Execution is coordinated from `$WORKSPACE`. Monorepo work runs in `$PROJECT` on 
 
 ## Items:
 
-| Iteration / Instructions                                                                                            | Status  |
-| ------------------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE`  |
-| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `DONE`  |
-| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `READY` |
-| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `READY` |
+| Iteration / Instructions                                                                                            | Status    |
+| ------------------------------------------------------------------------------------------------------------------- | --------- |
+| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE`    |
+| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `DONE`    |
+| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `WORKING` |
+| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `READY`   |
 
 ### Iteration: Scaffold Prettier Config
 
@@ -346,7 +346,7 @@ scaffold(prettier-config-astro): Create `@noodlestan/prettier-config-astro` for 
 
 **Id:** `adopt-base-config-in-web`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Purpose:** Prove the base package is a drop-in replacement for the hand-written `$WEB/.prettierrc`.
 
