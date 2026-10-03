@@ -1,0 +1,40 @@
+{
+  "name": "@noodlestan/prettier-config-astro",
+  "version": "0.0.1",
+  "description": "Noodlestan's Prettier formatting configuration with Astro support.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./src/index.cjs",
+  "prettier": "./src/index.cjs",
+  "exports": {
+    ".": "./src/index.cjs",
+    "./json": "./src/index.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "_guide.md",
+    "README.md",
+    "LICENSE-MIT"
+  ],
+  "scripts": {
+    "lint": "prettier . -c",
+    "lint:fix": "prettier . -c --write",
+    "test": "echo no tests yet",
+    "ci": "npm run lint"
+  },
+  "dependencies": {
+    "@noodlestan/prettier-config": "0.0.1"
+  },
+  "peerDependencies": {
+    "prettier": "^3.8.4",
+    "prettier-plugin-astro": "^1.1.0"
+  },
+  "devDependencies": {
+    "prettier-plugin-astro": "1.1.0"
+  }
+}

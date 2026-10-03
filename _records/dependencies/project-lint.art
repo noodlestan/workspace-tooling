@@ -64,6 +64,14 @@
 
 **Version:** `0.14.5`
 
+## Package Dependency: Prettier Plugin Astro
+
+**Canonical Name:** `prettier-plugin-astro`
+
+**Purpose:** Adds the Astro parser so `.astro` files can be formatted.
+
+**Version:** `1.1.0`
+
 ## Package Dependency Set: Project Lint
 
 **Dependencies:**

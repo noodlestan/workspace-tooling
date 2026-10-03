@@ -1,0 +1,22 @@
+---
+const title = 'Noodlestan';
+
+const items = ['one', 'two', 'three'];
+---
+
+<section class="greeting">
+	<h1>{title}</h1>
+	<ul>
+		{items.map(item => (
+			<li>{item}</li>
+		))}
+	</ul>
+	<script>
+		console.log('greeting rendered', title);
+	</script>
+	<style>
+		.greeting {
+			color: red;
+		}
+	</style>
+</section>

@@ -1,0 +1,56 @@
+# Module
+
+## Package: Prettier Config Astro
+
+**Purpose:** Noodlestan's Prettier formatting configuration with Astro support.
+
+**Description:** Shared Prettier configuration consumed by every Astro project repo.
+
+**Owner:** Project: Artificial
+
+**Namespace:** `@noodlestan`
+
+**Author:** Noodlestan Collective
+
+**Path:** `configs/prettier-config-astro/`
+
+**Canonical Name:** `@noodlestan/prettier-config-astro`
+
+**Published:** `true`
+
+**Private:** `false`
+
+**Deployment:** NPM Package Deployment: Prettier Config Astro
+
+**Files:**
+
+- `src`
+- `_guide.md`
+- `README.md`
+- `LICENSE-MIT`
+
+**Language:** JavaScript (CJS)
+
+**Engines:**
+
+- Node: `>= 22`
+
+**PackageManager:** `npm@10.2.3`
+
+**PackageFile:** `package.json`
+
+**Dependencies:**
+
+- Runtime:
+    - Package: Prettier Config
+- Peer:
+    - Package Dependency: Prettier
+    - Package Dependency: Prettier Plugin Astro
+- Dev:
+    - Package Dependency: Prettier Plugin Astro
+
+**Scripts:**
+
+- Package Script Set: Prettier Config Scripts
+
+**License:** License: Noodlestan 2024 MIT
