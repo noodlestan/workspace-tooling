@@ -2,7 +2,7 @@
 
 **Id:** `add-prettier-config`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -238,7 +238,7 @@ Execution is coordinated from `$WORKSPACE`. Monorepo work runs in `$PROJECT` on 
 
 | Iteration / Instructions                                                                                            | Status  |
 | ------------------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `READY` |
+| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE`  |
 | Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `READY` |
 | Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `READY` |
 | Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `READY` |
@@ -247,13 +247,15 @@ Execution is coordinated from `$WORKSPACE`. Monorepo work runs in `$PROJECT` on 
 
 **Id:** `scaffold-prettier-config`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Purpose:** Create the base Prettier config package holding the canonical rules.
 
 **Description:** Create `$PROJECT/configs/prettier-config/` following the layout of `$PROJECT/configs/eslint-config/`: `package.json`, `src/index.json`, `src/index.cjs`, `test/` fixtures, `_guide.md`, `README.md`, `LICENSE-MIT`, `CHANGELOG.md`, and `_records/`. The package is created directly at `0.0.1` — the version it will first be published as — with `CHANGELOG.md` already carrying a populated `## 0.0.1` entry, so nothing has to be back-filled or bumped at release time. Register the package in `$PROJECT/_records/project.art` and in the Projects table of `$PROJECT/_guide.md`. The existing `configs/*` workspace glob already includes it, and the root already depends on `prettier`, so `$PROJECT/package.json` needs no edit at all.
 
 **Instructions:** `./plan-add-prettier-config/instructions/scaffold-prettier-config.md`
+
+**Report:** `./plan-add-prettier-config/instructions/scaffold-prettier-config__report.md`
 
 **Changes:**
 
@@ -271,9 +273,9 @@ Execution is coordinated from `$WORKSPACE`. Monorepo work runs in `$PROJECT` on 
 
 #### Commits:
 
-| ID                         | Repository / Checkout / Branch                         | Policy   | Hash  | Status     |
-| -------------------------- | ------------------------------------------------------ | -------- | ----- | ---------- |
-| `scaffold-prettier-config` | Workspace Tooling / `$PROJECT` / `add-prettier-config` | `NOPUSH` | (TBD) | `AUTHORED` |
+| ID                         | Repository / Checkout / Branch                         | Policy   | Hash      | Status      |
+| -------------------------- | ------------------------------------------------------ | -------- | --------- | ----------- |
+| `scaffold-prettier-config` | Workspace Tooling / `$PROJECT` / `add-prettier-config` | `NOPUSH` | `838dfc1` | `COMMITTED` |
 
 ##### Commit: `scaffold-prettier-config`
 
@@ -450,7 +452,7 @@ tooling(noodlestan-web): Pin `@noodlestan/prettier-config` to the published rele
 
 ### Next
 
-Instruction files are written for all four iterations and every iteration is `READY`. Next move is to delegate `scaffold-prettier-config` to `agent-worker`.
+Iteration `scaffold-prettier-config` is `DONE` at commit `838dfc1` (not pushed). Next move is to delegate `scaffold-prettier-config-astro` to `agent-worker`.
 
 ## Operating Instructions
 
@@ -548,4 +550,4 @@ npm run ci # lint, test and build
 
 ### Feedback
 
-- None.
+- Iteration `scaffold-prettier-config` completed at `838dfc1`; `npm run ci` at `$PROJECT` passes and `@noodlestan/prettier-config` resolves through the workspace link.
