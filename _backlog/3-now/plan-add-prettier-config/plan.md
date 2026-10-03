@@ -236,12 +236,12 @@ Execution is coordinated from `$WORKSPACE`. Monorepo work runs in `$PROJECT` on 
 
 ## Items:
 
-| Iteration / Instructions                                                                                            | Status    |
-| ------------------------------------------------------------------------------------------------------------------- | --------- |
-| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE`    |
-| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `WORKING` |
-| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `READY`   |
-| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `READY`   |
+| Iteration / Instructions                                                                                            | Status  |
+| ------------------------------------------------------------------------------------------------------------------- | ------- |
+| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE`  |
+| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `DONE`  |
+| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `READY` |
+| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `READY` |
 
 ### Iteration: Scaffold Prettier Config
 
@@ -295,7 +295,7 @@ scaffold(prettier-config): Create `@noodlestan/prettier-config` with the base fo
 
 **Id:** `scaffold-prettier-config-astro`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Purpose:** Create the Astro-augmented Prettier config package.
 
@@ -304,6 +304,8 @@ scaffold(prettier-config): Create `@noodlestan/prettier-config` with the base fo
 Two constraints shape the implementation. Prettier 3 removed plugin auto-search from `node_modules`, so the config must declare `plugins: ["prettier-plugin-astro"]` explicitly; without that entry the `astro` parser cannot be resolved and `.astro` files fail to format. And JSON cannot spread, so the Astro entry point is a `.cjs` that requires the base package's `./json` subpath, spreads it, and concatenates `overrides` — which keeps the base rules in exactly one place instead of duplicating them.
 
 **Instructions:** `./plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md`
+
+**Report:** `./plan-add-prettier-config/instructions/scaffold-prettier-config-astro__report.md`
 
 **Changes:**
 
@@ -322,9 +324,9 @@ Two constraints shape the implementation. Prettier 3 removed plugin auto-search 
 
 #### Commits:
 
-| ID                               | Repository / Checkout / Branch                         | Policy   | Hash  | Status     |
-| -------------------------------- | ------------------------------------------------------ | -------- | ----- | ---------- |
-| `scaffold-prettier-config-astro` | Workspace Tooling / `$PROJECT` / `add-prettier-config` | `NOPUSH` | (TBD) | `AUTHORED` |
+| ID                               | Repository / Checkout / Branch                         | Policy   | Hash      | Status      |
+| -------------------------------- | ------------------------------------------------------ | -------- | --------- | ----------- |
+| `scaffold-prettier-config-astro` | Workspace Tooling / `$PROJECT` / `add-prettier-config` | `NOPUSH` | `bb136f8` | `COMMITTED` |
 
 ##### Commit: `scaffold-prettier-config-astro`
 
@@ -452,7 +454,7 @@ tooling(noodlestan-web): Pin `@noodlestan/prettier-config` to the published rele
 
 ### Next
 
-Iteration `scaffold-prettier-config` is `DONE` at commit `838dfc1` (not pushed). Next move is to delegate `scaffold-prettier-config-astro` to `agent-worker`.
+Iterations `scaffold-prettier-config` and `scaffold-prettier-config-astro` are `DONE`, at `838dfc1` and `bb136f8` (neither pushed). Next move is to delegate `adopt-base-config-in-web` to `agent-worker`.
 
 ## Operating Instructions
 
@@ -528,6 +530,9 @@ npm run ci # lint, test and build
 
 ### Findings
 
+- **A package's own Prettier config is not used to lint itself by default** — `prettier` resolves config by walking up from the file, so `$PROJECT/.prettierrc` wins over `configs/prettier-config-astro/src/index.cjs` unless the `prettier` field points at it. `configs/prettier-config/` still lints its fixtures against the root config; `configs/prettier-config-astro/` lints against its own. That asymmetry is invisible from either package alone.
+- **`npm ci` cannot add a workspace package or a new dependency** — it fails with `EUSAGE` on a missing lockfile entry. Scaffolding iterations need `npm install` first, then `npm ci`.
+
 - **Prettier config was never shipped** — `files` in `$PROJECT/configs/eslint-config/package.json` covers `src`, `.eslintrc.cjs`, `README.md`, and `LICENSE-MIT` only. The `.prettierrc` sitting next to it is excluded from the published tarball, which is why every consumer hand-writes its own and why they drifted apart.
 - **Two divergent rule sets existed** — `$WEB/.prettierrc` used `tabWidth: 2` with `useTabs: true` for JS-family files; `$PROJECT/configs/eslint-config/.prettierrc` used `tabWidth: 4` with 2-space overrides for `md`, `json`, and `html`. Publishing the second verbatim would have re-indented every consumer.
 
@@ -551,3 +556,4 @@ npm run ci # lint, test and build
 ### Feedback
 
 - Iteration `scaffold-prettier-config` completed at `838dfc1`; `npm run ci` at `$PROJECT` passes and `@noodlestan/prettier-config` resolves through the workspace link.
+- Iteration `scaffold-prettier-config-astro` completed at `bb136f8`; `npm run ci` passes for all 5 packages. The worker added one unplanned field — `"prettier": "./src/index.cjs"` in `$PROJECT/configs/prettier-config-astro/package.json` — because Prettier's resolution picked up `$PROJECT/.prettierrc` for the `test/component.astro` fixture, so the package's own config was never loaded and the `astro` parser was unavailable. The instruction's prescribed causes were both false; editing the root `.prettierrc` instead was correctly rejected as out of scope. Worth capturing in a follow-up: `npm install` must precede `npm ci` when a scaffolding iteration adds a workspace package.
