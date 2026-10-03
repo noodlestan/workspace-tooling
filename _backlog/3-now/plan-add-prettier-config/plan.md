@@ -533,6 +533,7 @@ npm run ci # lint, test and build
 ### Findings
 
 - **A package's own Prettier config is not used to lint itself by default** — `prettier` resolves config by walking up from the file, so `$PROJECT/.prettierrc` wins over `configs/prettier-config-astro/src/index.cjs` unless the `prettier` field points at it. `configs/prettier-config/` still lints its fixtures against the root config; `configs/prettier-config-astro/` lints against its own. That asymmetry is invisible from either package alone.
+- **The shipped rules and `$PROJECT/.prettierrc` already diverge on `*.mjs`** — the root config omits `*.mjs` from its tab override, the shipped base rules include it. Adding the `prettier` field to `configs/prettier-config/package.json` made each package lint against its own config and surfaced this at once. Impact on migration is accepted and tracked under `## Follow Ups`.
 - **`npm ci` cannot add a workspace package or a new dependency** — it fails with `EUSAGE` on a missing lockfile entry. Scaffolding iterations need `npm install` first, then `npm ci`.
 
 - **Prettier config was never shipped** — `files` in `$PROJECT/configs/eslint-config/package.json` covers `src`, `.eslintrc.cjs`, `README.md`, and `LICENSE-MIT` only. The `.prettierrc` sitting next to it is excluded from the published tarball, which is why every consumer hand-writes its own and why they drifted apart.
@@ -552,7 +553,11 @@ npm run ci # lint, test and build
 
 ### Follow Ups
 
-- Migrate the remaining 9 consumer repositories to `@noodlestan/prettier-config`.
+- **ACCEPTED IMPACT — adopting `@noodlestan/prettier-config` re-indents every `*.mjs` file from 2 spaces to tabs.** The shipped base rules put `*.mjs` in the `useTabs: true` override; `$PROJECT/.prettierrc`, which formats the monorepo today, omits `*.mjs` and so leaves those files at `tabWidth: 2`. This was confirmed by adding the `prettier` field to `configs/prettier-config/package.json`, which immediately exposed the divergence. In this monorepo alone it re-indents 10 files under `cli/esbuild-cli/`; each of the 9 consumer repositories carries its own unknown count.
+  - This impact is EXPECTED and ACCEPTED. It is a property of the shipped rules, not a defect in them: `$WEB/.prettierrc` already listed `*.mjs`, which is why its adoption pass produced zero diff, and that parity was the evidence iteration 3 was designed to produce.
+  - Every migration must therefore EXPECT a `*.mjs` re-indent and treat it as correct output, not as a failed equivalence check. The strict "zero diff" acceptance criterion used in `adopt-base-config-in-web` only holds for a consumer whose existing config already matched the shipped rules exactly.
+  - Follow-up plans must replace "confirm zero diff" with "confirm the diff contains only `*.mjs` re-indentation" — the criterion this plan used to write before the criterion was corrected by the iteration 3 blueprint.
+- Migrate the remaining 9 consumer repositories to `@noodlestan/prettier-config`, each with the `*.mjs` re-indent expectation above.
 - Consider a shared `@noodlestan/prettier-ignore` or documenting a single ignore convention in `$PROJECT/README.md`.
 
 ### Feedback

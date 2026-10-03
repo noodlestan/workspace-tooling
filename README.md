@@ -6,11 +6,13 @@ Esbuild CLI wrapper, ESLint config, and base TypeScript configs.
 
 ## Packages
 
-| Package                     | Location                | Purpose                                                                                                      |
-| --------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `@noodlestan/esbuild`       | `cli/esbuild-cli`       | esbuild build/watch wrapper. Bins: `noodlestan/esbuild-cli` (build), `noodlestan/esbuild-cli-watch` (watch). |
-| `@noodlestan/eslint-config` | `configs/eslint-config` | Noodlestan's opinionated style guide configuration (ESLint + Prettier).                                      |
-| `@noodlestan/tsconfig`      | `configs/tsconfig`      | Base TypeScript configurations (`esbuild` and `vite` presets).                                               |
+| Package                             | Location                        | Purpose                                                                                                      |
+| ----------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `@noodlestan/esbuild`               | `cli/esbuild-cli`               | esbuild build/watch wrapper. Bins: `noodlestan/esbuild-cli` (build), `noodlestan/esbuild-cli-watch` (watch). |
+| `@noodlestan/eslint-config`         | `configs/eslint-config`         | Noodlestan's opinionated style guide configuration (ESLint + Prettier).                                      |
+| `@noodlestan/prettier-config`       | `configs/prettier-config`       | Noodlestan's base Prettier formatting configuration.                                                         |
+| `@noodlestan/prettier-config-astro` | `configs/prettier-config-astro` | Prettier formatting configuration with Astro support.                                                        |
+| `@noodlestan/tsconfig`              | `configs/tsconfig`              | Base TypeScript configurations (libs and cli variants).                                                      |
 
 The declared namespaced esbuild bins are linked by npm as `esbuild-cli` and
 `esbuild-cli-watch`.

@@ -9,6 +9,7 @@
     "access": "public"
   },
   "main": "./src/index.cjs",
+  "prettier": "./src/index.cjs",
   "exports": {
     ".": "./src/index.cjs",
     "./json": "./src/index.json",
@@ -16,7 +17,6 @@
   },
   "files": [
     "src",
-    "_guide.md",
     "README.md",
     "LICENSE-MIT"
   ],
