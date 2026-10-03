@@ -4,7 +4,7 @@
 
 Monorepo containing build tools and configs for Noodlestan workspaces and their backlogs.
 
-Uses Workflow: Planning Work with one backlog per package.
+Uses Workflow: Planning Work with one backlog at `_backlog/`.
 
 ## Recommended Reading
 
@@ -21,6 +21,7 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 
 ```
 _guide.md           — this file
+_backlog/           — backlog record and planning artefacts, by state directory
 _records/           — project, repository, license, dependencies, scaffolders, and scripts records
 _backlog/           — Backlog: Workspace Tooling planning artefacts
 architecture/       — architecture documents and decision records
