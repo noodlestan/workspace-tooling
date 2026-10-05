@@ -12,9 +12,9 @@
 
 **Author:** Noodlestan Collective
 
-**Path:** `art-domains/cli/workspace/`
+**Path:** `cli/esbuild-cli/`
 
-**Canonical Name:** `@art-domains/workspace-cli`
+**Canonical Name:** `@noodlestan/esbuild`
 
 **Published:** `true`
 
