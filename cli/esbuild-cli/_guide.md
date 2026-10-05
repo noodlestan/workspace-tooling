@@ -14,8 +14,10 @@ Agents SHOULD scan these files for definitions and resource locations when faced
 ```
 _guide.md           — this file
 _records/           — package records
-bin/                — CLI bins
+bin/                — CLI entry points
 src/                — source code
+src/config/         — config defaults
+src/plugins/        — exported plugins
 ```
 
 ## Records Management
