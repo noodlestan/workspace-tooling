@@ -12,6 +12,9 @@
     "esbuild-cli": "./bin/build.mjs",
     "esbuild-cli-watch": "./bin/watch.mjs"
   },
+  "exports": {
+    "./plugins": "./src/plugins/index.mjs"
+  },
   "files": [
     "bin",
     "src",
