@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 0.1.0
+
+### Removed
+
+- **cli/tsconfig.esm.json** – Declaration emit is now owned by the consumer's `build.config.mjs`.
+- **cli/tsconfig.cjs.json** – Declaration emit is now owned by the consumer's `build.config.mjs`.
+
+### Changed
+
+- **cli/tsconfig.json** – Now the base CLI preset, extended directly by consumers.
+
 ## 0.0.14
 
 ### Added
