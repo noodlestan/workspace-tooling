@@ -1,13 +1,24 @@
 #!/usr/bin/env node
 
+import { loadConfig } from '../src/helpers/loadConfig.mjs';
 import { createBuild } from '../src/build/index.mjs';
-import { cjsConfig } from '../src/config/cjs.mjs';
-import { esmConfig } from '../src/config/esm.mjs';
 
-const cjs = options => createBuild(options, cjsConfig);
-const esm = options => createBuild(options, esmConfig);
+const config = await loadConfig();
 
-// TODO resolve build/config.mjs in target repository
-const config = {};
+const promises = [];
 
-await Promise.all([cjs(config).watch(), esm(config).watch()]);
+if (config.cjs) {
+  const p = createBuild(config.cjs).watch();
+  promises.push(p);
+}
+
+if (config.esm) {
+  const p = createBuild(config.esm).watch();
+  promises.push(p);
+}
+
+await Promise.all(promises).catch(err => {
+  console.error(err);
+  console.error(`🟥 Build failed with errors`);
+  process.exit(1);
+});
