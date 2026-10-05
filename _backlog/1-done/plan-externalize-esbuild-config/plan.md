@@ -2,7 +2,7 @@
 
 **ID:** `externalize-esbuild-config`
 
-**Status:** `PLANNING`
+**Status:** `DONE`
 
 **Template:** `.agents/domains/plans/templates/plan.tart`
 
@@ -121,21 +121,20 @@ Execution occurs from `$WORKSPACE/`; the plan is executed in the single checkout
 
 ## Items:
 
-| Iteration / Instructions                                    | Status     |
-| ----------------------------------------------------------- | ---------- |
-| Iteration: Add build config loader                          | `PLANNING` |
-| Iteration: Strip baked-in build defaults                    | `PLANNING` |
-| Iteration: Replace emit-types plugin with post-build plugin | `PLANNING` |
-| Iteration: Configure the static-files source directory      | `PLANNING` |
-| Iteration: Export plugins subpath                           | `PLANNING` |
-| Iteration: Drop esm/cjs tsconfig presets                    | `PLANNING` |
-| Iteration: Document config contract                         | `PLANNING` |
+| Iteration / Instructions                                    | Status |
+| ----------------------------------------------------------- | ------ |
+| Iteration: Add build config loader                          | `DONE` |
+| Iteration: Strip baked-in build defaults                    | `DONE` |
+| Iteration: Replace emit-types plugin with post-build plugin | `DONE` |
+| Iteration: Export plugins subpath                           | `DONE` |
+| Iteration: Drop esm/cjs tsconfig presets                    | `DONE` |
+| Iteration: Document config contract                         | `DONE` |
 
 ### Iteration: Add build config loader
 
 **Id:** `add-build-config-loader`
 
-**Status:** `PLANNING`
+**Status:** `DONE`
 
 **Purpose:** Give `esbuild-cli` a single, validated entry point for consumer-supplied build configuration.
 
@@ -152,9 +151,9 @@ Execution occurs from `$WORKSPACE/`; the plan is executed in the single checkout
   - Throw when neither `supplied.cjs` nor `supplied.esm` is defined.
   - Return only the declared targets, each as `{ ...common, ...targetConfig, ...supplied.<target> }`.
 
-- Rewrite `$ESBUILD_CLI/bin/build.mjs` to `await loadConfig()` once and then, per declared target, call `createBuild(config.<target>).build()`. Drop the `cjs`/`esm` wrapper closures and the `const config = {}` placeholder with its `TODO`.
+- Rewrite `$ESBUILD_CLI/bin/build.mjs` to `await loadConfig()` once and then, per declared target, call `createBuild(config.<target>).build()`. Drop the `cjs`/`esm` wrapper closures and the `const config = {}` COMMITTED with its `TODO`.
 
-- Rewrite `$ESBUILD_CLI/bin/watch.mjs` to `await loadConfig()` once, push each declared target's `watch()` promise into an array, and `await Promise.all(promises)`. Drop the wrapper closures and the placeholder.
+- Rewrite `$ESBUILD_CLI/bin/watch.mjs` to `await loadConfig()` once, push each declared target's `watch()` promise into an array, and `await Promise.all(promises)`. Drop the wrapper closures and the COMMITTED.
 
 - Both bins run targets sequentially in `build` and concurrently in `watch`; preserve that asymmetry.
 
@@ -164,9 +163,9 @@ Execution occurs from `$WORKSPACE/`; the plan is executed in the single checkout
 
 #### Commits:
 
-| ID                        | Repository / Checkout / Branch          | Policy       | Hash | Status        |
-| ------------------------- | --------------------------------------- | ------------ | ---- | ------------- |
-| `add-build-config-loader` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
+| ID                        | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| ------------------------- | --------------------------------------- | -------- | --------- | ----------- |
+| `add-build-config-loader` | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `c2b790b` | `COMMITTED` |
 
 ##### Commit: `add-build-config-loader`
 
@@ -183,7 +182,7 @@ build(esbuild): Load build config from consumer `build.config.mjs`.
 
 **Id:** `strip-baked-in-build-defaults`
 
-**Status:** `PLANNING`
+**Status:** `DONE`
 
 **Purpose:** Remove the defaults that made the previous behaviour unoverridable and produced bundles plain Node could not load.
 
@@ -227,10 +226,10 @@ Target defaults sit above `common` and below the consumer's target block, so a t
 
 #### Commits:
 
-| ID                              | Repository / Checkout / Branch          | Policy       | Hash | Status        |
-| ------------------------------- | --------------------------------------- | ------------ | ---- | ------------- |
-| `reduce-shared-config-defaults` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
-| `simplify-create-build`         | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
+| ID                              | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| ------------------------------- | --------------------------------------- | -------- | --------- | ----------- |
+| `reduce-shared-config-defaults` | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `8896709` | `COMMITTED` |
+| `simplify-create-build`         | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `198a430` | `COMMITTED` |
 
 ##### Commit: `reduce-shared-config-defaults`
 
@@ -248,7 +247,7 @@ build(esbuild): Trim the shared and target config defaults.
 **Message:**
 
 ```text
-refactor(esbuild): Make `createBuild` a thin esbuild wrapper.
+build(esbuild): Drop hardcoded injection in favor of postBuildPlugin.
 
 - Remove `__BUILD_VERSION__` define injection and external inference
 - Delete the orphaned `resolvePackageJson` and `resolveExternalPackages` helpers
@@ -258,7 +257,7 @@ refactor(esbuild): Make `createBuild` a thin esbuild wrapper.
 
 **Id:** `replace-emit-types-plugin`
 
-**Status:** `PLANNING`
+**Status:** `DONE`
 
 **Purpose:** Generalise the declaration-emission plugin into a reusable post-build step, and give the static-file copier a matching contract.
 
@@ -291,9 +290,9 @@ refactor(esbuild): Make `createBuild` a thin esbuild wrapper.
 
 #### Commits:
 
-| ID                          | Repository / Checkout / Branch          | Policy       | Hash | Status        |
-| --------------------------- | --------------------------------------- | ------------ | ---- | ------------- |
-| `replace-emit-types-plugin` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
+| ID                          | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| --------------------------- | --------------------------------------- | -------- | --------- | ----------- |
+| `replace-emit-types-plugin` | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `8375919` | `COMMITTED` |
 
 ##### Commit: `replace-emit-types-plugin`
 
@@ -306,50 +305,11 @@ build(esbuild): Replace `emitTypesPlugin` with a general `postBuildPlugin`.
 - Rename `copyStaticFiles` to `copyStaticFilesPlugin` on the same contract
 ```
 
-### Iteration: Configure the static-files source directory
-
-**Id:** `configure-copy-static-files-source`
-
-**Status:** `PLANNING`
-
-**Purpose:** Stop hardcoding `src` as the copy source so a consumer can copy from any directory.
-
-**Description:** Adds a `src` option to `copyStaticFilesPlugin`, defaulting to `'src'` to preserve current behaviour.
-
-**Instructions:** `./instructions/configure-copy-static-files-source.md`
-
-**Changes:**
-
-- `$ESBUILD_CLI/src/plugins/copyStaticFilesPlugin.mjs` — accept `src = 'src'` and pass it to `copyFilesRecursive` instead of the `'src'` literal.
-
-- `$ESBUILD_CLI/README.md` — document the `src` option in the `copyStaticFilesPlugin` reference and its use-case example.
-
-**Dependencies:**
-
-- Iteration: Replace emit-types plugin with post-build plugin.
-
-#### Commits:
-
-| ID                             | Repository / Checkout / Branch          | Policy       | Hash | Status        |
-| ------------------------------ | --------------------------------------- | ------------ | ---- | ------------- |
-| `configure-copy-source-option` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
-
-##### Commit: `configure-copy-source-option`
-
-**Message:**
-
-```text
-build(esbuild): Make the static-files copy source configurable.
-
-- Add a `src` option to `copyStaticFilesPlugin`, defaulting to `src`
-- Document the option in the package readme
-```
-
 ### Iteration: Export plugins subpath
 
 **Id:** `add-plugins-export-map`
 
-**Status:** `PLANNING`
+**Status:** `DONE`
 
 **Purpose:** Give plugins a stable public import path so consumers do not reach into `src/`.
 
@@ -377,9 +337,9 @@ build(esbuild): Make the static-files copy source configurable.
 
 #### Commits:
 
-| ID                       | Repository / Checkout / Branch          | Policy       | Hash | Status        |
-| ------------------------ | --------------------------------------- | ------------ | ---- | ------------- |
-| `add-plugins-export-map` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
+| ID                       | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| ------------------------ | --------------------------------------- | -------- | --------- | ----------- |
+| `add-plugins-export-map` | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `b4df102` | `COMMITTED` |
 
 ##### Commit: `add-plugins-export-map`
 
@@ -396,7 +356,7 @@ build(esbuild): Export plugins from `@noodlestan/esbuild/plugins`.
 
 **Id:** `drop-esm-cjs-tsconfig-presets`
 
-**Status:** `PLANNING`
+**Status:** `DONE`
 
 **Purpose:** Stop shipping emit-only esm/cjs presets now that consumers own their declaration emit strategy.
 
@@ -420,9 +380,9 @@ build(esbuild): Export plugins from `@noodlestan/esbuild/plugins`.
 
 #### Commits:
 
-| ID                                    | Repository / Checkout / Branch          | Policy       | Hash | Status        |
-| ------------------------------------- | --------------------------------------- | ------------ | ---- | ------------- |
-| `remove-cli-tsconfig-esm-cjs-presets` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
+| ID                                    | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| ------------------------------------- | --------------------------------------- | -------- | --------- | ----------- |
+| `remove-cli-tsconfig-esm-cjs-presets` | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `22f068e` | `COMMITTED` |
 
 ##### Commit: `remove-cli-tsconfig-esm-cjs-presets`
 
@@ -439,7 +399,7 @@ build(tsconfig): Remove esm and cjs emit presets.
 
 **Id:** `document-config-contract`
 
-**Status:** `PLANNING`
+**Status:** `DONE`
 
 **Purpose:** Make the new `build.config.mjs` contract discoverable by consumers migrating off the old defaults.
 
@@ -464,17 +424,16 @@ build(tsconfig): Remove esm and cjs emit presets.
 - Iteration: Add build config loader.
 - Iteration: Strip baked-in build defaults.
 - Iteration: Replace emit-types plugin with post-build plugin.
-- Iteration: Configure the static-files source directory.
 - Iteration: Export plugins subpath.
 - Iteration: Drop esm/cjs tsconfig presets.
 
 #### Commits:
 
-| ID                               | Repository / Checkout / Branch          | Policy       | Hash | Status        |
-| -------------------------------- | --------------------------------------- | ------------ | ---- | ------------- |
-| `correct-esbuild-cli-records`    | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
-| `update-esbuild-cli-guides`      | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
-| `document-build-config-contract` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` |      | `PLACEHOLDER` |
+| ID                               | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| -------------------------------- | --------------------------------------- | -------- | --------- | ----------- |
+| `correct-esbuild-cli-records`    | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `d174e78` | `COMMITTED` |
+| `update-esbuild-cli-guides`      | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `18be34d` | `COMMITTED` |
+| `document-build-config-contract` | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `afc7bb5` | `COMMITTED` |
 
 ##### Commit: `correct-esbuild-cli-records`
 
