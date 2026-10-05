@@ -13,24 +13,26 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 - `_guide.md` — this file: system overview, layout, setup, verification.
 - `_records/project.art` — the project record.
 - `_records/repository.art` — the repository record.
+- `_backlog/backlog.art` — the Backlog: Workspace Tooling record.
 
 ## Repository Layout
 
 ```
 _guide.md           — this file
 _records/           — project, repository, license, dependencies, scaffolders, and scripts records
+_backlog/           — Backlog: Workspace Tooling planning artefacts
 cli/                — CLI packages
 configs/            — shared configuration packages
 ```
 
 ## Projects
 
-| Project                  | Guide                             | Backlog |
-| ------------------------ | --------------------------------- | ------- |
-| Workspace Tooling (root) | `_guide.md`                       | `NONE`  |
-| Esbuild CLI              | `cli/esbuild-cli/_guide.md`       | `NONE`  |
-| ESLint Config            | `configs/eslint-config/_guide.md` | `NONE`  |
-| TS Config                | `configs/tsconfig/_guide.md`      | `NONE`  |
+| Project                  | Guide                             | Backlog     |
+| ------------------------ | --------------------------------- | ----------- |
+| Workspace Tooling (root) | `_guide.md`                       | `_backlog/` |
+| Esbuild CLI              | `cli/esbuild-cli/_guide.md`       | `NONE`      |
+| ESLint Config            | `configs/eslint-config/_guide.md` | `NONE`      |
+| TS Config                | `configs/tsconfig/_guide.md`      | `NONE`      |
 
 ## Records Management
 

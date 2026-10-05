@@ -22,6 +22,6 @@
 
 **Private:** `true`
 
-**Management:** Uses Workflow: Planning Work with one backlog per package.
+**Management:** Uses Workflow: Planning Work with one backlog per package. Backlog: Workspace Tooling at `_backlog/`.
 
 **License:** License: Noodlestan 2026 MIT
