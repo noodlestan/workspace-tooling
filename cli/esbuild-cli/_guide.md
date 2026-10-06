@@ -1,6 +1,6 @@
 # Esbuild CLI
 
-The `@noodlestan/esbuild` package wraps esbuild with the file-path-extensions plugin, providing `esbuild-cli` (build) and `esbuild-cli-watch` (watch) bins.
+The `@noodlestan/esbuild` package wraps esbuild behind a fixed config contract, providing `esbuild-cli` (build) and `esbuild-cli-watch` (watch) bins and exporting opt-in post-build plugins.
 
 ## Recommended Reading
 
@@ -8,6 +8,7 @@ Agents SHOULD scan these files for definitions and resource locations when faced
 
 - `_guide.md` — this file: package overview, layout, records, and operating instructions.
 - `README.md` — package readme.
+- `../../architecture/design/build.md` — command surface, config contract, defaults, plugins, and outputs.
 
 ## Package Layout
 
@@ -49,4 +50,14 @@ Run from this package directory:
 npm run lint:fix # to fix formatting issues automatically
 npm run lint # to report other issues (prettier, eslint)
 npm run test # to run all tests
+```
+
+### Operating Instructions: Verifying Completion
+
+**Instructions:**
+
+Runs automatically on pre-commit hook (from the repository root):
+
+```bash
+npm run ci # lint, build, and run both test suites
 ```

@@ -14,6 +14,8 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 - `_records/project.art` — the project record.
 - `_records/repository.art` — the repository record.
 - `_backlog/backlog.art` — the Backlog: Workspace Tooling record.
+- `architecture/index.md` — architecture documents and decision records index.
+- `architecture/overview.md` — toolchain overview, rules, constraints, and options.
 
 ## Repository Layout
 
@@ -21,6 +23,7 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 _guide.md           — this file
 _records/           — project, repository, license, dependencies, scaffolders, and scripts records
 _backlog/           — Backlog: Workspace Tooling planning artefacts
+architecture/       — architecture documents and decision records
 cli/                — CLI packages
 configs/            — shared configuration packages
 ```
@@ -42,6 +45,12 @@ Records are co-located with the resources they describe in `_records/` directori
 - **Repository:** `_records/repository.art`
 - **Packages:** `{package-path}/_records/package.art`
 - **NPM Deployments:** `{package-path}/_records/npm-deployment.art`
+
+## Knowledge References
+
+This repository maintains architecture references at:
+
+- `architecture/index.md` — Repository-level architecture index.
 
 ## Operating Instructions
 

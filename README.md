@@ -10,16 +10,25 @@ Esbuild CLI wrapper, ESLint config, and base TypeScript configs.
 | --------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `@noodlestan/esbuild`       | `cli/esbuild-cli`       | esbuild build/watch wrapper. Bins: `noodlestan/esbuild-cli` (build), `noodlestan/esbuild-cli-watch` (watch). |
 | `@noodlestan/eslint-config` | `configs/eslint-config` | Noodlestan's opinionated style guide configuration (ESLint + Prettier).                                      |
-| `@noodlestan/tsconfig`      | `configs/tsconfig`      | Base TypeScript configurations (libs and cli variants).                                                      |
+| `@noodlestan/tsconfig`      | `configs/tsconfig`      | Base TypeScript configurations (`esbuild` and `vite` presets).                                               |
 
 The declared namespaced esbuild bins are linked by npm as `esbuild-cli` and
 `esbuild-cli-watch`.
 
-## Getting started
+## Architecture
+
+Documents and decision records for this repository live in
+[architecture/index.md](architecture/index.md) — start with
+[architecture/overview.md](architecture/overview.md) for the toolchain,
+its rules, and the options available to consuming repositories.
+
+## Development
 
 First make sure you are using the correct node version by running `nvm use`.
 
 Install dependencies with `npm install`.
+
+### Scripts
 
 - `npm run turbo lint` - Check formatting (Prettier + ESLint) in all packages.
 - `npm run turbo test` - Run tests in all packages.

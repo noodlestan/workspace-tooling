@@ -26,6 +26,23 @@ And a few more plugins:
 
 Our overrides can be found in [src/config](./src/config/).
 
+## Usage
+
+Install the config and its peers, then spread it from your ESLint entry file:
+
+```bash
+npm install --save-dev @noodlestan/eslint-config eslint prettier typescript
+```
+
+```js
+// .eslintrc.cjs
+const config = require('@noodlestan/eslint-config');
+
+module.exports = { ...config };
+```
+
+The config supplies the rules; your repository owns the `eslint`, `prettier`, and `typescript` versions through the declared peer dependencies. See [architecture/design/linting.md](../../architecture/design/linting.md) for how the config is composed and validated.
+
 ## Development
 
 System requirements:
@@ -49,7 +66,7 @@ Run `npm run lint`. It will lint the example files provided.
 
 ### Committing
 
-Make sure the `pre-commit` hook was executed. It runs automatically before every commit and lints all code. Under the hood it runs `npm run lint:silent`.
+Make sure the `pre-commit` hook was executed. It runs automatically before every commit: from the repository root, Lefthook runs `npm run clean`, `npm run extract`, then `npm run ci`, and `ci` covers this package's Prettier and ESLint checks.
 
 ## License
 

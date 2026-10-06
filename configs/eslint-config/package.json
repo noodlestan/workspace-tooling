@@ -6,7 +6,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noodlestan/eslint-config"
+    "url": "git+https://github.com/noodlestan/workspace-tooling.git",
+    "directory": "configs/eslint-config"
   },
   "main": ".eslintrc.cjs",
   "publishConfig": {

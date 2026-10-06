@@ -2,9 +2,9 @@
 
 ## Package: TS Config
 
-**Purpose:** Base TypeScript configurations for Noodlestan packages.
+**Purpose:** Enforcing consistency and strict standards across all Noodlestan packages.
 
-**Description:** Shared tsconfig presets (libs and cli variants) consumed by every project repo.
+**Description:** Base TypeScript configurations for Noodlestan packages (`esbuild` and `vite` presets).
 
 **Owner:** Project: Artificial
 
@@ -24,8 +24,11 @@
 
 **Files:**
 
+- `esbuild`
+- `vite`
 - `cli`
 - `libs`
+- `workspace`
 
 **Language:** JSON
 

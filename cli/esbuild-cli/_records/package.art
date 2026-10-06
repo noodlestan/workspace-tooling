@@ -4,7 +4,7 @@
 
 **Purpose:** ESBuild build/watch wrapper for Noodlestan packages.
 
-**Description:** Wraps esbuild with file-path-extensions plugin. Provides `esbuild-cli` (build) and `esbuild-cli-watch` (watch) bins.
+**Description:** Opinionated esbuild wrapper with a fixed config contract. Provides `esbuild-cli` (build) and `esbuild-cli-watch` (watch) bins and opt-in plugins: `postBuildPlugin` and `copyStaticFilesPlugin`.
 
 **Owner:** Project: Artificial
 
