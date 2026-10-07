@@ -22,42 +22,28 @@
 
 **Consequences:** One formatting source of truth, two enforcement points, no rule conflicts. The trade-off is double reporting on the same files and formatting rules visible in ESLint output; both are accepted to keep a single pass sufficient wherever linting happens.
 
-## Decision: Config Published as a Versioned Package
+## Decision: TSConfig Scoped to Consumer Build Tool `esbuild` or `vite`
 
 **Status:** Adopted
 
-**Context:** Sharing rules via a git dependency or a copied config file gives consumers no version history, no install-time resolution, and no way to pin a known-good guide.
+**Decision:** Support exactly two consumer types: `esbuild` (NodeNext module semantics, Node target, wrapper-built output) and `vite` (ESNext with `bundler` resolution and `vite/client` types, with a `-solid` variant) and a convinience `workspace` preset for workspaces (not built).
 
-**Decision:** Ship the guide as `@noodlestan/eslint-config` with independent semantic versions and `peerDependencies` on `eslint`, `prettier`, and `typescript`. The config owns the rules; the consumer owns the toolchain.
-
-**Consequences:** Consumers upgrade the guide deliberately and can pin it. Peer ranges keep the engines compatible without the config dictating installation. This repository consumes the same package at the matching workspace version, so the guide is validated against itself before release.
-
-## Decision: Stable Consumer Kinds Are `esbuild` and `vite` Only
-
-**Status:** Proposed
-
-**Context:** `@noodlestan/tsconfig` shipped presets for `cli`, `libs`, `esbuild`, `vite`, and `workspace`. The `cli` and `libs` families overlap: libraries built with the wrapper and libraries resolved by a bundler now belong to the `esbuild` and `vite` kinds, and `workspace` is a root-only convenience.
-
-**Decision:** Support exactly two stable consumer kinds: `esbuild` (NodeNext module semantics, Node target, wrapper-built output) and `vite` (ESNext with `bundler` resolution and `vite/client` types, with a `-solid` variant). The `cli`, `libs`, and `workspace` presets are transitional: they stay published while their consumers migrate, are documented as in flux, and will be removed.
-
-**Consequences:** New packages pick from two clear options instead of five overlapping ones. The cost is a migration window in which the package still ships presets it recommends against, and the `files` list must keep covering them until removal.
-
-## Decision: Presets Extended, No Project References
+## Decision: No Typescript Project References
 
 **Status:** Adopted
 
-**Context:** TypeScript project references coordinate composite builds across packages. This toolchain builds packages with esbuild through turbo's task graph, so a second build graph would duplicate orchestration.
+**Context:** TypeScript project references allow coordinating composite builds across packages.
 
 **Decision:** A package `extends` exactly one base preset from `@noodlestan/tsconfig` and owns its own `include`, `exclude`, and `rootDir`. Project references are not used.
 
-**Consequences:** Each package has one obvious type-check configuration and no cross-package build coupling in TypeScript. Consumers must keep `include` and `exclude` accurate themselves, and composite builds remain out of scope.
+**Consequences:** Each package has one obvious type-check configuration and no cross-package build coupling in TypeScript. Consumers must keep `include` and `exclude` accurate themselves, and coordinate composite build through turbo's task graph.
 
-## Decision: Strictness Fixed Centrally
+## Decision: TSConfig Strict Preset
 
 **Status:** Adopted
 
 **Context:** Every preset repeated the same strictness block, and packages could quietly relax it by forking the config.
 
-**Decision:** All stable kinds apply one strictness block — `strict`, `noImplicitAny`, `verbatimModuleSyntax`, `isolatedModules`, `forceConsistentCasingInFileNames`, `noPropertyAccessFromIndexSignature`, `noUncheckedIndexedAccess` — while module semantics and type roots vary per kind. Presets declare `declaration: true` but emit nothing; declaration output is driven by the consumer's build config.
+**Decision:** All TSConfig apply one strictness block — `strict`, `noImplicitAny`, `verbatimModuleSyntax`, `isolatedModules`, `forceConsistentCasingInFileNames`, `noPropertyAccessFromIndexSignature`, `noUncheckedIndexedAccess` — while module semantics and type roots vary per kind. Presets declare `declaration: true` but emit nothing; declaration output is driven by the consumer's build config.
 
-**Consequences:** Type safety does not vary by package, and the only sanctioned difference between kinds is module resolution and environment types. Relaxing strictness requires a decision record here rather than a local override.
+**Consequences:** Type safety does not vary by package, and the only sanctioned difference between types is module resolution and environment types. Relaxing strictness requires a decision record here rather than a local override.
