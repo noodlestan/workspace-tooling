@@ -260,9 +260,9 @@ plan(adopt-esm): Add the distribution migration matrix.
 
 #### Commits:
 
-| ID                      | Repository / Checkout / Branch          | Policy   | Hash    | Status      |
-| ----------------------- | --------------------------------------- | -------- | ------- | ----------- |
-| `ship-consumer-configs` | Workspace Tooling / `$PROJECT` / `main` | `NOPUSH` | `(TBD)` | `COMMITTED` |
+| ID                      | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| ----------------------- | --------------------------------------- | -------- | --------- | ----------- |
+| `ship-consumer-configs` | Workspace Tooling / `$PROJECT` / `main` | `NOPUSH` | `3d9eca8` | `COMMITTED` |
 
 ##### Commit: `ship-consumer-configs`
 

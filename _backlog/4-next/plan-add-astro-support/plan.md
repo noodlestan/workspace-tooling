@@ -1,4 +1,4 @@
-# Plan: Add Astro Support to Prettier and ESLint
+# Plan: Add Astro Support to ESLint
 
 **Id:** `add-astro-support`
 
@@ -8,7 +8,7 @@
 
 **Skill:** `write-plan`
 
-**Purpose:** `.astro` files are skipped by `npm run lint` in Astro repositories, so formatting and lint rules only apply through the VS Code Astro extension and never from the CLI.
+**Purpose:** `.astro` files are skipped by `eslint .` in Astro repositories, so lint rules only apply through the VS Code Astro extension and never from the CLI.
 
 **Description:** Add an Astro ESLint override to `@noodlestan/eslint-config` mirroring the existing Solid and MDX overrides, exercise it with an `.astro` fixture inside the package, then live-tune it against `Repository: Noodlestan Web` through a local package link before publishing.
 
@@ -30,7 +30,7 @@
 
 ## Summary
 
-Extend `@noodlestan/eslint-config` with Astro parsing and rule coverage, and wire `@noodlestan/prettier-config-astro` into an Astro consumer, so `prettier . -c` and `eslint .` both act on `.astro` files.
+Extend `@noodlestan/eslint-config` with Astro parsing and rule coverage so `eslint .` acts on `.astro` files; the Prettier side is already delivered by upstream `Plan: Add Prettier Config`.
 
 ## Attachments
 
@@ -40,10 +40,10 @@ None.
 
 ### Upstream Work
 
-| Kind    | Path                                                    | Role                                                                                                                                                                             |
-| ------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Plan    | `$ROOT/_backlog/3-now/plan-add-prettier-config/plan.md` | Upstream plan. Ships `Package: Prettier Config` and `Package: Prettier Config Astro`, and owns the canonical base rules tuned by iteration `tune-astro-rules`. Blocks this plan. |
-| Project | `$ROOT/_records/project.art`                            | Owns the packages changed here.                                                                                                                                                  |
+| Kind    | Path                                                     | Role                                                                                                                                                               |
+| ------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Plan    | `$ROOT/_backlog/1-done/plan-add-prettier-config/plan.md` | `DONE`. Ships `@noodlestan/prettier-config` and `@noodlestan/prettier-config-astro`; its `prettier-plugin-astro` install satisfies this plan's fixture dependency. |
+| Project | `$ROOT/_records/project.art`                             | Owns the packages changed here.                                                                                                                                    |
 
 ### Required Skills
 
@@ -102,13 +102,13 @@ None.
 
 ::READ `$ROOT/configs/eslint-config/src/index.cjs` (Config) — Override registration order and `ignorePatterns`, which determine whether ESLint collects `.astro` files at all. Relevant for Drafting Work Item, Executing Work Step.
 
-::READ `$ROOT/_backlog/3-now/plan-add-prettier-config/plan.md` (Plan) — Upstream plan shipping the Prettier packages this plan consumes. Relevant for Planning Work Item, Executing Work Step.
+::READ `$ROOT/_backlog/1-done/plan-add-prettier-config/plan.md` (Plan) — Upstream plan (`DONE`) shipping the Prettier packages this plan consumes. Relevant for Planning Work Item, Executing Work Step.
 
 ::READ `$WORKSPACE/knowledge/conventions/writing-commit-message.art` (Conventions) — Commit types, scopes, and rules. Relevant for Writing Commit Message.
 
 ## Scope
 
-1 config package extended with an Astro override and 2 new dependencies; 1 consumer repository migrated to the Astro Prettier config and pinned after publication.
+1 config package extended with an Astro override and 2 new dependencies; 1 consumer repository live-tuned against the linked override and pinned to the published release.
 
 ### (Scope) Project: Noodlestan Workspace Tooling
 
@@ -167,29 +167,7 @@ None.
 
 **Dependencies:**
 
-- `Plan: Add Prettier Config` — `prettier-plugin-astro` must be resolvable from `$ROOT` before the fixture can be linted.
-
-### (Scope) Package: Prettier Config Astro
-
-**Record:** `$ROOT/configs/prettier-config-astro/_records/package.art`
-
-**Role:** — Changes required. Its `*.astro` override gains tuned options and an `.astro` fixture in the consumer.
-
-**Partial:**
-
-- `owner` — Project: Noodlestan Workspace Tooling
-- `path` — `$ROOT/configs/prettier-config-astro/`
-- `canonicalName` — `@noodlestan/prettier-config-astro`
-
-**Changes:**
-
-- Append an `overrides` entry for `*.astro` with `useTabs: true` and `parser: astro`, after the base entries, so `.astro` files are tab-indented like the rest of the JS-family files.
-- Tune the Astro options further during iteration `tune-astro-rules` — `printWidth` inside templates, and Markdown handling.
-- Bump minor version and publish.
-
-**Dependencies:**
-
-- `Plan: Add Prettier Config` — blocks this plan; the package must exist first.
+- None — upstream `Plan: Add Prettier Config` is `DONE`; `prettier-plugin-astro` resolves from `$ROOT`.
 
 ### (Scope) Repository: Noodlestan Web
 
@@ -204,15 +182,14 @@ None.
 
 **Changes:**
 
-- Link `@noodlestan/eslint-config` and `@noodlestan/prettier-config-astro` into `$WEB/node_modules/@noodlestan/`.
-- Point the `prettier` field at `@noodlestan/prettier-config-astro`.
+- Link `@noodlestan/eslint-config` into `$WEB/node_modules/@noodlestan/`.
 - Run `npm run lint:fix` and classify every new `.astro` violation as a config gap or a project defect.
 - Commit config gaps to `$ROOT` and project defects to `$WEB`.
-- Replace the links with published versions once tuning is complete.
+- Replace the link with the published version once tuning is complete.
 
 **Dependencies:**
 
-- `Plan: Add Prettier Config` — blocks this plan; the base and Astro Prettier packages must exist first.
+- `Plan: Add Prettier Config` — `DONE`; the Astro Prettier config is already pinned in `$WEB`, so this plan only links the ESLint config.
 
 ## Execution Context
 
@@ -307,26 +284,22 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 **Purpose:** Surface every real conflict between the shared Astro rules and an actual Astro codebase before publication.
 
-**Description:** Link `@noodlestan/eslint-config` and `@noodlestan/prettier-config-astro` into `$WEB/node_modules/@noodlestan/`, point the `prettier` field at the Astro variant, and run `npm run lint:fix` in `$WEB/apps/noodlestan-web`. Classify each violation as a config gap — fixed in `$PKG_ESLINT` or the Astro Prettier config — or a project defect — fixed in `$WEB`. Never commit an `.astro` file in `$WEB` to silence a rule that the shared config should instead express.
+**Description:** Link `@noodlestan/eslint-config` into `$WEB/node_modules/@noodlestan/` and run `npm run lint:fix` in `$WEB/apps/noodlestan-web`. Classify each violation as a config gap — fixed in `$PKG_ESLINT` — or a project defect — fixed in `$WEB`. Never commit an `.astro` file in `$WEB` to silence a rule that the shared config should instead express.
 
 **Instructions:** `./plan-add-astro-support/instructions/tune-astro-rules.md`
 
 **Changes:**
 
-- Link the packages into `$WEB` for live tuning, from `$WEB/node_modules/@noodlestan`:
+- Link the package into `$WEB` for live tuning, from `$WEB/node_modules/@noodlestan`:
 
   ```bash
   rm -rf eslint-config && ln -s ../../../workspace-tooling/configs/eslint-config eslint-config
-  rm -rf prettier-config-astro && ln -s ../../../workspace-tooling/configs/prettier-config-astro prettier-config-astro
   ```
 
-- Link `$ROOT/configs/prettier-config-astro` into `$WEB/node_modules/@noodlestan/prettier-config-astro`.
-- Point the `prettier` field in `$WEB/package.json` at `@noodlestan/prettier-config-astro`.
 - Run `npm run lint` in `$WEB/apps/noodlestan-web` and record every violation by class.
-- Adjust `src/config/astro.cjs` and the Astro `overrides` in the Prettier config for each config gap.
+- Adjust `src/config/astro.cjs` for each config gap.
 - Fix project defects in `$WEB/apps/noodlestan-web/src/**/*.astro`.
 - Confirm `parserOptions.project` resolves for `.astro` files, given that the Solid and Typescript overrides assume a CWD-relative `./tsconfig.json`.
-- Confirm `.astro` files come out tab-indented in both frontmatter and markup, matching the `useTabs: true` override.
 
 **Dependencies:**
 
@@ -338,20 +311,19 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 **Status:** `DRAFT`
 
-**Purpose:** Publish both packages and replace the local links in `$WEB` with released versions.
+**Purpose:** Publish the ESLint config and replace the local link in `$WEB` with the released version.
 
-**Description:** Bump the versions of `@noodlestan/eslint-config` and `@noodlestan/prettier-config-astro`, run `npm run art-work publish` from `$WORKSPACE`, then in `$WEB` remove both symlinks, install the released versions, and re-run `npm run lint` to confirm the pinned result matches the linked result. Update the NPM Deployment records and `$ROOT/configs/eslint-config/README.md`.
+**Description:** Bump the version of `@noodlestan/eslint-config`, run `npm run art-work publish` from `$WORKSPACE`, then in `$WEB` remove the symlink, install the released version, and re-run `npm run lint` to confirm the pinned result matches the linked result. Update the NPM Deployment records and `$ROOT/configs/eslint-config/README.md`.
 
 **Instructions:** `./plan-add-astro-support/instructions/publish-and-pin.md`
 
 **Changes:**
 
-- Bump `version` in both `package.json` files.
+- Bump `version` in `$ROOT/configs/eslint-config/package.json`.
 - Run `npm run art-work publish` from `$WORKSPACE`.
-- Remove both symlinks in `$WEB/node_modules/@noodlestan/` and install the published versions.
+- Remove the symlink in `$WEB/node_modules/@noodlestan/` and install the published version.
 - Re-run `npm run lint` in `$WEB/apps/noodlestan-web` and confirm parity with the linked run.
 - Update `$ROOT/configs/eslint-config/_records/npm-deployment.art` and `$ROOT/configs/eslint-config/README.md`.
-- Reflect the outcome upstream in `Plan: Add Prettier Config`.
 
 **Dependencies:**
 
@@ -361,11 +333,11 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 ### Next
 
-Refine `create-astro-eslint-override` into an instructions file once the upstream Prettier packages are published.
+Refine the iterations into instructions files; the upstream Prettier packages are published and pinned, so planning can proceed.
 
 ### Blockers
 
-- **Upstream Prettier packages** — `Plan: Add Prettier Config` must be `DONE` before this plan can start; its `.astro` fixtures need `prettier-plugin-astro` installed in `$ROOT`.
+- None — upstream `Plan: Add Prettier Config` is `DONE`; `prettier-plugin-astro` is installed in `$ROOT`.
 
 ## Operating Instructions
 
@@ -393,11 +365,10 @@ npm ci # to install dependencies.
 
 **Instructions:** (From `$WORKSPACE/_guide.md`)
 
-Run from `$WEB/node_modules/@noodlestan` to link the local packages into the live-test consumer:
+Run from `$WEB/node_modules/@noodlestan` to link the local package into the live-test consumer:
 
 ```bash
 rm -rf eslint-config && ln -s ../../../workspace-tooling/configs/eslint-config eslint-config
-rm -rf prettier-config-astro && ln -s ../../../workspace-tooling/configs/prettier-config-astro prettier-config-astro
 ```
 
 ### Verifying Step
@@ -443,13 +414,14 @@ npm run ci # lint, test and build
 - **Flat config migration** — Moving `@noodlestan/eslint-config` to `eslint.config.js` under ESLint 9 would change every override at once; the package stays on the legacy `eslintrc` shape it already uses for Solid and MDX.
 - **VS Code editor settings** — `editor.defaultFormatter` and format-on-save in `.vscode/settings.json` already work through the Astro extension and say nothing about the CLI.
 - **Other frameworks** — Vue, Svelte, and MDX parity beyond the existing MDX override.
+- **Prettier Astro tuning** — the Astro Prettier config and its `$WEB` pin are delivered by `Plan: Add Prettier Config`; this plan only adds ESLint coverage.
 - **Other Astro consumers** — only `Repository: Noodlestan Web` is live-tested; broader adoption is not verified by this plan.
 
 ### Evidence
 
 - In `$WEB/apps/noodlestan-web`, `npm run lint` reports violations in `src/**/*.astro` before the change and passes after it.
 - `$PKG_ESLINT` runs `npm run lint` and `npm run test` green with `test/component.astro` present in the tree.
-- After pinning published versions, `$WEB` produces the same `prettier . -c` result as it did against the linked packages.
+- After pinning the published ESLint config, `$WEB` produces the same lint result as it did against the linked package.
 
 ### Findings
 
