@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // "rootDir": "src/",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "jsxImportSource": "solid-js",
+    "jsx": "preserve"
+  }
+  // "include": ["src/"]
+}

@@ -10,7 +10,7 @@
 
 **Purpose:** Published Noodlestan packages still extend the transitional `cli/` and `libs/` tsconfig presets and ship module semantics that do not satisfy `architecture/adr/distribution.md` — Node-compatible ESM, compiled output, and declarations for Node-consumed packages; TypeScript source for bundler-consumed libraries.
 
-**Description:** Plan record with 6 draft iterations, spanning `Package: TS Config` in `$PROJECT` and the consumer checkouts enumerated by its inventory iteration, executed from `$WORKSPACE`.
+**Description:** Plan record with 6 iterations — `ship-consumer-configs` `DONE`, the rest draft — spanning `Package: TS Config` in `$PROJECT` and the consumer checkouts enumerated by its inventory iteration, executed from `$WORKSPACE`.
 
 ## Mandatory Reading
 
@@ -43,13 +43,13 @@ Scope is `Package: TS Config` plus the consumer checkouts enumerated by the inve
 
 ### Upstream Work
 
-| Kind                | Path                                                               | Role                                                                                                                          |
-| ------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| ADR                 | `$PROJECT/architecture/adr/distribution.md`                        | The decisions this plan adopts: Node-compatible ESM, compiled JS, declarations, TS-source exemption.                          |
-| ADR                 | `$PROJECT/architecture/adr/shared-config.md`                       | Scopes TSConfig to consumer build tool — `esbuild` or `vite`, plus the `workspace` convenience preset; decision is `Adopted`. |
-| Plan                | `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`; delivered the `build.config.mjs` contract and declaration-emit ownership this plan builds on.                         |
-| Milestone           | `$ROADMAP/3-now/milestone-tooling-one/milestone.md`                | Coordinates this plan with the other tooling plans.                                                                           |
-| Uncommitted changes | `git status` in `$PROJECT`                                         | The unstaged `configs/tsconfig/esbuild/` and `configs/tsconfig/vite/` presets are this plan's starting material.              |
+| Kind                 | Path                                                               | Role                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| ADR                  | `$PROJECT/architecture/adr/distribution.md`                        | The decisions this plan adopts: Node-compatible ESM, compiled JS, declarations, TS-source exemption.                          |
+| ADR                  | `$PROJECT/architecture/adr/shared-config.md`                       | Scopes TSConfig to consumer build tool — `esbuild` or `vite`, plus the `workspace` convenience preset; decision is `Adopted`. |
+| Plan                 | `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`; delivered the `build.config.mjs` contract and declaration-emit ownership this plan builds on.                         |
+| Milestone            | `$ROADMAP/3-now/milestone-tooling-one/milestone.md`                | Coordinates this plan with the other tooling plans.                                                                           |
+| Uncommitted material | `$TSCONFIG/esbuild/`, `$TSCONFIG/vite/`                            | The four new preset files — currently untracked in `$PROJECT` — are the material Iteration: Ship Consumer Configs lands.      |
 
 ### Required Skills
 
@@ -178,20 +178,24 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 ## Items:
 
-| Iteration / Instructions                 | Status  |
-| ---------------------------------------- | ------- |
-| Iteration: Inventory Distribution Matrix | `DRAFT` |
-| Iteration: Ship Consumer Configs         | `DRAFT` |
-| Iteration: Migrate Clis                  | `DRAFT` |
-| Iteration: Rename Vite Configs           | `DRAFT` |
-| Iteration: Migrate Vite to Esbuild       | `DRAFT` |
-| Iteration: Config Cleanup                | `DRAFT` |
+| Iteration / Instructions                                                                                | Status  |
+| ------------------------------------------------------------------------------------------------------- | ------- |
+| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `DRAFT` |
+| Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE`  |
+| Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `DRAFT` |
+| Iteration: Rename Vite Configs `plan-adopt-esm/instructions/rename-vite-configs.md`                     | `DRAFT` |
+| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `DRAFT` |
+| Iteration: Config Cleanup `plan-adopt-esm/instructions/config-cleanup.md`                               | `DRAFT` |
 
 ### Iteration: Inventory Distribution Matrix
 
 **Id:** `inventory-distribution-matrix`
 
 **Status:** `DRAFT`
+
+**Instructions:** `./plan-adopt-esm/instructions/inventory-distribution-matrix.md`
+
+**Report:** `./plan-adopt-esm/instructions/inventory-distribution-matrix__report.md`
 
 **Purpose:** Produce the authoritative list of what migrates, to which config, in which batch, before any package changes.
 
@@ -209,33 +213,82 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 - None.
 
+#### Commits:
+
+| ID       | Repository / Checkout / Branch          | Policy   | Hash    | Status     |
+| -------- | --------------------------------------- | -------- | ------- | ---------- |
+| `matrix` | Workspace Tooling / `$PROJECT` / `main` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+
+##### Commit: `matrix`
+
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+plan(adopt-esm): Add the distribution migration matrix.
+
+- Inventory every `tsconfig.json` under `$CHECKOUTS` and record its preset and consumers.
+- Classify each row by consumer build tool and assign it a migration batch.
+```
+
 ### Iteration: Ship Consumer Configs
 
 **Id:** `ship-consumer-configs`
 
-**Status:** `DRAFT`
+**Status:** `DONE`
+
+**Instructions:** `./plan-adopt-esm/instructions/ship-consumer-configs.md`
+
+**Report:** `./plan-adopt-esm/instructions/ship-consumer-configs__report.md`
 
 **Purpose:** Land the `esbuild/` and `vite/` config material currently sitting unstaged in `$TSCONFIG`.
 
-**Description:** Commit the four new preset files, confirm the package still ships all presets its consumers need, and align the package knowledge with the shared-config ADR's consumer-build-tool scoping.
+**Description:** Commit the four new preset files, which `$TSCONFIG/README.md` already documents, and record them in a `## UNPUBLISHED (0.2.0)` `CHANGELOG.md` entry that also announces the removal of `cli/` and `libs/`. Clean the transitional traces still present in `$TSCONFIG/_guide.md` and align the remaining package knowledge with the shared-config ADR's consumer-build-tool scoping. Publishing `0.2.0` is out of this iteration's scope — it happens once the migration batches land.
 
 **Changes:**
 
 - Commit `$TSCONFIG/esbuild/tsconfig.json`, `$TSCONFIG/esbuild/tsconfig-solid.json`, `$TSCONFIG/vite/tsconfig.json`, and `$TSCONFIG/vite/tsconfig-solid.json`.
 - Confirm `files` in `$TSCONFIG/package.json` still lists every preset directory the matrix references.
-- Update `$TSCONFIG/CHANGELOG.md` with an `Added` entry for the `esbuild/` and `vite/` configs, noting `cli/` and `libs/` as transitional.
-- Update `$TSCONFIG/_guide.md` and `$PROJECT/architecture/design/typescript.md` so both describe the same consumer-build-tool table as the shared-config ADR.
+- Add the `## UNPUBLISHED (0.2.0)` entry to `$TSCONFIG/CHANGELOG.md` — `Added` for the four new presets and `Removed` for `cli/` and `libs/`.
+- Clean the transitional rows from `$TSCONFIG/_guide.md` and update `$PROJECT/architecture/design/typescript.md` so both describe the same consumer-build-tool table as the shared-config ADR.
 - Run `$TSCONFIG` `npm run lint` and the monorepo `npm run ci`.
 
 **Dependencies:**
 
 - None.
 
+#### Commits:
+
+| ID                      | Repository / Checkout / Branch          | Policy   | Hash    | Status      |
+| ----------------------- | --------------------------------------- | -------- | ------- | ----------- |
+| `ship-consumer-configs` | Workspace Tooling / `$PROJECT` / `main` | `NOPUSH` | `(TBD)` | `COMMITTED` |
+
+##### Commit: `ship-consumer-configs`
+
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+configs(tsconfig): Ship the `esbuild/` and `vite/` consumer presets.
+
+- Add `esbuild/` and `vite/` presets with their `-solid` variants.
+- Record the `0.2.0` `Added` and `Removed` entry in `CHANGELOG.md`.
+- Clean the transitional traces from `_guide.md`.
+```
+
+**Notes:** Landed as part of the `adopt-esm` plan commit; the presets, `CHANGELOG.md`, and the plan share it.
+
 ### Iteration: Migrate Clis
 
 **Id:** `migrate-clis`
 
 **Status:** `DRAFT`
+
+**Instructions:** `./plan-adopt-esm/instructions/migrate-clis.md`
+
+**Report:** `./plan-adopt-esm/instructions/migrate-clis__report.md`
 
 **Purpose:** Execute the `clis` batch — every package extending `cli/tsconfig.json` moves to the `esbuild/` config.
 
@@ -253,11 +306,36 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 - Iteration: Inventory Distribution Matrix.
 - Iteration: Ship Consumer Configs.
 
+#### Commits:
+
+| ID             | Repository / Checkout / Branch                       | Policy   | Hash    | Status     |
+| -------------- | ---------------------------------------------------- | -------- | ------- | ---------- |
+| `migrate-clis` | `{checkout}` / `$CHECKOUTS/{checkout}` / `adopt-esm` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+
+One commit per matrix row. Message template:
+
+##### Commit: `migrate-clis`
+
+**Repository:** `{checkout}`
+
+**Message:**
+
+```
+migrate({checkout}): Move the `clis` batch to `@noodlestan/tsconfig/esbuild`.
+
+- Replace the `cli/` preset with the `esbuild/` config and declare `"type": "module"`.
+- Add explicit `.js` import extensions and a consumer-owned `build.config.mjs`.
+```
+
 ### Iteration: Rename Vite Configs
 
 **Id:** `rename-vite-configs`
 
 **Status:** `DRAFT`
+
+**Instructions:** `./plan-adopt-esm/instructions/rename-vite-configs.md`
+
+**Report:** `./plan-adopt-esm/instructions/rename-vite-configs__report.md`
 
 **Purpose:** Execute the `vite renames` batch — `libs/` packages consumed by a bundler move to the `vite/` config.
 
@@ -274,11 +352,36 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 - Iteration: Inventory Distribution Matrix.
 - Iteration: Ship Consumer Configs.
 
+#### Commits:
+
+| ID                    | Repository / Checkout / Branch                       | Policy   | Hash    | Status     |
+| --------------------- | ---------------------------------------------------- | -------- | ------- | ---------- |
+| `rename-vite-configs` | `{checkout}` / `$CHECKOUTS/{checkout}` / `adopt-esm` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+
+One commit per matrix row. Message template:
+
+##### Commit: `rename-vite-configs`
+
+**Repository:** `{checkout}`
+
+**Message:**
+
+```
+configs({checkout}): Swap the `libs/` preset for `@noodlestan/tsconfig/vite`.
+
+- Replace the `extends` value with the matching `vite/` config.
+- Confirm the diff contains only the preset swap.
+```
+
 ### Iteration: Migrate Vite to Esbuild
 
 **Id:** `migrate-vite-to-esbuild`
 
 **Status:** `DRAFT`
+
+**Instructions:** `./plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`
+
+**Report:** `./plan-adopt-esm/instructions/migrate-vite-to-esbuild__report.md`
 
 **Purpose:** Execute the `vite to esbuild migrations` batch — Node-consumed `libs/` packages move to the `esbuild/` config, piloted on one package first.
 
@@ -298,22 +401,47 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 - Iteration: Ship Consumer Configs.
 - Iteration: Migrate Clis.
 
+#### Commits:
+
+| ID                        | Repository / Checkout / Branch                       | Policy   | Hash    | Status     |
+| ------------------------- | ---------------------------------------------------- | -------- | ------- | ---------- |
+| `migrate-vite-to-esbuild` | `{checkout}` / `$CHECKOUTS/{checkout}` / `adopt-esm` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+
+One commit per matrix row, including the pilot. Message template:
+
+##### Commit: `migrate-vite-to-esbuild`
+
+**Repository:** `{checkout}`
+
+**Message:**
+
+```
+migrate({checkout}): Move the `vite to esbuild` batch to `NodeNext`.
+
+- Flip `extends` to the `esbuild/` config and resolve the `NodeNext` errors.
+- Add the consumer-owned `build.config.mjs` with declaration emit.
+```
+
 ### Iteration: Config Cleanup
 
 **Id:** `config-cleanup`
 
 **Status:** `DRAFT`
 
+**Instructions:** `./plan-adopt-esm/instructions/config-cleanup.md`
+
+**Report:** `./plan-adopt-esm/instructions/config-cleanup__report.md`
+
 **Purpose:** Execute the `config cleanup` batch — stop shipping the presets the ecosystem has migrated away from.
 
-**Description:** Once the matrix shows zero rows extending `cli/` and `libs/`, remove those directories from `$TSCONFIG`, bump a major version, and record the retirement in the package and architecture knowledge. This is the only iteration that publishes a breaking `@noodlestan/tsconfig` release.
+**Description:** Once the matrix shows zero rows extending `cli/` and `libs/`, delete `cli/` and `libs/` from `$TSCONFIG`, drop them from `files` and the package record, finalise the `UNPUBLISHED` changelog entry, and publish `@noodlestan/tsconfig@0.2.0`. This is the only iteration that publishes a breaking `@noodlestan/tsconfig` release.
 
 **Changes:**
 
 - Confirm with a final scan that no `tsconfig.json` outside `$TSCONFIG` extends `cli/` or `libs/`.
-- Delete `$TSCONFIG/cli/` and `$TSCONFIG/libs/` only; remove them from `files` in `$TSCONFIG/package.json` and from `$TSCONFIG/_records/package.art`.
-- Add a major `CHANGELOG.md` entry recording the removal and the config that replaces each preset.
-- Update `$TSCONFIG/_guide.md`, `$PROJECT/architecture/design/typescript.md`, and `$PROJECT/README.md`; bump the package major version for release.
+- Delete `$TSCONFIG/cli/` and `$TSCONFIG/libs/`; remove them from `files` in `$TSCONFIG/package.json` and from `$TSCONFIG/_records/package.art`.
+- Finalise the `## 0.2.0` `CHANGELOG.md` entry — drop the `UNPUBLISHED` marker — and bump `version` in `$TSCONFIG/package.json` to `0.2.0`.
+- Update `$TSCONFIG/_guide.md`, `$PROJECT/architecture/design/typescript.md`, and `$PROJECT/README.md`; publish `@noodlestan/tsconfig@0.2.0`.
 
 **Dependencies:**
 
@@ -321,11 +449,32 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 - Iteration: Rename Vite Configs.
 - Iteration: Migrate Vite to Esbuild.
 
+#### Commits:
+
+| ID               | Repository / Checkout / Branch          | Policy     | Hash    | Status     |
+| ---------------- | --------------------------------------- | ---------- | ------- | ---------- |
+| `config-cleanup` | Workspace Tooling / `$PROJECT` / `main` | `NOCOMMIT` | `(TBD)` | `AUTHORED` |
+
+##### Commit: `config-cleanup`
+
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
+
+- Delete the preset directories and drop them from `files` and the package record.
+- Finalise the `0.2.0` `CHANGELOG.md` entry mapping each preset to its replacement.
+```
+
+**Policy:** `NOCOMMIT` — `0.2.0` ships as a breaking `@noodlestan/tsconfig` release; stage the changes and hand back for crew commit and publish.
+
 ## Work
 
 ### Next
 
-All 6 iterations are `DRAFT`. Run **Plan Iterations** (`plan more`) to refine purposes, changes, and commit blueprints, then **Write Instructions** to produce delegatable instruction files.
+All 6 iterations carry `AUTHORED` commit blueprints and instruction paths. `ship-consumer-configs` is `DONE`; write the instructions files and execute `inventory-distribution-matrix` next, then the three migration batches follow the matrix order, and `config-cleanup` closes the plan.
 
 ### Blockers
 
@@ -376,7 +525,6 @@ Run from `$TSCONFIG`:
 
 ```bash
 npm run lint # to report prettier and eslint issues.
-npm run test # to run all tests.
 ```
 
 **Instructions:** (Per migrated consumer checkout)
@@ -425,6 +573,7 @@ npm run ci # lint, test and build
 - **Folder location does not decide the batch** — `art-lib/libs/fs-records` extends the `cli/` preset while living under `libs/`; classification must come from consumers, not paths.
 - **`libs/` → `vite/` is largely a rename** — both use `ESNext`/`bundler` resolution, so the semantic risk concentrates in the `vite to esbuild migrations` batch's flip to `NodeNext`.
 - **Declaration emit is consumer-owned** — since `Plan: Externalize Esbuild Config` removed the emit presets, every `esbuild/` package needs `build.config.mjs` plus `postBuildPlugin` running `tsc --emitDeclarationOnly`.
+- **The `0.2.0` release is authored but not published** — `esbuild/` and `vite/` exist untracked and are documented in `$TSCONFIG/README.md`, while `$TSCONFIG/_guide.md` still lists `cli/` and `libs/` as transitional, and `$PROJECT/architecture/design/typescript.md` and `$PROJECT/README.md` carry further traces. The `cli/` and `libs/` presets still need deleting and `0.2.0` still needs publishing.
 
 ### Decisions
 
@@ -436,7 +585,7 @@ npm run ci # lint, test and build
 
 ### Knowledge to Update
 
-- `$TSCONFIG/CHANGELOG.md` — `esbuild/` and `vite/` configs added; transitional presets retired with a major entry.
+- `$TSCONFIG/CHANGELOG.md` — `esbuild/` and `vite/` configs added; `cli/` and `libs/` retired in the `0.2.0` entry.
 - `$TSCONFIG/_guide.md` — layout and consumer-build-tool table after removal.
 - `$PROJECT/architecture/design/typescript.md` — drop the transitional preset rows; match the shared-config ADR's consumer-build-tool scoping.
 - `$PROJECT/README.md` — preset guidance for new packages.
@@ -444,7 +593,7 @@ npm run ci # lint, test and build
 ### Follow Ups
 
 - **Declaration-emit preset** — decide whether `Plan: Externalize Esbuild Config`'s follow-up ships a documented `tsc --emitDeclarationOnly` preset or stays a recipe; the pilot step of the `vite to esbuild migrations` batch feeds this decision.
-- **Major release of `@noodlestan/tsconfig`** — publish the breaking version produced by the `config cleanup` batch.
+- **Publish `@noodlestan/tsconfig@0.2.0`** — the breaking release produced by the `config cleanup` batch, whose `UNPUBLISHED` changelog entry is already authored.
 
 ### Feedback
 

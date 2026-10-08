@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## UNPUBLISHED (0.2.0)
+
+### Added
+
+- **esbuild/tsconfig.json** – Base preset for packages built with `@noodlestan/esbuild`.
+- **esbuild/tsconfig-solid.json** – Adds `solid-js` JSX configuration to the esbuild preset.
+- **vite/tsconfig.json** – Base preset for packages resolved by Vite and other bundlers.
+- **vite/tsconfig-solid.json** – Adds `solid-js` JSX configuration to the vite preset.
+
+### Removed
+
+- **cli/tsconfig.json** – Replaced by `esbuild/tsconfig.json`.
+- **libs/tsconfig.json** – Replaced by `vite/tsconfig.json`.
+- **libs/tsconfig-vite.json** – Replaced by `vite/tsconfig.json`.
+- **libs/tsconfig-vite-solid.json** – Replaced by `vite/tsconfig-solid.json`.
+- **libs/tsconfig-vite-node.json** – Replaced by `esbuild/tsconfig.json`.
+
 ## 0.1.0
 
 ### Removed

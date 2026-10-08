@@ -1,6 +1,6 @@
 # TS Config
 
-The `@noodlestan/tsconfig` package provides base TypeScript configurations for Noodlestan packages. The stable consumer kinds are `esbuild` and `vite`; the `cli`, `libs`, and `workspace` presets are transitional and will be removed.
+The `@noodlestan/tsconfig` package provides base TypeScript configurations for Noodlestan packages. The stable presets are the `esbuild` and `vite` consumer kinds plus the `workspace` root preset; the `cli` and `libs` presets are transitional and will be removed.
 
 ## Recommended Reading
 
@@ -17,9 +17,9 @@ _guide.md           — this file
 _records/           — package records
 esbuild/            — esbuild consumer kind presets (stable)
 vite/               — vite consumer kind presets (stable)
+workspace/          — monorepo root preset (stable)
 cli/                — CLI presets (transitional, will be removed)
 libs/               — library presets (transitional, will be removed)
-workspace/          — monorepo root preset (transitional, will be removed)
 ```
 
 ## Records Management
