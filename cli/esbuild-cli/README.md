@@ -229,6 +229,17 @@ The `copyStaticFilesPlugin` runs after the build.
 
 By default, it skips copying when the build reports errors or warnings, and exits when copying fails.
 
+## Development
+
+Make sure you read the [root README](../../README.md) first.
+
+### Scripts
+
+Run from this package directory:
+
+- `npm run lint` — report prettier issues
+- `npm run lint:fix` — fix formatting and lint issues
+
 ## License
 
 Copyright (c) 2024 [Noodlestan](https://noodlestan.org/).

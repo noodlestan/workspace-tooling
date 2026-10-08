@@ -4,13 +4,13 @@
 
 ## Usage
 
-Install the package alongside [Prettier](https://prettier.io/):
+Install the package alongside [Prettier](https://prettier.io/) and [prettier-plugin-astro](https://github.com/withastro/prettier-plugin-astro).
 
 ```bash
-npm install --save-dev @noodlestan/prettier-config-astro prettier
+npm install --save-dev @noodlestan/prettier-config-astro prettier prettier-plugin-astro
 ```
 
-Then point your repository at it from the `prettier` field of your `package.json`:
+Then point your repository or package at the config from the `prettier` field of your `package.json`:
 
 ```json
 {
@@ -18,25 +18,17 @@ Then point your repository at it from the `prettier` field of your `package.json
 }
 ```
 
-**⚠️ Note:** delete your repository's own `.prettierrc` (or `.prettierrc.json`,
+**⚠️ Note:** delete your repository's or library's own `.prettierrc` (or `.prettierrc.json`,
 `.prettierrc.js`, …). A local Prettier config file shadows the `prettier` field of
-`package.json`, so leaving one in place silently keeps your hand-written rules
-instead of Noodlestan's.
+`package.json`.
 
-## Plugins
+## Peer Depedencies
 
-`prettier-plugin-astro` is a **peer dependency** of this package, so npm installs it
-automatically alongside the config — there is no extra setup step. It is declared
-explicitly in the `plugins` array because Prettier 3 no longer searches
-`node_modules` for plugins on its own, and without that entry the `astro` parser
-cannot be resolved and `.astro` files fail to format.
+Both `prettier` and `prettier-plugin-astro` are peer dependencies of this package and must be installed in the target project.
 
 ## Rules
 
-The configuration resolves to `@noodlestan/prettier-config` — `printWidth: 100`,
-`tabWidth: 2`, `semi: true`, `singleQuote: true`, `trailingComma: "all"`,
-`arrowParens: "avoid"`, plus `useTabs: true` for the JS family — with one extra
-`overrides` entry appended:
+The configuration resolves to [@noodlestan/prettier-config](../prettier-config/README.md) adding an override for `.astro` files.
 
 | Rule      | Value     |
 | --------- | --------- |
@@ -44,25 +36,19 @@ The configuration resolves to `@noodlestan/prettier-config` — `printWidth: 100
 | `useTabs` | `true`    |
 | `parser`  | `astro`   |
 
-The Astro-specific delta alone is also available on the `./json` subpath:
+## Development
 
-```json
-{
-  "prettier": {
-    "...": "...",
-    "...@noodlestan/prettier-config-astro/json": {}
-  }
-}
-```
+Make sure you read the [root README](../../README.md) first.
 
-**⚠️ Note:** the `./json` subpath is a **partial Astro-only delta**. It carries the
-`plugins` array and the `*.astro` override, and nothing else — it does **not**
-include the base rules from `@noodlestan/prettier-config`. Spread
-`@noodlestan/prettier-config/json` alongside it, or adopt the package itself, or
-your repository loses Noodlestan's base formatting.
+### Scripts
+
+Run from this package directory:
+
+- `npm run lint` — report prettier issues
+- `npm run lint:fix` — fix formatting and lint issues
 
 ## License
 
-Copyright (c) 2024 [Noodlestan](https://noodlestan.org/).
+Copyright (c) 2026 [Noodlestan](https://noodlestan.org/).
 
 Published under a [MIT license](https://noodlestan.mit-license.org/).

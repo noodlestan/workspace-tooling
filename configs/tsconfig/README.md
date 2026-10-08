@@ -34,6 +34,17 @@ Extend configuration.
 }
 ```
 
+## Development
+
+Make sure you read the [root README](../../README.md) first.
+
+### Scripts
+
+Run from this package directory:
+
+- `npm run lint` — report prettier issues
+- `npm run lint:fix` — fix formatting and lint issues
+
 ## License
 
 Copyright (c) 2024 [Noodlestan](https://noodlestan.org/).

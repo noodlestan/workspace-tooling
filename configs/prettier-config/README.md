@@ -10,7 +10,7 @@ Install the package alongside [Prettier](https://prettier.io/):
 npm install --save-dev @noodlestan/prettier-config prettier
 ```
 
-Then point your repository at it from the `prettier` field of your `package.json`:
+Then point your repository or package at the config from the `prettier` field of your `package.json`:
 
 ```json
 {
@@ -18,10 +18,13 @@ Then point your repository at it from the `prettier` field of your `package.json
 }
 ```
 
-**⚠️ Note:** delete your repository's own `.prettierrc` (or `.prettierrc.json`,
+**⚠️ Note:** delete your repository's or library's own `.prettierrc` (or `.prettierrc.json`,
 `.prettierrc.js`, …). A local Prettier config file shadows the `prettier` field of
-`package.json`, so leaving one in place silently keeps your hand-written rules
-instead of Noodlestan's.
+`package.json`.
+
+### Peer Depedencies
+
+The `prettier` package is a peer dependencies of this package and must be installed in the target project.
 
 ## Rules
 
@@ -40,21 +43,19 @@ The configuration resolves to the following rules:
 An `overrides` entry sets `useTabs: true` for `*.js`, `*.cjs`, `*.mjs`, `*.mts`,
 `*.ts` and `*.tsx`.
 
-The raw rules are also available on the `./json` subpath, for consumers that want
-to spread them into a local config:
+## Development
 
-```json
-{
-  "prettier": {
-    "printWidth": 120,
-    "...": "...",
-    "...@noodlestan/prettier-config/json": {}
-  }
-}
-```
+Make sure you read the [root README](../../README.md) first.
+
+### Scripts
+
+Run from this package directory:
+
+- `npm run lint` — report prettier issues
+- `npm run lint:fix` — fix formatting and lint issues
 
 ## License
 
-Copyright (c) 2024 [Noodlestan](https://noodlestan.org/).
+Copyright (c) 2026 [Noodlestan](https://noodlestan.org/).
 
 Published under a [MIT license](https://noodlestan.mit-license.org/).

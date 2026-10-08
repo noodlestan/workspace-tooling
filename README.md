@@ -26,6 +26,15 @@ its rules, and the options available to consuming repositories.
 
 ## Development
 
+System requirements:
+
+- [Node.js](https://nodejs.org/)
+- [NVM](https://github.com/nvm-sh/nvm)
+
+We recommended using [VS Code](https://code.visualstudio.com/) with the following extensions: [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
+
+### Getting started
+
 First make sure you are using the correct node version by running `nvm use`.
 
 Install dependencies with `npm install`.
@@ -33,11 +42,10 @@ Install dependencies with `npm install`.
 ### Scripts
 
 - `npm run turbo lint` - Check formatting (Prettier + ESLint) in all packages.
-- `npm run turbo test` - Run tests in all packages.
-- `npm run turbo build` - Build all packages.
+- `npm run turbo lint:fix` - Fix formatting issues (Prettier + ESLint) in all packages.
 - `npm run ci` - Full build.
 
-Pre-commit hooks (via lefthook) run the repo's `ci` on every package.
+Pre-commit hooks (via [Lefthook](https://evilmartians.com/chronicles/lefthook-knock-your-teams-code-back-into-shape)) run the repo's `ci` on every package.
 
 ## License
 

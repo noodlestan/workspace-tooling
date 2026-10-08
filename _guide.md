@@ -31,13 +31,14 @@ configs/            — shared configuration packages
 
 ## Projects
 
-| Project                  | Guide                               | Backlog     |
-| ------------------------ | ----------------------------------- | ----------- |
-| Workspace Tooling (root) | `_guide.md`                         | `_backlog/` |
-| Esbuild CLI              | `cli/esbuild-cli/_guide.md`         | `NONE`      |
-| ESLint Config            | `configs/eslint-config/_guide.md`   | `NONE`      |
-| Prettier Config          | `configs/prettier-config/_guide.md` | `NONE`      |
-| TS Config                | `configs/tsconfig/_guide.md`        | `NONE`      |
+| Project                  | Guide                                     | Backlog     |
+| ------------------------ | ----------------------------------------- | ----------- |
+| Workspace Tooling (root) | `_guide.md`                               | `_backlog/` |
+| Esbuild CLI              | `cli/esbuild-cli/_guide.md`               | `NONE`      |
+| ESLint Config            | `configs/eslint-config/_guide.md`         | `NONE`      |
+| Prettier Config          | `configs/prettier-config/_guide.md`       | `NONE`      |
+| Prettier Config          | `configs/prettier-config-astro/_guide.md` | `NONE`      |
+| TS Config                | `configs/tsconfig/_guide.md`              | `NONE`      |
 
 ## Records Management
 

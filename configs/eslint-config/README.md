@@ -6,8 +6,6 @@
 
 This style guide targets Noodlestan's web stack, mostly based on [Solid JS](https://www.solidjs.com/) and [Astro](https://docs.astro.build) / [Starlight](https://starlight.astro.build/) for documentation and sandboxes.
 
-**⚠️ Note:** this style guide is not meant to be used on codebases that use React, Vue.js or any other frameworks. An opt-in method to setup rules for specific framework (on a per path basis) is being considered.
-
 The style guide was built on top of:
 
 - [ESLint](https://eslint.org/)
@@ -45,28 +43,14 @@ The config supplies the rules; your repository owns the `eslint`, `prettier`, an
 
 ## Development
 
-System requirements:
+Make sure you read the [root README](../../README.md) first.
 
-- [Node.js](https://nodejs.org/)
-- [NVM](https://github.com/nvm-sh/nvm)
+### Scripts
 
-We recommended using [VS Code](https://code.visualstudio.com/) with the following extensions: [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx), [SpellRight](https://marketplace.visualstudio.com/items?itemName=ban.spellright).
+Run from this package directory:
 
-### Getting started
-
-First make sure you are using the correct node version by running `nvm use`.
-
-Install dependencies with `npm install`.
-
-Run `npm run lint`. It will lint the example files provided.
-
-### Tools
-
-- [Lefthook](https://evilmartians.com/chronicles/lefthook-knock-your-teams-code-back-into-shape) - manages the git hooks
-
-### Committing
-
-Make sure the `pre-commit` hook was executed. It runs automatically before every commit: from the repository root, Lefthook runs `npm run clean`, `npm run extract`, then `npm run ci`, and `ci` covers this package's Prettier and ESLint checks.
+- `npm run lint` — report prettier issues
+- `npm run lint:fix` — fix formatting and lint issues
 
 ## License
 
