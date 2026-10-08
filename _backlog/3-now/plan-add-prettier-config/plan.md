@@ -165,7 +165,7 @@ None.
 **Changes:**
 
 - Create `package.json` with `main`, `exports` map, `files`, `private: false`, and `ci` scripts.
-- Create `src/index.json` (the canonical rules) and `src/index.cjs` (the same rules, requiring the JSON) so both ESM and CJS consumers resolve.
+- Create `src/index.cjs` holding the canonical base rules inline, so one file resolves for ESM imports, CJS `require`, and the `prettier` field.
 - Create `_guide.md`, `README.md`, `LICENSE-MIT`, `_records/package.art`, `_records/npm-deployment.art`.
 - Create `test/` fixtures covering `.ts`, `.md`, `.json`, and `.html` formatting.
 
@@ -194,7 +194,7 @@ None.
 **Changes:**
 
 - Create `package.json` depending on `Package: Prettier Config` and on `prettier-plugin-astro`.
-- Create `src/index.json` spreading the base rules and adding an `overrides` entry for `*.astro` with `parser: astro`, plus `*.md` and `*.mdx` entries.
+- Create `src/index.cjs` requiring `@noodlestan/prettier-config`, spreading the base rules, adding `plugins: ["prettier-plugin-astro"]`, and appending an `overrides` entry for `*.astro` with `useTabs: true` and `parser: astro`.
 - Create `_guide.md`, `README.md`, `LICENSE-MIT`, `_records/package.art`, `_records/npm-deployment.art`.
 - Create `test/component.astro` fixture proving the Astro parser is applied.
 
@@ -543,7 +543,7 @@ npm run ci # lint, test and build
 
 - **Canonical base rules are byte-identical to `$WEB`'s existing `.prettierrc`** — `useTabs: false`, `printWidth: 100`, `tabWidth: 2`, `semi: true`, `singleQuote: true`, `trailingComma: "all"`, `arrowParens: "avoid"`, with `overrides` setting `useTabs: true` for `["*.js", "*.cjs", "*.mjs", "*.mts", "*.ts", "*.tsx"]`. Both files already list `*.mjs`, so adopting the package is provably a no-op on formatting — which is what makes it a trustworthy drop-in. The rules were lifted from `$WEB` rather than from `$PROJECT/configs/eslint-config/.prettierrc`, which uses `tabWidth: 4` with 2-space overrides for `md`, `json`, and `html` and would have re-indented every consumer.
 - **Two packages, not one** — The base rules and the Astro-augmented rules ship separately so that non-Astro consumers never install `prettier-plugin-astro`, and so the Astro variant can evolve independently.
-- **JSON plus CJS entry points** — Prettier resolves a `prettier` config field through Node resolution, so the package ships both `index.json` and `index.cjs` to work for ESM and CJS consumers without a build step.
+- **Single CJS entry point, no `./json` subpath** — Prettier resolves a `prettier` config field through Node resolution, so each package ships one `src/index.cjs` holding the rules inline: it resolves for ESM imports, CJS `require`, and the `prettier` field without a build step. The originally planned `index.json` plus `./json` export were removed before first publish — the base rules' only consumer was the Astro package (repointed to the base package's main entry), and the Astro `./json` delta was a fragment that was not a usable config on its own. JSON-only was rejected because ESM `import` of JSON requires import attributes.
 
 ### Knowledge to Update
 

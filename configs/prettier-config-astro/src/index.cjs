@@ -1,4 +1,4 @@
-const base = require('@noodlestan/prettier-config/json');
+const base = require('@noodlestan/prettier-config');
 
 module.exports = {
 	...base,

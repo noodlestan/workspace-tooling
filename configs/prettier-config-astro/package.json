@@ -12,12 +12,10 @@
   "prettier": "./src/index.cjs",
   "exports": {
     ".": "./src/index.cjs",
-    "./json": "./src/index.json",
     "./package.json": "./package.json"
   },
   "files": [
     "src",
-    "_guide.md",
     "README.md",
     "LICENSE-MIT"
   ],
@@ -33,8 +31,5 @@
   "peerDependencies": {
     "prettier": "^3.8.4",
     "prettier-plugin-astro": "^1.1.0"
-  },
-  "devDependencies": {
-    "prettier-plugin-astro": "1.1.0"
   }
 }

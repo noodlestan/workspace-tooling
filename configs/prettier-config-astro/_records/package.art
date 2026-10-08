@@ -42,15 +42,15 @@
 **Dependencies:**
 
 - Runtime:
-    - Package: Prettier Config
+  - Package: Prettier Config
 - Peer:
-    - Package Dependency: Prettier
-    - Package Dependency: Prettier Plugin Astro
+  - Package Dependency: Prettier
+  - Package Dependency: Prettier Plugin Astro
 - Dev:
-    - Package Dependency: Prettier Plugin Astro
+  - Package Dependency: Prettier Plugin Astro
 
 **Scripts:**
 
 - Package Script Set: Prettier Config Scripts
 
-**License:** License: Noodlestan 2024 MIT
+**License:** License: Noodlestan 2026 MIT
