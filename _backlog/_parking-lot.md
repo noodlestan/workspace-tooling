@@ -1,8 +1,6 @@
 # Parking Lot: Workspace Tooling Backlog
 
-WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progress now), **PENDING** (waiting), **BLOCKERS** (blocking work), **FOLLOW-UPS** (not in scope).
-
-Backlog plans live in `_backlog/` and contain delegatable instructions. This file is the tracker only — no done items; completed work is recorded in the plans it came from.
+WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progress now), **PENDING** (waiting), **BLOCKERS** (blocking work), **FOLLOW-UPS** (not in scope). Done items, answered questions, removed blockers, are deleted from the parking lot (tracked in plans if applicable).
 
 ## ACTIONABLE
 

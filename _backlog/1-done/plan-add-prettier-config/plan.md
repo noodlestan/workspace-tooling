@@ -2,7 +2,7 @@
 
 **Id:** `add-prettier-config`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -236,12 +236,12 @@ Execution is coordinated from `$WORKSPACE`. Monorepo work runs in `$PROJECT` on 
 
 ## Items:
 
-| Iteration / Instructions                                                                                            | Status    |
-| ------------------------------------------------------------------------------------------------------------------- | --------- |
-| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE`    |
-| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `DONE`    |
-| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `DONE`    |
-| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `WORKING` |
+| Iteration / Instructions                                                                                            | Status |
+| ------------------------------------------------------------------------------------------------------------------- | ------ |
+| Iteration: Scaffold Prettier Config `plan-add-prettier-config/instructions/scaffold-prettier-config.md`             | `DONE` |
+| Iteration: Scaffold Prettier Config Astro `plan-add-prettier-config/instructions/scaffold-prettier-config-astro.md` | `DONE` |
+| Iteration: Adopt Base Config in Noodlestan Web `plan-add-prettier-config/instructions/adopt-base-config-in-web.md`  | `DONE` |
+| Iteration: Publish and Pin `plan-add-prettier-config/instructions/publish-and-pin.md`                               | `DONE` |
 
 ### Iteration: Scaffold Prettier Config
 
@@ -396,7 +396,7 @@ tooling(noodlestan-web): Adopt `@noodlestan/prettier-config` through the `pretti
 
 **Id:** `publish-and-pin`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Purpose:** Publish both packages and replace the local link in `$WEB` with released versions.
 
@@ -419,22 +419,36 @@ tooling(noodlestan-web): Adopt `@noodlestan/prettier-config` through the `pretti
 
 #### Commits:
 
-| ID                         | Repository / Checkout / Branch                         | Policy     | Hash  | Status     |
-| -------------------------- | ------------------------------------------------------ | ---------- | ----- | ---------- |
-| `release-prettier-configs` | Workspace Tooling / `$PROJECT` / `add-prettier-config` | `NOCOMMIT` | (TBD) | `AUTHORED` |
-| `pin-prettier-config`      | Noodlestan Web / `$WEB` / `add-prettier-config`        | `NOPUSH`   | (TBD) | `AUTHORED` |
+| ID                              | Repository / Checkout / Branch                         | Policy     | Hash      | Status      |
+| ------------------------------- | ------------------------------------------------------ | ---------- | --------- | ----------- |
+| `release-prettier-config`       | Workspace Tooling / `$PROJECT` / `add-prettier-config` | `NOCOMMIT` | `e6105b9` | `COMMITTED` |
+| `release-prettier-config-astro` | Workspace Tooling / `$PROJECT` / `add-prettier-config` | `NOCOMMIT` | `3afa85a` | `COMMITTED` |
+| `pin-prettier-config`           | Noodlestan Web / `$WEB` / `add-prettier-config`        | `NOPUSH`   | `2261e07` | `COMMITTED` |
 
-##### Commit: `release-prettier-configs`
+##### Commit: `release-prettier-config`
 
 **Repository:** Workspace Tooling
 
 **Message:**
 
 ```
-release(workspace-tooling): Publish `prettier-config` and `prettier-config-astro` 0.0.1.
+release(prettier-config): 0.0.1.
 
-- Both packages were scaffolded at `0.0.1` with populated changelogs; run `npm run art-work publish` after crew approval.
-- Update both `_records/npm-deployment.art` records and the `$PROJECT/README.md` package list.
+- Inline the canonical rules in `src/index.cjs`;
+- Ship `0.0.1` with the changelog, package record, and fixture in sync.
+```
+
+##### Commit: `release-prettier-config-astro`
+
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+release(prettier-config-astro): 0.0.1.
+
+- Inline the canonical rules in `src/index.cjs`;
+- Ship `0.0.1` with the changelog, package record, and fixture in sync.
 ```
 
 **Policy:** `NOCOMMIT` — publishing to the public registry is irreversible; stage the changes and hand back for crew commit and publish.
@@ -446,10 +460,11 @@ release(workspace-tooling): Publish `prettier-config` and `prettier-config-astro
 **Message:**
 
 ```
-tooling(noodlestan-web): Pin `@noodlestan/prettier-config` to the published release.
+tooling(noodlestan-web): Pin `@noodlestan/prettier-config` to 0.0.1.
 
-- Replace the local link with the released version.
-- Confirm `npm run lint` matches the linked run.
+- Replace the local links with the released versions and add the app's astro config.
+- Apply formatting rules to codebase.
+- Drop the unused `rollup` dependency; document the tooling in `_guide.md`.
 ```
 
 ## Work

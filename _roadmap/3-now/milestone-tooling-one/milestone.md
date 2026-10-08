@@ -10,7 +10,7 @@
 
 **Purpose:** Make Noodlestan's build, TypeScript distribution, and formatting configuration a set of published packages that every repository adopts, instead of hand-written per-repo defaults.
 
-**Description:** Milestone record with 3 phases, 4 plan items, and 4 configuration packages, coordinated across `$WORKSPACE` checkouts.
+**Description:** Milestone record with 3 phases, 5 plan items, and 4 configuration packages, coordinated across `$WORKSPACE` checkouts.
 
 ## Mandatory Reading
 
@@ -29,7 +29,7 @@
 
 ## Summary
 
-Deliver the tooling configuration story end to end: the build config contract is already externalised (`DONE`), the Prettier config packages are being finished and published (`WORKING`), and the ecosystem-wide adoption of Prettier formatting and Node-compatible ESM distribution is drafted and waiting to be planned (`DRAFT`).
+Deliver the tooling configuration story end to end: the build config contract is already externalised (`DONE`), the Prettier config packages are published and pinned in the pilot consumer with ecosystem adoption still open (`WORKING`), and the ecosystem-wide adoption of Prettier formatting and Node-compatible ESM distribution is drafted and waiting to be planned (`DRAFT`).
 
 Scope is `Project: Noodlestan Workspace Tooling` with its configuration packages and every consumer checkout; upstream is the distribution, shared-config, and build ADRs in `$PROJECT/architecture/`.
 
@@ -203,18 +203,19 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 
 ## Items:
 
-| Phase | Resource / Record                                                                                   | Status    |
-| ----- | --------------------------------------------------------------------------------------------------- | --------- |
-| 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`    |
-| 2     | Plan: Add Prettier Config `$PROJECT/_backlog/3-now/plan-add-prettier-config/plan.md`                | `WORKING` |
-| 2     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`           | `DRAFT`   |
-| 3     | Plan: Adopt ESM `$PROJECT/_backlog/6-plan/plan-adopt-esm/plan.md`                                   | `DRAFT`   |
+| Phase | Resource / Record                                                                                   | Status  |
+| ----- | --------------------------------------------------------------------------------------------------- | ------- |
+| 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`  |
+| 2     | Plan: Add Prettier Config `$PROJECT/_backlog/1-done/plan-add-prettier-config/plan.md`               | `DONE`  |
+| 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                   | `DRAFT` |
+| 2     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`           | `DRAFT` |
+| 3     | Plan: Adopt ESM `$PROJECT/_backlog/6-plan/plan-adopt-esm/plan.md`                                   | `DRAFT` |
 
 ## Work
 
 ### Next
 
-Run **Plan Iterations** on `Plan: Adopt Prettier Config` and `Plan: Adopt ESM` to turn their draft iterations into refined changes and commit blueprints, then land the unstaged release artefacts, let `Plan: Add Prettier Config` complete `publish-and-pin`, and proceed to adoption.
+Run **Plan Iterations** on `Plan: Adopt Prettier Config`, `Plan: Add Astro Support`, and `Plan: Adopt ESM` to turn their draft iterations into refined changes and commit blueprints, then migrate the remaining consumer checkouts to the published Prettier config and wire Astro linting into the pilot.
 
 ### Blockers
 
@@ -262,7 +263,7 @@ Milestone-level evidence: both Prettier packages published at `0.0.1`, no `.pret
 ### Evidence
 
 - **Build config owned by consumers** — delivered at `838dfc1`..`afc7bb5`; missing `build.config.mjs` fails loudly, and plain `node` loads the emitted bundle.
-- **Prettier packages release-ready** — both `ci` scripts pass twice in a row with the rewritten changelogs and tab-indented fixtures committed.
+- **Prettier packages published and pinned** — both packages released at `0.0.1` (`e6105b9`, `3afa85a`), and the pilot consumer pinned at `2261e07` in `$WEB`.
 - **Adoption is provable per repository** — each adoption commit's diff contains only the expected `*.mjs` re-indent, and lint passes afterwards.
 - **Presets retired safely** — a final scan finds zero `tsconfig/cli` and `tsconfig/libs` extends outside the package itself.
 
@@ -270,7 +271,6 @@ Milestone-level evidence: both Prettier packages published at `0.0.1`, no `.pret
 
 - **Scale of the ESM migration** — the planning scan found 10 packages extending `cli/` across 6 checkouts and 26 packages extending `libs/` across 6 checkouts; the `vite to esbuild migrations` batch is the 8 `libs/tsconfig-vite-node.json` packages that must flip to `NodeNext`.
 - **Scale of the Prettier migration** — the upstream plan recorded 9 consumer repositories plus `$PROJECT` itself; only `$WEB` has adopted.
-- **Release artefacts are unstaged** — rewritten changelogs, an Astro `files` fix, and a re-indented fixture sit uncommitted in `$PROJECT`.
 - **The `*.mjs` re-indent is accepted impact** — proven byte-identical in `$WEB`, but every other repository will see the diff and must treat it as correct output.
 
 ### Decisions
