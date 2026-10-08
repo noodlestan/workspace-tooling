@@ -2,16 +2,17 @@
 
 > Enforcing consistency and strict standards across all Noodlestan packages.
 
-Base TypeScript configurations for Noodlestan packages (`esbuild` and `vite` presets).
+Base TypeScript configurations for Noodlestan packages (`esbuild`, `vite`, and `monorepo` presets).
 
 ## Configs
 
-| Kind      | Preset                                             | Use for                                      |
-| --------- | -------------------------------------------------- | -------------------------------------------- |
-| `esbuild` | `@noodlestan/tsconfig/esbuild/tsconfig.json`       | Packages built with `@noodlestan/esbuild`    |
-| `esbuild` | `@noodlestan/tsconfig/esbuild/tsconfig-solid.json` | JSX set to `solid-js`.                       |
-| `vite`    | `@noodlestan/tsconfig/vite/tsconfig.json`          | Packages resolved by Vite and other bundlers |
-| `vite`    | `@noodlestan/tsconfig/vite/tsconfig-solid.json`    | JSX set to `solid-js`.                       |
+| Kind       | Preset                                             | Use for                                      |
+| ---------- | -------------------------------------------------- | -------------------------------------------- |
+| `esbuild`  | `@noodlestan/tsconfig/esbuild/tsconfig.json`       | Packages built with `@noodlestan/esbuild`    |
+| `esbuild`  | `@noodlestan/tsconfig/esbuild/tsconfig-solid.json` | JSX set to `solid-js`.                       |
+| `vite`     | `@noodlestan/tsconfig/vite/tsconfig.json`          | Packages resolved by Vite and other bundlers |
+| `vite`     | `@noodlestan/tsconfig/vite/tsconfig-solid.json`    | JSX set to `solid-js`.                       |
+| `monorepo` | `@noodlestan/tsconfig/monorepo/tsconfig.json`      | Monorepo root tsconfig.                      |
 
 ## Usage
 

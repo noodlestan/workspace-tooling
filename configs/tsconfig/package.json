@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/tsconfig",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Base TypeScript configurations for Noodlestan packages (esbuild and vite presets).",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -9,8 +9,11 @@
     "access": "public"
   },
   "files": [
+    "README.md",
+    "LICENSE-MIT",
     "esbuild",
     "vite",
+    "monorepo",
     "cli",
     "libs",
     "workspace"
