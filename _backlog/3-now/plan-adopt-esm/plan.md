@@ -185,7 +185,7 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 | Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE`    |
 | Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `WORKING` |
 | Iteration: Rename Vite Configs (inline instructions)                                                    | `WORKING` |
-| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `READY`   |
+| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `WORKING` |
 | Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `READY`   |
 | Iteration: Config Cleanup (inline instructions)                                                         | `READY`   |
 
@@ -457,7 +457,7 @@ configs({checkout}): Swap the `libs/` preset for `@noodlestan/tsconfig/vite`.
 
 **Id:** `migrate-vite-to-esbuild`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Instructions:** `./plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`
 
@@ -483,9 +483,12 @@ configs({checkout}): Swap the `libs/` preset for `@noodlestan/tsconfig/vite`.
 
 #### Commits:
 
-| ID                        | Repository / Checkout / Branch                       | Policy   | Hash    | Status     |
-| ------------------------- | ---------------------------------------------------- | -------- | ------- | ---------- |
-| `migrate-vite-to-esbuild` | `{checkout}` / `$CHECKOUTS/{checkout}` / `adopt-esm` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+| ID                        | Repository / Checkout / Branch                       | Policy   | Hash      | Status      |
+| ------------------------- | ---------------------------------------------------- | -------- | --------- | ----------- |
+| `migrate-vite-to-esbuild` | Art MD / `$CHECKOUTS/art-md` / `adopt-esm`           | `NOPUSH` | `a0036d4` | `COMMITTED` |
+| `migrate-vite-to-esbuild` | Art MD / `$CHECKOUTS/art-md` / `adopt-esm`           | `NOPUSH` | `0dfc4b8` | `COMMITTED` |
+| `migrate-vite-to-esbuild` | Art JS / `$CHECKOUTS/art-js` / `adopt-esm`           | `NOPUSH` | `0cd562b` | `COMMITTED` |
+| `migrate-vite-to-esbuild` | Purrception / `$CHECKOUTS/purrception` / `adopt-esm` | `NOPUSH` | `8a86e92` | `COMMITTED` |
 
 One commit per matrix row, including the pilot. Message template:
 
@@ -501,6 +504,8 @@ migrate({checkout}): Move the `vite to esbuild` batch to `NodeNext`.
 - Flip `extends` to the `esbuild/` config and resolve the `NodeNext` errors.
 - Add the consumer-owned `build.config.mjs` with declaration emit.
 ```
+
+**Notes:** 10 of 11 `vite to esbuild migrations` rows delivered (art-md 5, art-js 3, purrception 2; one commit per checkout on `adopt-esm`). `no-comply/libs/meta` is blocked — `npm run ci` fails at baseline on `cli/meta-extract` (extends removed `cli/tsconfig.esm.json`), and under `NodeNext` the published `@purrception/*@0.0.11` extensionless re-exports collapse meta's types (`TS2305`). Unblocked by migrating `meta-extract` AND a new purrception release shipping NodeNext-consumable artifacts.
 
 ### Iteration: Config Cleanup
 
@@ -561,6 +566,7 @@ configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
 
 - **no-comply/cli/meta-extract** deferred — blocked on `@purrception/*` libs being NodeNext-consumable; unblocked by `migrate-vite-to-esbuild` migrating `purrception/libs/lang-ts` and `purrception/libs/primitives`.
 - **no-comply `vite renames` rows (6)** deferred — blocked on `cli/meta-extract` migration; unblocked by `migrate-vite-to-esbuild` + the deferred `meta-extract` cli row.
+- **no-comply/libs/meta** (`vite to esbuild`) blocked — `npm run ci` fails at baseline on `cli/meta-extract` (extends removed `cli/tsconfig.esm.json`), and under `NodeNext` the published `@purrception/*@0.0.11` extensionless re-exports collapse meta's types (`TS2305`). Unblocked by migrating `meta-extract` AND a new purrception release shipping NodeNext-consumable artifacts.
 
 ---
 

@@ -200,3 +200,15 @@ RULE: Report a BLOCKER instead of improvising if a row cannot be made to pass af
 - Verify the commits were executed and not pushed, per the `NOPUSH` policy.
 - Execute the **Verifying Completion** step as defined in the "Operating Instructions" section.
 - Report according to the "How to Report Back to the Delegator" instructions.
+
+---
+
+## DELEGATOR NOTE (authorized dependency upgrade)
+
+Each consumer checkout pins `@noodlestan/tsconfig` to a version before `0.2.0` (e.g. `0.0.14` or `0.1.0`), which does NOT ship the `esbuild/` preset, and does not yet depend on `@noodlestan/esbuild` (the `esbuild-cli` build script). As part of each row's migration, in the checkout run:
+
+```bash
+npm install @noodlestan/tsconfig@^0.2.0 @noodlestan/esbuild@^0.1.0
+```
+
+Include the dependency bump in the same commit as the migration. This is authorized by the delegator; no replan is needed.
