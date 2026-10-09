@@ -29,7 +29,7 @@
 
 ## Summary
 
-Deliver the tooling configuration story end to end: the build config contract is already externalised (`DONE`), the Prettier config packages are published and pinned in the pilot consumer with ecosystem adoption still open (`WORKING`), and the ecosystem-wide adoption of Prettier formatting and Node-compatible ESM distribution is drafted and waiting to be planned (`DRAFT`).
+Deliver the tooling configuration story end to end: the build config contract is already externalised (`DONE`), the Prettier config packages are published and pinned in the pilot consumer with ecosystem adoption still open (`WORKING`), and the ecosystem-wide adoption of Node-compatible ESM distribution is underway (`WORKING`), shipping `@noodlestan/tsconfig@0.2.0` with the new presets.
 
 Scope is `Project: Noodlestan Workspace Tooling` with its configuration packages and every consumer checkout; upstream is the distribution, shared-config, and build ADRs in `$PROJECT/architecture/`.
 
@@ -114,16 +114,16 @@ Scope is `Project: Noodlestan Workspace Tooling` with its configuration packages
 
 The packages that carry the configuration to the ecosystem.
 
-| Package               | Record                                                        | Carries                                                                          |
-| --------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| TS Config             | `$PROJECT/configs/tsconfig/_records/package.art`              | `esbuild` / `vite` configs; transitional `cli`, `libs`; convenience `workspace`. |
-| Prettier Config       | `$PROJECT/configs/prettier-config/_records/package.art`       | Canonical base formatting rules.                                                 |
-| Prettier Config Astro | `$PROJECT/configs/prettier-config-astro/_records/package.art` | Astro-augmented formatting rules.                                                |
-| ESBuild CLI           | `$PROJECT/cli/esbuild-cli/_records/package.art`               | The `build.config.mjs` consumer contract.                                        |
+| Package               | Record                                                        | Carries                                                                                             |
+| --------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| TS Config             | `$PROJECT/configs/tsconfig/_records/package.art`              | `esbuild` / `vite` configs; `monorepo` root preset; transitional `cli`, `libs`; legacy `workspace`. |
+| Prettier Config       | `$PROJECT/configs/prettier-config/_records/package.art`       | Canonical base formatting rules.                                                                    |
+| Prettier Config Astro | `$PROJECT/configs/prettier-config-astro/_records/package.art` | Astro-augmented formatting rules.                                                                   |
+| ESBuild CLI           | `$PROJECT/cli/esbuild-cli/_records/package.art`               | The `build.config.mjs` consumer contract.                                                           |
 
 **Changes:**
 
-- Publish the Prettier packages at `0.0.1`; retire the transitional tsconfig presets once consumers migrate.
+- Publish the Prettier packages at `0.0.1` and `@noodlestan/tsconfig@0.2.0` with the new presets; retire the transitional tsconfig presets once consumers migrate.
 
 ### (Scope) Consumer Checkouts
 
@@ -147,7 +147,7 @@ Repositories that adopt the configuration; the exact adoption set per plan is fi
 
 **Changes:**
 
-- Replace hand-written Prettier configs with the published base package; migrate transitional tsconfig extends to the `esbuild/` or `vite/` config chosen according to consumer build tool.
+- Replace hand-written Prettier configs with the published base package; migrate transitional tsconfig extends to the `esbuild/` or `vite/` config chosen according to consumer build tool; move repository roots onto the `monorepo/` preset.
 
 ## Execution Context
 
@@ -161,7 +161,7 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 | ----- | -------------------------- | --------- |
 | 1     | Build Config Contract      | `DONE`    |
 | 2     | Distribute Prettier Config | `WORKING` |
-| 3     | Adopt ESM Distribution     | -         |
+| 3     | Adopt ESM Distribution     | `WORKING` |
 
 ### Phase: 1 — Build Config Contract
 
@@ -191,9 +191,9 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 
 **Goal:** Every published package satisfies the distribution ADR.
 
-**Description:** Inventory the ecosystem's packages, classify each by its consumers, migrate them off the transitional `cli/` and `libs/` tsconfig presets onto the `esbuild/` or `vite/` config chosen according to consumer build tool, and retire the transitional presets once nothing extends them.
+**Description:** Inventory the ecosystem's packages, classify each by its consumers, migrate them off the transitional `cli/` and `libs/` tsconfig presets onto the `esbuild/` or `vite/` config chosen according to consumer build tool, move repository roots onto the `monorepo/` preset, and retire the transitional presets once nothing extends them.
 
-**Status:** -
+**Status:** `WORKING`
 
 **Dependencies:**
 
@@ -203,19 +203,19 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 
 ## Items:
 
-| Phase | Resource / Record                                                                                   | Status  |
-| ----- | --------------------------------------------------------------------------------------------------- | ------- |
-| 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`  |
-| 2     | Plan: Add Prettier Config `$PROJECT/_backlog/1-done/plan-add-prettier-config/plan.md`               | `DONE`  |
-| 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                   | `DRAFT` |
-| 2     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`           | `DRAFT` |
-| 3     | Plan: Adopt ESM `$PROJECT/_backlog/6-plan/plan-adopt-esm/plan.md`                                   | `DRAFT` |
+| Phase | Resource / Record                                                                                   | Status    |
+| ----- | --------------------------------------------------------------------------------------------------- | --------- |
+| 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`    |
+| 2     | Plan: Add Prettier Config `$PROJECT/_backlog/1-done/plan-add-prettier-config/plan.md`               | `DONE`    |
+| 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                   | `DRAFT`   |
+| 2     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`           | `DRAFT`   |
+| 3     | Plan: Adopt ESM `$PROJECT/_backlog/3-now/plan-adopt-esm/plan.md`                                    | `WORKING` |
 
 ## Work
 
 ### Next
 
-Run **Plan Iterations** on `Plan: Adopt Prettier Config`, `Plan: Add Astro Support`, and `Plan: Adopt ESM` to turn their draft iterations into refined changes and commit blueprints, then migrate the remaining consumer checkouts to the published Prettier config and wire Astro linting into the pilot.
+`Plan: Adopt ESM` is `WORKING` — `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets and its remaining iterations await their instructions files. Run **Plan Iterations** on `Plan: Adopt Prettier Config` and `Plan: Add Astro Support` to refine their draft iterations, then migrate the remaining consumer checkouts to the published Prettier config and wire Astro linting into the pilot.
 
 ### Blockers
 
@@ -255,7 +255,6 @@ Milestone-level evidence: both Prettier packages published at `0.0.1`, no `.pret
 
 ### Not In Scope
 
-- **`workspace/` root configs** — the `workspace` convenience preset stays per the shared-config ADR; roots do not shape distribution and are outside this milestone's adoption set.
 - **Astro rollout in apps** — `Plan: Add Astro Support` consumes `@noodlestan/prettier-config-astro`.
 - **`.prettierignore` policy** — a shared ignore convention stays open from `Plan: Add Prettier Config`.
 - **Consumer feature work** — this milestone changes how configuration is distributed, not what repositories build.
@@ -270,6 +269,7 @@ Milestone-level evidence: both Prettier packages published at `0.0.1`, no `.pret
 ### Findings
 
 - **Scale of the ESM migration** — the planning scan found 10 packages extending `cli/` across 6 checkouts and 26 packages extending `libs/` across 6 checkouts; the `vite to esbuild migrations` batch is the 8 `libs/tsconfig-vite-node.json` packages that must flip to `NodeNext`.
+- **Repository roots are split** — some consumer roots extend `workspace/` while others hardcode their compiler options; all move to `monorepo/`.
 - **Scale of the Prettier migration** — the upstream plan recorded 9 consumer repositories plus `$PROJECT` itself; only `$WEB` has adopted.
 - **The `*.mjs` re-indent is accepted impact** — proven byte-identical in `$WEB`, but every other repository will see the diff and must treat it as correct output.
 
@@ -290,7 +290,6 @@ Milestone-level evidence: both Prettier packages published at `0.0.1`, no `.pret
 
 - Adopt `@noodlestan/prettier-config-astro` in Astro repositories via `Plan: Add Astro Support`.
 - Decide the shared `.prettierignore` convention across repositories.
-- Publish the breaking `@noodlestan/tsconfig` major produced by the `config cleanup` batch.
 
 ### Feedback
 

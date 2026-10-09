@@ -2,7 +2,7 @@
 
 **ID:** `adopt-esm`
 
-**Status:** `DRAFT`
+**Status:** `WORKING`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -10,7 +10,7 @@
 
 **Purpose:** Published Noodlestan packages still extend the transitional `cli/` and `libs/` tsconfig presets and ship module semantics that do not satisfy `architecture/adr/distribution.md` — Node-compatible ESM, compiled output, and declarations for Node-consumed packages; TypeScript source for bundler-consumed libraries.
 
-**Description:** Plan record with 6 iterations — `ship-consumer-configs` `DONE`, the rest draft — spanning `Package: TS Config` in `$PROJECT` and the consumer checkouts enumerated by its inventory iteration, executed from `$WORKSPACE`.
+**Description:** Plan record with 7 iterations — `ship-consumer-configs` `DONE` and the other six `READY` — spanning `Package: TS Config` in `$PROJECT` and the consumer checkouts and monorepo roots enumerated by its inventory iteration, executed from `$WORKSPACE`.
 
 ## Mandatory Reading
 
@@ -31,25 +31,26 @@
 
 ## Summary
 
-Adopt the distribution ADR across the ecosystem by classifying every package by its consumers, migrating each off the transitional `cli/` and `libs/` presets onto the `esbuild/` or `vite/` config chosen according to consumer build tool, and removing the transitional presets once no consumer extends them.
+Adopt the distribution ADR across the ecosystem by classifying every package by its consumers, migrating each off the transitional `cli/` and `libs/` presets onto the `esbuild/` or `vite/` config chosen according to consumer build tool, moving every consumer monorepo root onto the `monorepo/` preset, and removing the transitional presets once no consumer extends them.
 
-Scope is `Package: TS Config` plus the consumer checkouts enumerated by the inventory iteration; upstream is the distribution and shared-config ADRs and the delivered `build.config.mjs` contract.
+Scope is `Package: TS Config` plus the consumer checkouts and their monorepo roots enumerated by the inventory iteration; upstream is the distribution and shared-config ADRs and the delivered `build.config.mjs` contract.
 
 ## Attachments
 
-- `./plan-adopt-esm__matrix.md` (Matrix) — Distribution migration matrix produced by Iteration: Inventory Distribution Matrix.
+- `./plan__adopt-esm-matrix.md` (Matrix) — Distribution migration matrix produced by Iteration: Inventory Distribution Matrix.
+
+> Note: the matrix does not exist yet — it is the expected output of the READY `inventory-distribution-matrix` iteration (forward reference).
 
 ## Context
 
 ### Upstream Work
 
-| Kind                 | Path                                                               | Role                                                                                                                          |
-| -------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| ADR                  | `$PROJECT/architecture/adr/distribution.md`                        | The decisions this plan adopts: Node-compatible ESM, compiled JS, declarations, TS-source exemption.                          |
-| ADR                  | `$PROJECT/architecture/adr/shared-config.md`                       | Scopes TSConfig to consumer build tool — `esbuild` or `vite`, plus the `workspace` convenience preset; decision is `Adopted`. |
-| Plan                 | `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`; delivered the `build.config.mjs` contract and declaration-emit ownership this plan builds on.                         |
-| Milestone            | `$ROADMAP/3-now/milestone-tooling-one/milestone.md`                | Coordinates this plan with the other tooling plans.                                                                           |
-| Uncommitted material | `$TSCONFIG/esbuild/`, `$TSCONFIG/vite/`                            | The four new preset files — currently untracked in `$PROJECT` — are the material Iteration: Ship Consumer Configs lands.      |
+| Kind      | Path                                                               | Role                                                                                                                          |
+| --------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| ADR       | `$PROJECT/architecture/adr/distribution.md`                        | The decisions this plan adopts: Node-compatible ESM, compiled JS, declarations, TS-source exemption.                          |
+| ADR       | `$PROJECT/architecture/adr/shared-config.md`                       | Scopes TSConfig to consumer build tool — `esbuild` or `vite`, plus the `workspace` convenience preset; decision is `Adopted`. |
+| Plan      | `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`; delivered the `build.config.mjs` contract and declaration-emit ownership this plan builds on.                         |
+| Milestone | `$ROADMAP/3-now/milestone-tooling-one/milestone.md`                | Coordinates this plan with the other tooling plans.                                                                           |
 
 ### Required Skills
 
@@ -103,7 +104,7 @@ Scope is `Package: TS Config` plus the consumer checkouts enumerated by the inve
 
 ::READ `$PROJECT/architecture/design/typescript.md` (Design) — Preset table, variant extension rules, and consumer-owned declaration emit. Relevant for Planning Work Item, Executing Work Step.
 
-::READ `$TSCONFIG/_guide.md` (Guide) — Package layout, current status of `cli/`, `libs/`, and `workspace/`, verification commands. Relevant for Executing Work Step, Verifying Step.
+::READ `$TSCONFIG/_guide.md` (Guide) — Package layout, current status of `esbuild/`, `vite/`, `monorepo/`, `cli/`, `libs/`, and `workspace/`, verification commands. Relevant for Executing Work Step, Verifying Step.
 
 ::READ `$PROJECT/_guide.md` (Guide) — Repository layout, records management, and `npm run ci` verification. Relevant for Planning Work Item, Setting Up, Verifying Completion.
 
@@ -127,7 +128,7 @@ Changes in 1 package and every consumer checkout that extends a transitional pre
 
 **Changes:**
 
-- Land the `esbuild/` and `vite/` configs and retire the transitional presets from `Package: TS Config`.
+- Land the `esbuild/`, `vite/`, and `monorepo/` configs and retire the transitional presets from `Package: TS Config`.
 - Record adoption progress in the distribution migration matrix.
 
 ### (Scope) Package: TS Config
@@ -141,12 +142,13 @@ Changes in 1 package and every consumer checkout that extends a transitional pre
 - `owner` — Project: Artificial
 - `path` — `configs/tsconfig/`
 - `canonicalName` — `@noodlestan/tsconfig`
-- `files` — `esbuild`, `vite`, `cli`, `libs`, `workspace`
+- `files` — `esbuild`, `vite`, `monorepo`, `cli`, `libs`, `workspace`
 
 **Changes:**
 
-- Commit the unstaged `esbuild/` and `vite/` presets.
-- Keep `cli/` and `libs/` published while any matrix row still extends them; remove them from `files` only when the matrix clears. `workspace/` stays published as the convenience preset for workspaces.
+- Commit the `esbuild/`, `vite/`, and `monorepo/` presets.
+- Publish `@noodlestan/tsconfig@0.2.0` — the additive release shipping the new presets — before any consumer upgrades.
+- Keep `cli/` and `libs/` published while any matrix row still extends them; remove them from `files` only when the matrix clears. `workspace/` stays published while consumer roots migrate to `monorepo/`.
 - Update `CHANGELOG.md`, `_guide.md`, and `README.md` per batch; bump a major version when presets are removed.
 
 ### (Scope) Consumer Checkouts: Transitional Preset Packages
@@ -158,6 +160,7 @@ Changes in 1 package and every consumer checkout that extends a transitional pre
 **Changes:**
 
 - Replace `extends` with `@noodlestan/tsconfig/esbuild/...` or `@noodlestan/tsconfig/vite/...` per the matrix's target config.
+- Move each checkout's root `tsconfig.json` — extending `workspace/` or hardcoded — onto `@noodlestan/tsconfig/monorepo/tsconfig.json`.
 - For `esbuild/` migrations: declare `"type": "module"`, add explicit `.js` extensions to relative imports, and add a consumer-owned `build.config.mjs` with declaration emit through `postBuildPlugin`.
 - For `vite/` migrations: swap the preset only; module semantics do not change.
 - Verify each checkout with its own lint, test, and build before committing it.
@@ -180,18 +183,19 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 | Iteration / Instructions                                                                                | Status  |
 | ------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `DRAFT` |
+| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `READY` |
 | Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE`  |
-| Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `DRAFT` |
-| Iteration: Rename Vite Configs `plan-adopt-esm/instructions/rename-vite-configs.md`                     | `DRAFT` |
-| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `DRAFT` |
-| Iteration: Config Cleanup `plan-adopt-esm/instructions/config-cleanup.md`                               | `DRAFT` |
+| Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `READY` |
+| Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `READY` |
+| Iteration: Rename Vite Configs (inline instructions)                                                    | `READY` |
+| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `READY` |
+| Iteration: Config Cleanup (inline instructions)                                                         | `READY` |
 
 ### Iteration: Inventory Distribution Matrix
 
 **Id:** `inventory-distribution-matrix`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Instructions:** `./plan-adopt-esm/instructions/inventory-distribution-matrix.md`
 
@@ -199,15 +203,16 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 **Purpose:** Produce the authoritative list of what migrates, to which config, in which batch, before any package changes.
 
-**Description:** Scan every `tsconfig.json` under `$CHECKOUTS` (excluding `node_modules`), record its `extends`, the package's consumers, the ADR-scoped config, and the required changes, and write the result to the plan attachment `./plan-adopt-esm__matrix.md`. Classification follows consumer build tool, not the folder: Node-consumed packages use `esbuild/`; bundler-consumed packages use `vite/`; `workspace/` roots and `astro/tsconfigs/*` app configs are recorded but left out of the migration batches.
+**Description:** Scan every `tsconfig.json` under `$CHECKOUTS` (excluding `node_modules`), record its `extends`, the package's consumers, the ADR-scoped config, and the required changes, and write the result to the plan attachment `./plan__adopt-esm-matrix.md`. Classification follows consumer build tool, not the folder: Node-consumed packages use `esbuild/`; bundler-consumed packages use `vite/`; monorepo roots move to `monorepo/`; `astro/tsconfigs/*` app configs are recorded but left out of the migration batches.
 
 **Changes:**
 
 - Scan `$CHECKOUTS` for `extends` values matching `@noodlestan/tsconfig/{cli,libs,workspace}/...` and record checkout, package path, current preset, and preset variant.
+- Record each checkout's root `tsconfig.json` — extending `workspace/` or hardcoded — as a row targeting `@noodlestan/tsconfig/monorepo/tsconfig.json`.
 - Classify each package's consumers from its `package.json` and build setup: Node-consumed (needs compiled ESM), bundler-consumed (TS-source distribution), or app/root.
-- Choose the target config per row (`esbuild/` or `vite/`) and list the required changes: preset swap only, `"type": "module"`, `.js` extension renames, `build.config.mjs`, declaration emit.
-- Assign each migrating row one of the three migration batches: `clis` (extends `cli/`), `vite renames` (`libs/` → `vite/`), or `vite to esbuild migrations` (`libs/` → `esbuild/`). The fourth batch, `config cleanup`, is not a row classification — it closes the plan once the other three are empty.
-- Write `./plan-adopt-esm__matrix.md` with the full matrix and a per-batch summary count.
+- Choose the target config per row (`esbuild/`, `vite/`, or `monorepo/`) and list the required changes: preset swap only, `"type": "module"`, `.js` extension renames, `build.config.mjs`, declaration emit.
+- Assign each migrating row one of the four migration batches: `clis` (extends `cli/`), `vite renames` (`libs/` → `vite/`), `vite to esbuild migrations` (`libs/` → `esbuild/`), or `monorepo roots` (roots extending `workspace/` or hardcoded → `monorepo/`). The fifth batch, `config cleanup`, is not a row classification — it closes the plan once the other four are empty.
+- Write `./plan__adopt-esm-matrix.md` with the full matrix and a per-batch summary count.
 
 **Dependencies:**
 
@@ -240,19 +245,18 @@ plan(adopt-esm): Add the distribution migration matrix.
 
 **Instructions:** `./plan-adopt-esm/instructions/ship-consumer-configs.md`
 
-**Report:** `./plan-adopt-esm/instructions/ship-consumer-configs__report.md`
+**Purpose:** Land the `esbuild/`, `vite/`, and `monorepo/` presets and publish the additive `0.2.0` release before any consumer upgrades.
 
-**Purpose:** Land the `esbuild/` and `vite/` config material currently sitting unstaged in `$TSCONFIG`.
-
-**Description:** Commit the four new preset files, which `$TSCONFIG/README.md` already documents, and record them in a `## UNPUBLISHED (0.2.0)` `CHANGELOG.md` entry that also announces the removal of `cli/` and `libs/`. Clean the transitional traces still present in `$TSCONFIG/_guide.md` and align the remaining package knowledge with the shared-config ADR's consumer-build-tool scoping. Publishing `0.2.0` is out of this iteration's scope — it happens once the migration batches land.
+**Description:** Commit the new preset files, record them in the `0.2.0` `CHANGELOG.md` entry, and publish `@noodlestan/tsconfig@0.2.0` so consumers can move onto `esbuild/`, `vite/`, and `monorepo/`. `0.2.0` is additive — `cli/` and `libs/` stay published until the migration batches clear the matrix, so their removal is deferred to Config Cleanup. Clean the transitional traces still present in `$TSCONFIG/_guide.md` and align the remaining package knowledge with the shared-config ADR's consumer-build-tool scoping.
 
 **Changes:**
 
-- Commit `$TSCONFIG/esbuild/tsconfig.json`, `$TSCONFIG/esbuild/tsconfig-solid.json`, `$TSCONFIG/vite/tsconfig.json`, and `$TSCONFIG/vite/tsconfig-solid.json`.
-- Confirm `files` in `$TSCONFIG/package.json` still lists every preset directory the matrix references.
-- Add the `## UNPUBLISHED (0.2.0)` entry to `$TSCONFIG/CHANGELOG.md` — `Added` for the four new presets and `Removed` for `cli/` and `libs/`.
+- Commit `$TSCONFIG/esbuild/tsconfig.json`, `$TSCONFIG/esbuild/tsconfig-solid.json`, `$TSCONFIG/vite/tsconfig.json`, `$TSCONFIG/vite/tsconfig-solid.json`, and `$TSCONFIG/monorepo/tsconfig.json`.
+- Add `monorepo` to `files` in `$TSCONFIG/package.json` and `$TSCONFIG/_records/package.art`.
+- Add the `## 0.2.0` entry to `$TSCONFIG/CHANGELOG.md` — `Added` for the new presets.
 - Clean the transitional rows from `$TSCONFIG/_guide.md` and update `$PROJECT/architecture/design/typescript.md` so both describe the same consumer-build-tool table as the shared-config ADR.
 - Run `$TSCONFIG` `npm run lint` and the monorepo `npm run ci`.
+- Publish `@noodlestan/tsconfig@0.2.0`.
 
 **Dependencies:**
 
@@ -263,6 +267,7 @@ plan(adopt-esm): Add the distribution migration matrix.
 | ID                      | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
 | ----------------------- | --------------------------------------- | -------- | --------- | ----------- |
 | `ship-consumer-configs` | Workspace Tooling / `$PROJECT` / `main` | `NOPUSH` | `3d9eca8` | `COMMITTED` |
+| `ship-monorepo-config`  | Workspace Tooling / `$PROJECT` / `main` | `NOPUSH` | `11017ce` | `COMMITTED` |
 
 ##### Commit: `ship-consumer-configs`
 
@@ -274,17 +279,79 @@ plan(adopt-esm): Add the distribution migration matrix.
 configs(tsconfig): Ship the `esbuild/` and `vite/` consumer presets.
 
 - Add `esbuild/` and `vite/` presets with their `-solid` variants.
-- Record the `0.2.0` `Added` and `Removed` entry in `CHANGELOG.md`.
+- Record the `0.2.0` `Added` entry in `CHANGELOG.md`.
 - Clean the transitional traces from `_guide.md`.
 ```
 
 **Notes:** Landed as part of the `adopt-esm` plan commit; the presets, `CHANGELOG.md`, and the plan share it.
 
+##### Commit: `ship-monorepo-config`
+
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+configs(tsconfig): Add the `monorepo/` root preset and bump to `0.2.0`.
+
+- Add `monorepo/tsconfig.json` and list it in `files` and the package record.
+- Record the additive `0.2.0` entry in `CHANGELOG.md`.
+```
+
+**Notes:** `@noodlestan/tsconfig@0.2.0` is published from this commit before any consumer upgrades.
+
+### Iteration: Migrate Monorepo Roots
+
+**Id:** `migrate-monorepo-roots`
+
+**Status:** `READY`
+
+**Purpose:** Execute the `monorepo roots` batch — every repository root moves onto `@noodlestan/tsconfig/monorepo/tsconfig.json`.
+
+**Description:** For every matrix row in the `monorepo roots` batch, point the root `tsconfig.json` at `@noodlestan/tsconfig/monorepo/tsconfig.json` — replacing a `workspace/` extend or a hardcoded root config. This is a preset swap with no module-format change; one checkout per commit, matrix updated as rows land.
+
+**Changes:**
+
+- Per matrix row: point the root `tsconfig.json` at `@noodlestan/tsconfig/monorepo/tsconfig.json`, replacing a `workspace/` extend or a hardcoded root config.
+- Drop the compiler options the root preset now owns; keep only the repo-specific `include`, `exclude`, and `rootDir`.
+
+**Instructions:**
+
+- Work one matrix row per commit — a complete checkout on branch `adopt-esm` — following the blueprint below.
+- Run the checkout's lint and build before committing; update the matrix row as it lands.
+- Report completion or a BLOCKER inline in chat — this iteration has no separate instruction or report file.
+
+**Dependencies:**
+
+- Iteration: Inventory Distribution Matrix.
+- Iteration: Ship Consumer Configs.
+
+#### Commits:
+
+| ID                       | Repository / Checkout / Branch                       | Policy   | Hash    | Status     |
+| ------------------------ | ---------------------------------------------------- | -------- | ------- | ---------- |
+| `migrate-monorepo-roots` | `{checkout}` / `$CHECKOUTS/{checkout}` / `adopt-esm` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+
+One commit per matrix row. Message template:
+
+##### Commit: `migrate-monorepo-roots`
+
+**Repository:** `{checkout}`
+
+**Message:**
+
+```
+configs({checkout}): Move the root tsconfig to `@noodlestan/tsconfig/monorepo`.
+
+- Replace the root `extends` with the `monorepo/` preset.
+- Drop the compiler options the preset now owns.
+```
+
 ### Iteration: Migrate Clis
 
 **Id:** `migrate-clis`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Instructions:** `./plan-adopt-esm/instructions/migrate-clis.md`
 
@@ -331,11 +398,7 @@ migrate({checkout}): Move the `clis` batch to `@noodlestan/tsconfig/esbuild`.
 
 **Id:** `rename-vite-configs`
 
-**Status:** `DRAFT`
-
-**Instructions:** `./plan-adopt-esm/instructions/rename-vite-configs.md`
-
-**Report:** `./plan-adopt-esm/instructions/rename-vite-configs__report.md`
+**Status:** `READY`
 
 **Purpose:** Execute the `vite renames` batch — `libs/` packages consumed by a bundler move to the `vite/` config.
 
@@ -343,9 +406,13 @@ migrate({checkout}): Move the `clis` batch to `@noodlestan/tsconfig/esbuild`.
 
 **Changes:**
 
-- Per matrix row: replace the `extends` value with the matching `vite/` config; run type-check and lint.
-- Confirm the diff contains only the preset swap; any module-format fallout means the row was classified wrong — return it to the inventory for reclassification.
-- Commit the complete checkout on branch `adopt-esm` and update the matrix row.
+- Per matrix row: replace the `extends` value with the matching `vite/` config (`vite/tsconfig.json` or `vite/tsconfig-solid.json`).
+
+**Instructions:**
+
+- Confirm the diff contains only the preset swap; any module-format fallout means the row was misclassified — return it to the inventory for reclassification.
+- Run type-check and lint; commit the complete checkout on branch `adopt-esm` and update the matrix row — one commit per row, per the blueprint below.
+- Report completion or a BLOCKER inline in chat — this iteration has no separate instruction or report file.
 
 **Dependencies:**
 
@@ -377,7 +444,7 @@ configs({checkout}): Swap the `libs/` preset for `@noodlestan/tsconfig/vite`.
 
 **Id:** `migrate-vite-to-esbuild`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Instructions:** `./plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`
 
@@ -391,7 +458,7 @@ configs({checkout}): Swap the `libs/` preset for `@noodlestan/tsconfig/vite`.
 
 - Select the pilot package from the matrix and record why it was selected.
 - Pilot: flip `extends` to `esbuild/tsconfig.json`; fix every resulting NodeNext error: explicit `.js` extensions, `"type": "module"`, `verbatimModuleSyntax` import shape; add `build.config.mjs` with the `esm` target, explicit `external`, and declaration emit; confirm `dist` output and `.d.ts` files are produced; verify consumers of the pilot still resolve it.
-- Write the recipe — ordered steps, commands, expected failure modes — into the plan attachment `./plan-adopt-esm__matrix.md` under a `## Recipe` section.
+- Write the recipe — ordered steps, commands, expected failure modes — into the plan attachment `./plan__adopt-esm-matrix.md` under a `## Recipe` section.
 - Replay the recipe per remaining row; escalate to a re-pilot if a package needs steps the recipe does not cover.
 - Update the matrix after every checkout until all `vite to esbuild migrations` rows are `DONE`.
 
@@ -426,22 +493,23 @@ migrate({checkout}): Move the `vite to esbuild` batch to `NodeNext`.
 
 **Id:** `config-cleanup`
 
-**Status:** `DRAFT`
-
-**Instructions:** `./plan-adopt-esm/instructions/config-cleanup.md`
-
-**Report:** `./plan-adopt-esm/instructions/config-cleanup__report.md`
+**Status:** `READY`
 
 **Purpose:** Execute the `config cleanup` batch — stop shipping the presets the ecosystem has migrated away from.
 
-**Description:** Once the matrix shows zero rows extending `cli/` and `libs/`, delete `cli/` and `libs/` from `$TSCONFIG`, drop them from `files` and the package record, finalise the `UNPUBLISHED` changelog entry, and publish `@noodlestan/tsconfig@0.2.0`. This is the only iteration that publishes a breaking `@noodlestan/tsconfig` release.
+**Description:** Once the matrix shows zero rows extending `cli/` and `libs/`, delete `cli/` and `libs/` from `$TSCONFIG`, drop them from `files` and the package record, add the breaking `## 0.3.0` changelog entry, and publish `@noodlestan/tsconfig@0.3.0`. `0.2.0` was published earlier by Ship Consumer Configs; this is the only iteration that publishes a breaking `@noodlestan/tsconfig` release.
 
 **Changes:**
 
-- Confirm with a final scan that no `tsconfig.json` outside `$TSCONFIG` extends `cli/` or `libs/`.
 - Delete `$TSCONFIG/cli/` and `$TSCONFIG/libs/`; remove them from `files` in `$TSCONFIG/package.json` and from `$TSCONFIG/_records/package.art`.
-- Finalise the `## 0.2.0` `CHANGELOG.md` entry — drop the `UNPUBLISHED` marker — and bump `version` in `$TSCONFIG/package.json` to `0.2.0`.
-- Update `$TSCONFIG/_guide.md`, `$PROJECT/architecture/design/typescript.md`, and `$PROJECT/README.md`; publish `@noodlestan/tsconfig@0.2.0`.
+- Add the `## 0.3.0` `CHANGELOG.md` entry mapping each removed preset to its replacement, and bump `version` in `$TSCONFIG/package.json` to `0.3.0`.
+- Update `$TSCONFIG/_guide.md`, `$PROJECT/architecture/design/typescript.md`, and `$PROJECT/README.md`.
+
+**Instructions:**
+
+- First confirm with a final scan that no `tsconfig.json` outside `$TSCONFIG` extends `cli/` or `libs/`; a match means the matrix is not clear — stop and REPORT A BLOCKER.
+- Run `$TSCONFIG` `npm run lint` and the monorepo `npm run ci`; stage the changes but do not commit (`NOCOMMIT`) — hand back for crew commit and publish.
+- Report completion or a BLOCKER inline in chat — this iteration has no separate instruction or report file.
 
 **Dependencies:**
 
@@ -465,16 +533,16 @@ migrate({checkout}): Move the `vite to esbuild` batch to `NodeNext`.
 configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
 
 - Delete the preset directories and drop them from `files` and the package record.
-- Finalise the `0.2.0` `CHANGELOG.md` entry mapping each preset to its replacement.
+- Add the `0.3.0` `CHANGELOG.md` entry mapping each preset to its replacement.
 ```
 
-**Policy:** `NOCOMMIT` — `0.2.0` ships as a breaking `@noodlestan/tsconfig` release; stage the changes and hand back for crew commit and publish.
+**Policy:** `NOCOMMIT` — `0.3.0` ships as a breaking `@noodlestan/tsconfig` release; stage the changes and hand back for crew commit and publish.
 
 ## Work
 
 ### Next
 
-All 6 iterations carry `AUTHORED` commit blueprints and instruction paths. `ship-consumer-configs` is `DONE`; write the instructions files and execute `inventory-distribution-matrix` next, then the three migration batches follow the matrix order, and `config-cleanup` closes the plan.
+`ship-consumer-configs` is `DONE` and `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets. All seven iterations are now `READY` or `DONE`: three carry inline instructions and four have instruction files. Execute `inventory-distribution-matrix` next — it produces the matrix every migration batch reads — then the four migration batches follow the matrix order, and `config-cleanup` closes the plan.
 
 ### Blockers
 
@@ -553,7 +621,7 @@ npm run ci # lint, test and build
 
 ### Not In Scope
 
-- **`workspace/` roots** — the inventory records roots extending `workspace/tsconfig.json`; `workspace` stays as the supported convenience preset for workspaces per the shared-config ADR, and roots do not shape distribution.
+- **`workspace/` preset retirement** — `workspace/` stays published after consumer roots move to `monorepo/`; retiring it is not part of this plan.
 - **App and Astro configs** — configs extending `astro/tsconfigs/*` are app-owned, not `@noodlestan/tsconfig` consumers.
 - **Prettier adoption** — every repository adopts `@noodlestan/prettier-config` under `Plan: Adopt Prettier Config`.
 - **Feature changes in consumer packages** — this plan changes distribution shape only; no API or behaviour work rides along.
@@ -562,6 +630,7 @@ npm run ci # lint, test and build
 
 - **Matrix complete** — every `tsconfig.json` under `$CHECKOUTS` (excluding `node_modules`) resolves to a row with a chosen config and a batch.
 - **No transitional extends remain** — a scan for `tsconfig/cli` and `tsconfig/libs` outside `$TSCONFIG` returns zero matches.
+- **No legacy root presets remain** — no root `tsconfig.json` under `$CHECKOUTS` extends `workspace/` or hardcodes the options the `monorepo/` preset now owns.
 - **Node loads migrated output** — for each migrated `esbuild/` package, plain `node` loads its built entry without a loader flag, and `.d.ts` files exist next to the bundle.
 - **CI green per checkout** — `npm run ci` passes in every migrated checkout and in `$PROJECT`.
 
@@ -571,21 +640,24 @@ npm run ci # lint, test and build
 - **26 packages extend `libs/*` across 6 checkouts** — no-comply (8, including `apps/standard-ui-demo`), art-md (5), purrtrait (5), purrpose (3), art-js (3), purrception (2).
 - **`libs/` splits three ways** — `tsconfig-vite.json` (9 packages), `tsconfig-vite-solid.json` (9), `tsconfig-vite-node.json` (8: art-md ×5, art-js ×3). The `vite-node` rows are Node-consumed libraries and the strongest `esbuild/` candidates — they form the `vite to esbuild migrations` batch.
 - **Folder location does not decide the batch** — `art-lib/libs/fs-records` extends the `cli/` preset while living under `libs/`; classification must come from consumers, not paths.
+- **Repository roots are split** — some consumer roots extend `@noodlestan/tsconfig/workspace/tsconfig.json` while others hardcode their compiler options; both migrate to `@noodlestan/tsconfig/monorepo/tsconfig.json`.
 - **`libs/` → `vite/` is largely a rename** — both use `ESNext`/`bundler` resolution, so the semantic risk concentrates in the `vite to esbuild migrations` batch's flip to `NodeNext`.
 - **Declaration emit is consumer-owned** — since `Plan: Externalize Esbuild Config` removed the emit presets, every `esbuild/` package needs `build.config.mjs` plus `postBuildPlugin` running `tsc --emitDeclarationOnly`.
-- **The `0.2.0` release is authored but not published** — `esbuild/` and `vite/` exist untracked and are documented in `$TSCONFIG/README.md`, while `$TSCONFIG/_guide.md` still lists `cli/` and `libs/` as transitional, and `$PROJECT/architecture/design/typescript.md` and `$PROJECT/README.md` carry further traces. The `cli/` and `libs/` presets still need deleting and `0.2.0` still needs publishing.
+- **`0.2.0` ships the new presets; `cli/` and `libs/` are still to delete** — `esbuild/`, `vite/`, and `monorepo/` are published in `0.2.0`, while `$PROJECT/architecture/design/typescript.md` and `$PROJECT/README.md` still carry transitional traces. The `cli/` and `libs/` presets still need deleting in the breaking `0.3.0` release.
 
 ### Decisions
 
 - **Classify by consumers, not folders** — Node-consumed packages use the `esbuild/` config; bundler-consumed packages use the `vite/` config, chosen according to consumer build tool.
 - **Inventory before migration** — no package changes until the matrix exists; it is both the to-do list and the effort estimate.
 - **Pilot the `vite to esbuild migrations` batch before rolling it out** — one `libs/` → `esbuild/` migration first; its recipe is replayed by the rest of the batch, and gaps escalate to a re-pilot.
+- **Consumer roots move to `monorepo/`** — the `workspace/` root preset is superseded by `monorepo/` for consumer repositories; `workspace/` stays published while roots migrate.
 - **One complete checkout per commit** — each migration commit is independently verifiable and revertable.
 - **Transitional presets stay published until the matrix clears** — removal is a breaking release, not a prerequisite.
+- **Small iterations carry inline instructions** — `migrate-monorepo-roots`, `rename-vite-configs`, and `config-cleanup` keep their steps in the plan and report back in chat, sparing a separate instruction and report file.
 
 ### Knowledge to Update
 
-- `$TSCONFIG/CHANGELOG.md` — `esbuild/` and `vite/` configs added; `cli/` and `libs/` retired in the `0.2.0` entry.
+- `$TSCONFIG/CHANGELOG.md` — `esbuild/`, `vite/`, and `monorepo/` added in `0.2.0`; `cli/` and `libs/` retired in `0.3.0`.
 - `$TSCONFIG/_guide.md` — layout and consumer-build-tool table after removal.
 - `$PROJECT/architecture/design/typescript.md` — drop the transitional preset rows; match the shared-config ADR's consumer-build-tool scoping.
 - `$PROJECT/README.md` — preset guidance for new packages.
@@ -593,7 +665,9 @@ npm run ci # lint, test and build
 ### Follow Ups
 
 - **Declaration-emit preset** — decide whether `Plan: Externalize Esbuild Config`'s follow-up ships a documented `tsc --emitDeclarationOnly` preset or stays a recipe; the pilot step of the `vite to esbuild migrations` batch feeds this decision.
-- **Publish `@noodlestan/tsconfig@0.2.0`** — the breaking release produced by the `config cleanup` batch, whose `UNPUBLISHED` changelog entry is already authored.
+- **Publish `@noodlestan/tsconfig@0.2.0`** — the additive release shipping `esbuild/`, `vite/`, and `monorepo/`, produced by `ship-consumer-configs`.
+- **Publish `@noodlestan/tsconfig@0.3.0`** — the breaking release that retires `cli/` and `libs/`, produced by `config cleanup`.
+- **Retire `workspace/`** — decide when the legacy root preset can be unpublished once consumer roots have moved to `monorepo/`.
 
 ### Feedback
 
