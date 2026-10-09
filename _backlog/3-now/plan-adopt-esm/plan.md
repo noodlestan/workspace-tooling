@@ -179,15 +179,15 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 ## Items:
 
-| Iteration / Instructions                                                                                | Status  |
-| ------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `DONE`  |
-| Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE`  |
-| Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `READY` |
-| Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `READY` |
-| Iteration: Rename Vite Configs (inline instructions)                                                    | `READY` |
-| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `READY` |
-| Iteration: Config Cleanup (inline instructions)                                                         | `READY` |
+| Iteration / Instructions                                                                                | Status    |
+| ------------------------------------------------------------------------------------------------------- | --------- |
+| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `DONE`    |
+| Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE`    |
+| Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `WORKING` |
+| Iteration: Rename Vite Configs (inline instructions)                                                    | `READY`   |
+| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `READY`   |
+| Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `READY`   |
+| Iteration: Config Cleanup (inline instructions)                                                         | `READY`   |
 
 ### Iteration: Inventory Distribution Matrix
 
@@ -349,7 +349,7 @@ configs({checkout}): Move the root tsconfig to `@noodlestan/tsconfig/monorepo`.
 
 **Id:** `migrate-clis`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Instructions:** `./plan-adopt-esm/instructions/migrate-clis.md`
 
@@ -373,9 +373,13 @@ configs({checkout}): Move the root tsconfig to `@noodlestan/tsconfig/monorepo`.
 
 #### Commits:
 
-| ID             | Repository / Checkout / Branch                       | Policy   | Hash    | Status     |
-| -------------- | ---------------------------------------------------- | -------- | ------- | ---------- |
-| `migrate-clis` | `{checkout}` / `$CHECKOUTS/{checkout}` / `adopt-esm` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+| ID             | Repository / Checkout / Branch                  | Policy   | Hash      | Status      |
+| -------------- | ----------------------------------------------- | -------- | --------- | ----------- |
+| `migrate-clis` | Art JS / `$CHECKOUTS/art-js` / `main`           | `NOPUSH` | `a35b770` | `COMMITTED` |
+| `migrate-clis` | Art Lib / `$CHECKOUTS/art-lib` / `main`         | `NOPUSH` | `d751cf8` | `COMMITTED` |
+| `migrate-clis` | Art MD / `$CHECKOUTS/art-md` / `main`           | `NOPUSH` | `8a24d1a` | `COMMITTED` |
+| `migrate-clis` | Art Work / `$CHECKOUTS/art-work` / `main`       | `NOPUSH` | `da2ddf5` | `COMMITTED` |
+| `migrate-clis` | Purrception / `$CHECKOUTS/purrception` / `main` | `NOPUSH` | `fcd5f84` | `COMMITTED` |
 
 One commit per matrix row. Message template:
 
@@ -391,6 +395,8 @@ migrate({checkout}): Move the `clis` batch to `@noodlestan/tsconfig/esbuild`.
 - Replace the `cli/` preset with the `esbuild/` config and declare `"type": "module"`.
 - Add explicit `.js` import extensions and a consumer-owned `build.config.mjs`.
 ```
+
+**Notes:** 9 of 10 `clis` rows delivered (5 checkouts, one commit each, merged to `main`). `no-comply/cli/meta-extract` is deferred — blocked on `@purrception/*` libs being NodeNext-consumable; unblocked by `migrate-vite-to-esbuild` migrating `purrception/libs/lang-ts` and `purrception/libs/primitives`.
 
 ### Iteration: Rename Vite Configs
 
@@ -540,11 +546,11 @@ configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
 
 ### Next
 
-`ship-consumer-configs` and `inventory-distribution-matrix` are `DONE`; `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets, and `$MATRIX` lists 47 migrating rows across 4 batches (10 `clis`, 17 `vite renames`, 8 `vite to esbuild migrations`, 12 `monorepo roots`) plus 12 excluded configs. Execute `migrate-monorepo-roots` next — the `monorepo roots` batch — then the remaining migration batches follow the matrix order, and `config-cleanup` closes the plan.
+`ship-consumer-configs` and `inventory-distribution-matrix` are `DONE`; `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets, and `$MATRIX` lists 47 migrating rows across 4 batches (10 `clis`, 14 `vite renames`, 11 `vite to esbuild migrations`, 12 `monorepo roots`) plus 12 excluded configs. Execution is reordered (delegator decision): `migrate-clis` and `migrate-vite-to-esbuild` run before `migrate-monorepo-roots`, because `0.2.0` removed the `cli/tsconfig.esm.json` and `cli/tsconfig.cjs.json` presets and the `clis`/`vite-to-esbuild` batches move those packages off them first. `migrate-clis` is 9/10 done — `no-comply/cli/meta-extract` is deferred until `migrate-vite-to-esbuild` migrates the purrception libs it consumes. Three rows were reclassified from `vite renames` to `vite to esbuild` (delegator decision): `no-comply/libs/meta`, `purrception/libs/lang-ts`, `purrception/libs/primitives` — only bundler-only SolidJS packages stay on `vite renames`. Execute `rename-vite-configs` next, then `migrate-vite-to-esbuild` (which unblocks the deferred `no-comply` cli row), then `migrate-monorepo-roots`, and `config-cleanup` closes the plan.
 
 ### Blockers
 
-- None.
+- **no-comply/cli/meta-extract** deferred — blocked on `@purrception/*` libs being NodeNext-consumable; unblocked by `migrate-vite-to-esbuild` migrating `purrception/libs/lang-ts` and `purrception/libs/primitives`.
 
 ---
 
