@@ -28,6 +28,12 @@ Records are co-located with the resources they describe in `_records/` directori
 - **Package:** `_records/package.art`
 - **NPM Deployment:** `_records/npm-deployment.art`
 
+## Conventions
+
+This package follows strict conventions.
+
+::READ `../../_guide.md` for repository-wide conventions.
+
 ## Operating Instructions
 
 ### Operating Instructions: Setting Up

@@ -32,6 +32,8 @@
     "esbuild-plugin-file-path-extensions": "^2.1.4"
   },
   "devDependencies": {
+    "@noodlestan/conventions-typescript": "0.1.0",
+    "@noodlestan/conventions-unit-tests": "0.1.0",
     "@noodlestan/eslint-config": "0.0.8",
     "@types/node": "24.13.0",
     "eslint": "8.57.1",
