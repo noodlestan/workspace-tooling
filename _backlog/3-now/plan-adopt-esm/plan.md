@@ -186,7 +186,7 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 | Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `WORKING` |
 | Iteration: Rename Vite Configs (inline instructions)                                                    | `WORKING` |
 | Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `WORKING` |
-| Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `READY`   |
+| Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `WORKING` |
 | Iteration: Config Cleanup (inline instructions)                                                         | `READY`   |
 
 ### Iteration: Inventory Distribution Matrix
@@ -302,7 +302,7 @@ configs(tsconfig): Add the `monorepo/` root preset and bump to `0.2.0`.
 
 **Id:** `migrate-monorepo-roots`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Purpose:** Execute the `monorepo roots` batch — every repository root moves onto `@noodlestan/tsconfig/monorepo/tsconfig.json`.
 
@@ -326,9 +326,18 @@ configs(tsconfig): Add the `monorepo/` root preset and bump to `0.2.0`.
 
 #### Commits:
 
-| ID                       | Repository / Checkout / Branch                       | Policy   | Hash    | Status     |
-| ------------------------ | ---------------------------------------------------- | -------- | ------- | ---------- |
-| `migrate-monorepo-roots` | `{checkout}` / `$CHECKOUTS/{checkout}` / `adopt-esm` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+| ID                       | Repository / Checkout / Branch                             | Policy   | Hash      | Status      |
+| ------------------------ | ---------------------------------------------------------- | -------- | --------- | ----------- |
+| `migrate-monorepo-roots` | Art Lib / `$CHECKOUTS/art-lib` / `adopt-esm`               | `NOPUSH` | `43b7eed` | `COMMITTED` |
+| `migrate-monorepo-roots` | Art Work / `$CHECKOUTS/art-work` / `adopt-esm`             | `NOPUSH` | `c274778` | `COMMITTED` |
+| `migrate-monorepo-roots` | Art MD / `$CHECKOUTS/art-md` / `adopt-esm`                 | `NOPUSH` | `417ef4c` | `COMMITTED` |
+| `migrate-monorepo-roots` | Purrception / `$CHECKOUTS/purrception` / `adopt-esm`       | `NOPUSH` | `58c4f08` | `COMMITTED` |
+| `migrate-monorepo-roots` | Purrpose / `$CHECKOUTS/purrpose` / `adopt-esm`             | `NOPUSH` | `4b0c393` | `COMMITTED` |
+| `migrate-monorepo-roots` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm`           | `NOPUSH` | `2df4d85` | `COMMITTED` |
+| `migrate-monorepo-roots` | Artificials / `$CHECKOUTS/artificials` / `adopt-esm`       | `NOPUSH` | `53fa663` | `COMMITTED` |
+| `migrate-monorepo-roots` | Artisans / `$CHECKOUTS/artisans` / `adopt-esm`             | `NOPUSH` | `29740d3` | `COMMITTED` |
+| `migrate-monorepo-roots` | Purrfect / `$CHECKOUTS/purrfect` / `adopt-esm`             | `NOPUSH` | `825852c` | `COMMITTED` |
+| `migrate-monorepo-roots` | Noodlestan Web / `$CHECKOUTS/noodlestan-web` / `adopt-esm` | `NOPUSH` | `1be4630` | `COMMITTED` |
 
 One commit per matrix row. Message template:
 
@@ -344,6 +353,8 @@ configs({checkout}): Move the root tsconfig to `@noodlestan/tsconfig/monorepo`.
 - Replace the root `extends` with the `monorepo/` preset.
 - Drop the compiler options the preset now owns.
 ```
+
+**Notes:** 11 of 12 `monorepo roots` rows delivered (10 commits on `adopt-esm`; `art-js` already extended `monorepo/` at `^0.2.0` via the earlier `clis` commit `ac45852`, so no new commit — row marked `DONE`). `no-comply` root row is blocked — its checkout cannot pass `npm run ci` because `cli/meta-extract` still extends the removed `cli/` esm/cjs presets; unblocked by the deferred `meta-extract` cli row.
 
 ### Iteration: Migrate Clis
 
@@ -567,6 +578,7 @@ configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
 - **no-comply/cli/meta-extract** deferred — blocked on `@purrception/*` libs being NodeNext-consumable; unblocked by `migrate-vite-to-esbuild` migrating `purrception/libs/lang-ts` and `purrception/libs/primitives`.
 - **no-comply `vite renames` rows (6)** deferred — blocked on `cli/meta-extract` migration; unblocked by `migrate-vite-to-esbuild` + the deferred `meta-extract` cli row.
 - **no-comply/libs/meta** (`vite to esbuild`) blocked — `npm run ci` fails at baseline on `cli/meta-extract` (extends removed `cli/tsconfig.esm.json`), and under `NodeNext` the published `@purrception/*@0.0.11` extensionless re-exports collapse meta's types (`TS2305`). Unblocked by migrating `meta-extract` AND a new purrception release shipping NodeNext-consumable artifacts.
+- **no-comply root** (`monorepo roots`) blocked — checkout cannot pass `npm run ci` because `cli/meta-extract` still extends the removed `cli/` esm/cjs presets; unblocked by the deferred `meta-extract` cli row.
 
 ---
 
