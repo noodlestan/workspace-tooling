@@ -184,7 +184,7 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 | Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `DONE`    |
 | Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE`    |
 | Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `WORKING` |
-| Iteration: Rename Vite Configs (inline instructions)                                                    | `READY`   |
+| Iteration: Rename Vite Configs (inline instructions)                                                    | `WORKING` |
 | Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `READY`   |
 | Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `READY`   |
 | Iteration: Config Cleanup (inline instructions)                                                         | `READY`   |
@@ -402,7 +402,7 @@ migrate({checkout}): Move the `clis` batch to `@noodlestan/tsconfig/esbuild`.
 
 **Id:** `rename-vite-configs`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Purpose:** Execute the `vite renames` batch — `libs/` packages consumed by a bundler move to the `vite/` config.
 
@@ -425,9 +425,16 @@ migrate({checkout}): Move the `clis` batch to `@noodlestan/tsconfig/esbuild`.
 
 #### Commits:
 
-| ID                    | Repository / Checkout / Branch                       | Policy   | Hash    | Status     |
-| --------------------- | ---------------------------------------------------- | -------- | ------- | ---------- |
-| `rename-vite-configs` | `{checkout}` / `$CHECKOUTS/{checkout}` / `adopt-esm` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+| ID                    | Repository / Checkout / Branch                   | Policy   | Hash      | Status      |
+| --------------------- | ------------------------------------------------ | -------- | --------- | ----------- |
+| `rename-vite-configs` | Purrpose / `$CHECKOUTS/purrpose` / `adopt-esm`   | `NOPUSH` | `ab1d486` | `COMMITTED` |
+| `rename-vite-configs` | Purrpose / `$CHECKOUTS/purrpose` / `adopt-esm`   | `NOPUSH` | `e397a8c` | `COMMITTED` |
+| `rename-vite-configs` | Purrpose / `$CHECKOUTS/purrpose` / `adopt-esm`   | `NOPUSH` | `1eb1d45` | `COMMITTED` |
+| `rename-vite-configs` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm` | `NOPUSH` | `401ed02` | `COMMITTED` |
+| `rename-vite-configs` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm` | `NOPUSH` | `f25073c` | `COMMITTED` |
+| `rename-vite-configs` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm` | `NOPUSH` | `80a571a` | `COMMITTED` |
+| `rename-vite-configs` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm` | `NOPUSH` | `fff54fd` | `COMMITTED` |
+| `rename-vite-configs` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm` | `NOPUSH` | `03834fa` | `COMMITTED` |
 
 One commit per matrix row. Message template:
 
@@ -443,6 +450,8 @@ configs({checkout}): Swap the `libs/` preset for `@noodlestan/tsconfig/vite`.
 - Replace the `extends` value with the matching `vite/` config.
 - Confirm the diff contains only the preset swap.
 ```
+
+**Notes:** 8 of 14 `vite renames` rows delivered (purrpose 3, purrtrait 5, one commit each on `adopt-esm`). The 6 no-comply rows are deferred — blocked on `cli/meta-extract` migration (the `^0.2.0` bump removes the `cli/` esm/cjs presets it still extends); unblocked by `migrate-vite-to-esbuild` + the deferred `meta-extract` cli row.
 
 ### Iteration: Migrate Vite to Esbuild
 
@@ -551,6 +560,7 @@ configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
 ### Blockers
 
 - **no-comply/cli/meta-extract** deferred — blocked on `@purrception/*` libs being NodeNext-consumable; unblocked by `migrate-vite-to-esbuild` migrating `purrception/libs/lang-ts` and `purrception/libs/primitives`.
+- **no-comply `vite renames` rows (6)** deferred — blocked on `cli/meta-extract` migration; unblocked by `migrate-vite-to-esbuild` + the deferred `meta-extract` cli row.
 
 ---
 
