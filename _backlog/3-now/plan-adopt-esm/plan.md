@@ -39,8 +39,6 @@ Scope is `Package: TS Config` plus the consumer checkouts and their monorepo roo
 
 - `./plan__adopt-esm-matrix.md` (Matrix) — Distribution migration matrix produced by Iteration: Inventory Distribution Matrix.
 
-> Note: the matrix does not exist yet — it is the expected output of the READY `inventory-distribution-matrix` iteration (forward reference).
-
 ## Context
 
 ### Upstream Work
@@ -183,7 +181,7 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 | Iteration / Instructions                                                                                | Status  |
 | ------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `READY` |
+| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `DONE`  |
 | Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE`  |
 | Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `READY` |
 | Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `READY` |
@@ -195,7 +193,7 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 **Id:** `inventory-distribution-matrix`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Instructions:** `./plan-adopt-esm/instructions/inventory-distribution-matrix.md`
 
@@ -220,9 +218,9 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 #### Commits:
 
-| ID       | Repository / Checkout / Branch          | Policy   | Hash    | Status     |
-| -------- | --------------------------------------- | -------- | ------- | ---------- |
-| `matrix` | Workspace Tooling / `$PROJECT` / `main` | `NOPUSH` | `(TBD)` | `AUTHORED` |
+| ID       | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| -------- | --------------------------------------- | -------- | --------- | ----------- |
+| `matrix` | Workspace Tooling / `$PROJECT` / `main` | `NOPUSH` | `2460d0b` | `COMMITTED` |
 
 ##### Commit: `matrix`
 
@@ -542,7 +540,7 @@ configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
 
 ### Next
 
-`ship-consumer-configs` is `DONE` and `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets. All seven iterations are now `READY` or `DONE`: three carry inline instructions and four have instruction files. Execute `inventory-distribution-matrix` next — it produces the matrix every migration batch reads — then the four migration batches follow the matrix order, and `config-cleanup` closes the plan.
+`ship-consumer-configs` and `inventory-distribution-matrix` are `DONE`; `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets, and `$MATRIX` lists 47 migrating rows across 4 batches (10 `clis`, 17 `vite renames`, 8 `vite to esbuild migrations`, 12 `monorepo roots`) plus 12 excluded configs. Execute `migrate-monorepo-roots` next — the `monorepo roots` batch — then the remaining migration batches follow the matrix order, and `config-cleanup` closes the plan.
 
 ### Blockers
 
