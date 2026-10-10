@@ -2,7 +2,7 @@
 
 **ID:** `adopt-esm`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -179,15 +179,16 @@ Execution occurs from `$WORKSPACE/`. Work in `$PROJECT` runs on branch `main`; c
 
 ## Items:
 
-| Iteration / Instructions                                                                                | Status  |
-| ------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `DONE`  |
-| Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE`  |
-| Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `DONE`  |
-| Iteration: Rename Vite Configs (inline instructions)                                                    | `DONE`  |
-| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `DONE`  |
-| Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `DONE`  |
-| Iteration: Config Cleanup (inline instructions)                                                         | `READY` |
+| Iteration / Instructions                                                                                | Status |
+| ------------------------------------------------------------------------------------------------------- | ------ |
+| Iteration: Inventory Distribution Matrix `plan-adopt-esm/instructions/inventory-distribution-matrix.md` | `DONE` |
+| Iteration: Ship Consumer Configs `plan-adopt-esm/instructions/ship-consumer-configs.md`                 | `DONE` |
+| Iteration: Migrate Clis `plan-adopt-esm/instructions/migrate-clis.md`                                   | `DONE` |
+| Iteration: Rename Vite Configs (inline instructions)                                                    | `DONE` |
+| Iteration: Migrate Vite to Esbuild `plan-adopt-esm/instructions/migrate-vite-to-esbuild.md`             | `DONE` |
+| Iteration: Migrate Monorepo Roots (inline instructions)                                                 | `DONE` |
+| Iteration: Config Cleanup (inline instructions)                                                         | `DONE` |
+| Iteration: Standardize Declaration Emit (manual)                                                        | `DONE` |
 
 ### Iteration: Inventory Distribution Matrix
 
@@ -530,7 +531,7 @@ migrate({checkout}): Move the `vite to esbuild` batch to `NodeNext`.
 
 **Id:** `config-cleanup`
 
-**Status:** `DELIVERED`
+**Status:** `DONE`
 
 **Purpose:** Execute the `config cleanup` batch — stop shipping the presets the ecosystem has migrated away from.
 
@@ -575,11 +576,48 @@ configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
 
 **Policy:** `NOCOMMIT` — `0.3.0` ships as a breaking `@noodlestan/tsconfig` release; stage the changes and hand back for crew commit and publish.
 
+### Iteration: Standardize Declaration Emit
+
+**Id:** `standardize-declaration-emit`
+
+**Status:** `DONE`
+
+**Purpose:** Standardize declaration emit across the migrated `esbuild/` packages and pin the `@noodlestan/*` devDependencies to exact versions.
+
+**Description:** Manual work executed by the delegator after the migration batches landed. Eliminates the per-package `tsconfig.types.json` by emitting declarations via `tsc --project tsconfig.build.json --emitDeclarationOnly`, adds `exclude: ["**/*.test.ts"]` to every `tsconfig.build.json` (fixing a pre-existing bug where `art-md/libs/*` published `.test.d.ts` files), and pins `@noodlestan/esbuild` and `@noodlestan/tsconfig` to exact versions across all consumer checkouts. `art-work/cli/work` keeps its `tsconfig.types.json` (its `include: ["src/config/"]` restriction is genuinely needed). All 12 consumer `adopt-esm` branches were then merged to `main` (9 fast-forward, 3 force-push after material-identity verification).
+
+**Changes:**
+
+- Delete `tsconfig.types.json` from 20 packages across 6 checkouts; emit declarations via `tsc --project tsconfig.build.json --emitDeclarationOnly`.
+- Add `exclude: ["**/*.test.ts"]` to every `tsconfig.build.json` (including `art-work/cli/work`, which keeps its `tsconfig.types.json`).
+- Update `build.config.mjs` `postBuildPlugin` args accordingly.
+- Pin `@noodlestan/esbuild` and `@noodlestan/tsconfig` to exact versions in all 12 consumer checkouts.
+- Merge all 12 consumer `adopt-esm` branches to `main`.
+
+#### Commits:
+
+| ID                             | Repository / Checkout / Branch                        | Policy   | Hash      | Status      |
+| ------------------------------ | ----------------------------------------------------- | -------- | --------- | ----------- |
+| `standardize-declaration-emit` | Art JS / `$CHECKOUTS/art-js` / `main`                 | `NOPUSH` | `947720f` | `COMMITTED` |
+| `standardize-declaration-emit` | Art Lib / `$CHECKOUTS/art-lib` / `main`               | `NOPUSH` | `e014c33` | `COMMITTED` |
+| `standardize-declaration-emit` | Art MD / `$CHECKOUTS/art-md` / `main`                 | `NOPUSH` | `cb375eb` | `COMMITTED` |
+| `standardize-declaration-emit` | Art Work / `$CHECKOUTS/art-work` / `main`             | `NOPUSH` | `a5f196d` | `COMMITTED` |
+| `standardize-declaration-emit` | Artificials / `$CHECKOUTS/artificials` / `main`       | `NOPUSH` | `0435892` | `COMMITTED` |
+| `standardize-declaration-emit` | Artisans / `$CHECKOUTS/artisans` / `main`             | `NOPUSH` | `8369f47` | `COMMITTED` |
+| `standardize-declaration-emit` | No Comply / `$CHECKOUTS/no-comply` / `main`           | `NOPUSH` | `4db4ae9` | `COMMITTED` |
+| `standardize-declaration-emit` | Noodlestan Web / `$CHECKOUTS/noodlestan-web` / `main` | `NOPUSH` | `02da891` | `COMMITTED` |
+| `standardize-declaration-emit` | Purrception / `$CHECKOUTS/purrception` / `main`       | `NOPUSH` | `b2b077c` | `COMMITTED` |
+| `standardize-declaration-emit` | Purrfect / `$CHECKOUTS/purrfect` / `main`             | `NOPUSH` | `1a1e07a` | `COMMITTED` |
+| `standardize-declaration-emit` | Purrpose / `$CHECKOUTS/purrpose` / `main`             | `NOPUSH` | `674b802` | `COMMITTED` |
+| `standardize-declaration-emit` | Purrtrait / `$CHECKOUTS/purrtrait` / `main`           | `NOPUSH` | `cbe530a` | `COMMITTED` |
+
+**Notes:** Executed manually by the delegator (not delegated to workers). 9 checkouts merged via fast-forward; art-js, art-work, and purrception required force-push after verifying adopt-esm-final is a material superset of main (the only difference in the clis commits was a transient caret on `@noodlestan/esbuild`, resolved to pinned in the final state; art-work additionally added `rollup`). `no-comply` also carries the earlier `d858d93` (remove redundant overrides) on `main`.
+
 ## Work
 
 ### Next
 
-`ship-consumer-configs` and `inventory-distribution-matrix` are `DONE`; `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets, and `$MATRIX` lists 47 migrating rows across 4 batches (10 `clis`, 14 `vite renames`, 11 `vite to esbuild migrations`, 12 `monorepo roots`) plus 12 excluded configs. Execution is reordered (delegator decision): `migrate-clis` and `migrate-vite-to-esbuild` run before `migrate-monorepo-roots`, because `0.2.0` removed the `cli/tsconfig.esm.json` and `cli/tsconfig.cjs.json` presets and the `clis`/`vite-to-esbuild` batches move those packages off them first. `migrate-clis` is 9/10 done — `no-comply/cli/meta-extract` is deferred until `migrate-vite-to-esbuild` migrates the purrception libs it consumes. Three rows were reclassified from `vite renames` to `vite to esbuild` (delegator decision): `no-comply/libs/meta`, `purrception/libs/lang-ts`, `purrception/libs/primitives` — only bundler-only SolidJS packages stay on `vite renames`. All iterations `DONE`. `@noodlestan/tsconfig@0.2.1` published (commit `ffbeaac`) — removes `cli/`, `libs/`, and `workspace/` presets. Consumer checkout `adopt-esm` branches ready for merge to `main`.
+All 7 iterations `DONE`. `@noodlestan/tsconfig@0.2.1` published (commit `ffbeaac`) — removes `cli/`, `libs/`, and `workspace/` presets. All 47 matrix rows migrated and all 12 consumer `adopt-esm` branches merged to `main` (9 fast-forward, 3 force-push). Declaration emit standardized (extra manual iteration `standardize-declaration-emit`) and `@noodlestan/*` devDependencies pinned. Plan complete.
 
 ### Blockers
 

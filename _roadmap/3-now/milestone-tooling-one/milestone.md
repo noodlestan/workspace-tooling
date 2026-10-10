@@ -212,7 +212,7 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 | 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                   | `DRAFT`   |
 | 2     | Plan: Distribute Tooling Decisions                                                                  | -         |
 | 3     | Plan: Adopt Own Configs `$PROJECT/_backlog/4-next/plan-adopt-own-configs/plan.md`                   | `WORKING` |
-| 3     | Plan: Adopt ESM `$PROJECT/_backlog/3-now/plan-adopt-esm/plan.md`                                    | `WORKING` |
+| 3     | Plan: Adopt ESM `$PROJECT/_backlog/1-done/plan-adopt-esm/plan.md`                                   | `DONE`    |
 | 3     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`           | `DRAFT`   |
 | 3     | Plan: Adopt Tooling Decisions                                                                       | -         |
 
@@ -220,7 +220,7 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 
 ### Next
 
-`Plan: Adopt ESM` is `WORKING` — `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets and its remaining iterations await their instructions files. Run **Plan Iterations** on `Plan: Adopt Prettier Config` and `Plan: Add Astro Support` to refine their draft iterations, then migrate the remaining consumer checkouts to the published Prettier config and wire Astro linting into the pilot.
+`Plan: Adopt ESM` is `DONE` — `@noodlestan/tsconfig@0.2.1` ships the `esbuild/`, `vite/`, and `monorepo/` presets, all 47 matrix rows migrated, and all 12 consumer `adopt-esm` branches merged to `main`. Run **Plan Iterations** on `Plan: Adopt Prettier Config` and `Plan: Add Astro Support` to refine their draft iterations, then migrate the remaining consumer checkouts to the published Prettier config and wire Astro linting into the pilot.
 
 ### Blockers
 
