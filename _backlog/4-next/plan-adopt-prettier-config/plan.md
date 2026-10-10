@@ -8,9 +8,9 @@
 
 **Skill:** `write-plan`
 
-**Purpose:** The two Prettier config packages are scaffolded but their release artefacts are still unstaged and unpublished, and every Noodlestan repository except `$WEB` still hand-writes — or simply lacks — its own Prettier config.
+**Purpose:** The two Prettier config packages are scaffolded, released at `0.0.1`, and published; every Noodlestan repository except `$WEB` still hand-writes — or simply lacks — its own Prettier config.
 
-**Description:** Plan record with 4 draft iterations spanning `Package: Prettier Config`, `Package: Prettier Config Astro`, and every consumer checkout, executed from `$WORKSPACE`.
+**Description:** Plan record with 4 iterations spanning `Package: Prettier Config`, `Package: Prettier Config Astro`, and every consumer checkout, executed from `$WORKSPACE`. The release-artefact iteration is already `DONE`; the remaining work is inventory, ecosystem adoption, and documentation.
 
 ## Mandatory Reading
 
@@ -33,7 +33,7 @@
 
 ## Summary
 
-Land both Prettier config packages' release artefacts, let `Plan: Add Prettier Config` publish them at `0.0.1` and pin the pilot consumer, then replace every repository's hand-written or missing Prettier config with the `prettier` field pointing at `@noodlestan/prettier-config`.
+Both Prettier config packages are released at `0.0.1` and published, and the pilot consumer `$WEB` is pinned. The remaining work is to replace every repository's hand-written or missing Prettier config with the `prettier` field pointing at `@noodlestan/prettier-config`.
 
 Scope is both config packages, `$PROJECT` itself, and the consumer checkouts enumerated by the inventory iteration; upstream is `Plan: Add Prettier Config`, which delivered the packages and the proven `$WEB` pilot.
 
@@ -45,12 +45,12 @@ Scope is both config packages, `$PROJECT` itself, and the consumer checkouts enu
 
 ### Upstream Work
 
-| Kind                | Path                                                                      | Role                                                                                                                                                                                                                       |
-| ------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Plan                | `$PROJECT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md` | `DONE`; created both packages and proved the base config in `$WEB`; owns publishing `0.0.1` and pinning `$WEB` through its `publish-and-pin` iteration — this plan lands the release artefacts that iteration needs first. |
-| ADR                 | `$PROJECT/architecture/adr/shared-config.md`                              | Prettier as both an ESLint rule and a standalone check; config ships as a versioned package.                                                                                                                               |
-| Milestone           | `$ROADMAP/3-now/milestone-tooling-one/milestone.md`                       | Coordinates this plan with the other tooling plans.                                                                                                                                                                        |
-| Uncommitted changes | `git status` in `$PROJECT`                                                | The unstaged CHANGELOG, `files`, and fixture changes are this plan's release material.                                                                                                                                     |
+| Kind              | Path                                                                      | Role                                                                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Plan              | `$PROJECT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md` | `DONE`; created both packages, proved the base config in `$WEB`, published `0.0.1`, and pinned `$WEB`. Its `publish-and-pin` dependency is satisfied. |
+| ADR               | `$PROJECT/architecture/adr/shared-config.md`                              | Prettier as both an ESLint rule and a standalone check; config ships as a versioned package.                                                          |
+| Milestone         | `$ROADMAP/3-now/milestone-tooling-one/milestone.md`                       | Coordinates this plan with the other tooling plans.                                                                                                   |
+| Committed release | `git log` in `$PROJECT` (`e6105b9`, `3afa85a`)                            | The release artefacts (CHANGELOG, `files`, fixture) are committed and published at `0.0.1`; nothing remains unstaged.                                 |
 
 ### Required Skills
 
@@ -111,7 +111,7 @@ Scope is both config packages, `$PROJECT` itself, and the consumer checkouts enu
 
 ## Scope
 
-Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefacts land first, upstream publishes and pins, the inventory fixes the adoption list, and each repository adopts the base config with one complete commit.
+Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefacts are landed and published, the inventory fixes the adoption list, and each repository adopts the base config with one complete commit.
 
 ### (Scope) Project: Noodlestan Workspace Tooling
 
@@ -127,14 +127,14 @@ Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefac
 
 **Changes:**
 
-- Land both packages' release artefacts (changelogs, `files`, fixture) for upstream's `publish-and-pin` to publish.
+- `DONE` — both packages' release artefacts (changelogs, `files`, fixture) are landed and published at `0.0.1`.
 - Replace the root `$PROJECT/.prettierrc` with the `prettier` field, accepting the documented `*.mjs` re-indent.
 
 ### (Scope) Package: Prettier Config
 
 **Record:** `$PRETTIER/_records/package.art`
 
-**Role:** — Changes required. Holds the canonical rules; release artefacts are unstaged.
+**Role:** — Changes required. Holds the canonical rules; release artefacts are committed and published.
 
 **Partial:**
 
@@ -145,14 +145,14 @@ Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefac
 
 **Changes:**
 
-- Land the rewritten `CHANGELOG.md` `0.0.1` entry describing the shipped rules and both entry points.
-- Confirm `test/example.mjs` is formatted by the package's own rules (tabs in the `*.mjs` override) and that the `ci` script leaves fixtures unchanged.
+- `DONE` — the rewritten `CHANGELOG.md` `0.0.1` entry describing the shipped rules and both entry points is committed (`e6105b9`).
+- `DONE` — `test/example.mjs` is formatted by the package's own rules (tabs in the `*.mjs` override) and the `ci` script leaves fixtures unchanged.
 
 ### (Scope) Package: Prettier Config Astro
 
 **Record:** `$PRETTIER_ASTRO/_records/package.art`
 
-**Role:** — Changes required. Release artefacts are unstaged.
+**Role:** — Changes required. Release artefacts are committed and published.
 
 **Partial:**
 
@@ -163,8 +163,8 @@ Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefac
 
 **Changes:**
 
-- Land the rewritten `CHANGELOG.md` `0.0.1` entry describing the Astro override, the base spread, and the peer dependency.
-- Drop `_guide.md` from `files` in `package.json`, and confirm whether the base package should match.
+- `DONE` — the rewritten `CHANGELOG.md` `0.0.1` entry describing the Astro override, the base spread, and the peer dependency is committed (`3afa85a`).
+- `DONE` — `_guide.md` is dropped from `files` in `package.json`; the base package matches.
 
 ### (Scope) Consumer Checkouts: Prettier Adoption
 
@@ -196,7 +196,7 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 | Iteration / Instructions               | Status  |
 | -------------------------------------- | ------- |
-| Iteration: Finalise Release Artefacts  | `DRAFT` |
+| Iteration: Finalise Release Artefacts  | `DONE`  |
 | Iteration: Inventory Prettier Configs  | `DRAFT` |
 | Iteration: Adopt Base Config Ecosystem | `DRAFT` |
 | Iteration: Document Adoption           | `DRAFT` |
@@ -205,18 +205,18 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Id:** `finalise-release-artefacts`
 
-**Status:** `DRAFT`
+**Status:** `DONE`
 
-**Purpose:** Turn the unstaged polish into committed, publish-ready release artefacts.
+**Purpose:** Turn the unstaged polish into committed, publish-ready release artefacts. **Complete** — the artefacts are committed and published at `0.0.1`.
 
-**Description:** Land the four modified files: the rewritten `CHANGELOG.md` in both packages, the `files` change dropping `_guide.md` from the Astro package, and `test/example.mjs` re-indented to tabs by the shipped rules. This iteration changes no rules — it only makes the release description and fixtures match what the packages actually ship.
+**Description:** Land the four modified files: the rewritten `CHANGELOG.md` in both packages, the `files` change dropping `_guide.md` from the Astro package, and `test/example.mjs` re-indented to tabs by the shipped rules. This iteration changes no rules — it only makes the release description and fixtures match what the packages actually ship. **Complete** — committed in `e6105b9` (base) and `3afa85a` (Astro), published at `0.0.1`, `git diff HEAD` clean.
 
 **Changes:**
 
-- Commit `$PRETTIER/CHANGELOG.md` with the rewritten `0.0.1` prose covering base rules, tab override, and both entry points.
-- Commit `$PRETTIER_ASTRO/CHANGELOG.md` with the rewritten `0.0.1` prose covering the Astro override, base spread, and peer dependency.
-- Commit `$PRETTIER_ASTRO/package.json` with `_guide.md` removed from `files`; confirm whether `$PRETTIER/package.json` should match and align or record the reason.
-- Commit `$PRETTIER/test/example.mjs` re-indented to tabs; run `npm run ci` in both packages and confirm the fixtures are unchanged by a second run.
+- `DONE` — `$PRETTIER/CHANGELOG.md` committed with the rewritten `0.0.1` prose covering base rules, tab override, and both entry points.
+- `DONE` — `$PRETTIER_ASTRO/CHANGELOG.md` committed with the rewritten `0.0.1` prose covering the Astro override, base spread, and peer dependency.
+- `DONE` — `$PRETTIER_ASTRO/package.json` committed with `_guide.md` removed from `files`; the base package matches.
+- `DONE` — `$PRETTIER/test/example.mjs` committed re-indented to tabs; `npm run ci` passes in both packages with fixtures unchanged.
 
 **Dependencies:**
 
@@ -262,7 +262,7 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Dependencies:**
 
-- Iteration: Finalise Release Artefacts — the release artefacts must be committed before upstream can publish them.
+- Iteration: Finalise Release Artefacts — `DONE`; the release artefacts are committed and published at `0.0.1`.
 - `Plan: Add Prettier Config` — Iteration: Publish and Pin must have published `0.0.1`.
 - Iteration: Inventory Prettier Configs.
 
@@ -290,7 +290,7 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 ### Next
 
-All 4 iterations are `DRAFT`. Run **Plan Iterations** (`plan more`) to refine purposes, changes, and commit blueprints, then **Write Instructions** to produce delegatable instruction files. Sequencing: land the release artefacts, let upstream's `publish-and-pin` publish and pin, then adopt.
+`Finalise Release Artefacts` is `DONE` (release artefacts committed and published at `0.0.1`; upstream `publish-and-pin` satisfied). The remaining 3 iterations are `DRAFT`. Run **Plan Iterations** (`plan more`) to refine purposes, changes, and commit blueprints, then **Write Instructions** to produce delegatable instruction files. Sequencing: inventory the configs, adopt the base config ecosystem, then document adoption.
 
 ### Blockers
 
@@ -369,7 +369,7 @@ npm run ci # lint, test and build
 
 ### Evidence
 
-- **Release artefacts match the shipped rules** — after `Finalise Release Artefacts`, both package `ci` scripts pass twice in a row with no diff.
+- **Release artefacts match the shipped rules** — `Finalise Release Artefacts` is `DONE`; both package `ci` scripts pass twice in a row with no diff.
 - **Adopters run on released versions** — every adopted checkout installs `@noodlestan/prettier-config` at `0.0.1` from npm, not a symlink.
 - **Adoption diffs are explainable** — every per-checkout diff contains only the expected `*.mjs` re-indent; anything else is reported as a defect in `$PROJECT`.
 - **No hand-written configs remain** — a scan for `.prettierrc*` outside the config packages returns zero matches.
@@ -384,7 +384,7 @@ npm run ci # lint, test and build
 
 - **All repositories adopt** — inventory decides the variant and the expected diff, never whether to adopt.
 - **Release artefacts land before publish** — changelogs and fixtures are committed before upstream's publish run; nothing is back-filled after `npm run art-work publish`.
-- **Publishing stays upstream** — `Plan: Add Prettier Config`'s `publish-and-pin` runs the release; this plan lands the release artefacts first and adopts after, so no file and no npm gate is worked by both plans.
+- **Publishing stays upstream** — `Plan: Add Prettier Config`'s `publish-and-pin` ran the release; this plan landed the release artefacts first and adopts after, so no file and no npm gate is worked by both plans.
 - **One complete checkout per commit** — adoption commits are independently verifiable and revertable.
 - **The `*.mjs` re-indent is correct output** — a wider diff stops the migration and is judged as a defect in `$PROJECT` or a pre-existing divergence, never absorbed silently.
 
