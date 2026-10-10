@@ -27,8 +27,6 @@
 - `esbuild`
 - `vite`
 - `monorepo`
-- `cli`
-- `libs`
 - `workspace`
 
 **Language:** JSON

@@ -12,7 +12,7 @@ Esbuild CLI wrapper, ESLint config, and base TypeScript configs.
 | `@noodlestan/eslint-config`         | `configs/eslint-config`         | Noodlestan's opinionated style guide configuration (ESLint + Prettier).                                      |
 | `@noodlestan/prettier-config`       | `configs/prettier-config`       | Noodlestan's base Prettier formatting configuration.                                                         |
 | `@noodlestan/prettier-config-astro` | `configs/prettier-config-astro` | Prettier formatting configuration with Astro support.                                                        |
-| `@noodlestan/tsconfig`              | `configs/tsconfig`              | Base TypeScript configurations (libs and cli variants).                                                      |
+| `@noodlestan/tsconfig`              | `configs/tsconfig`              | Base TypeScript configurations (esbuild, vite, and monorepo presets).                                        |
 
 The declared namespaced esbuild bins are linked by npm as `esbuild-cli` and
 `esbuild-cli-watch`.

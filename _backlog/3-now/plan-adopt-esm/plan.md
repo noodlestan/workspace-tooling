@@ -449,6 +449,10 @@ migrate({checkout}): Move the `clis` batch to `@noodlestan/tsconfig/esbuild`.
 | `rename-vite-configs` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm` | `NOPUSH` | `fff54fd` | `COMMITTED` |
 | `rename-vite-configs` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm` | `NOPUSH` | `03834fa` | `COMMITTED` |
 | `rename-vite-configs` | No Comply / `$CHECKOUTS/no-comply` / `adopt-esm` | `NOPUSH` | `01346f6` | `COMMITTED` |
+| `rename-vite-configs` | No Comply / `$CHECKOUTS/no-comply` / `adopt-esm` | `NOPUSH` | `96f4646` | `COMMITTED` |
+| `rename-vite-configs` | No Comply / `$CHECKOUTS/no-comply` / `adopt-esm` | `NOPUSH` | `8533135` | `COMMITTED` |
+| `rename-vite-configs` | Purrtrait / `$CHECKOUTS/purrtrait` / `adopt-esm` | `NOPUSH` | `f0a8d29` | `COMMITTED` |
+| `rename-vite-configs` | Purrpose / `$CHECKOUTS/purrpose` / `adopt-esm`   | `NOPUSH` | `50acb45` | `COMMITTED` |
 
 One commit per matrix row. Message template:
 
@@ -526,7 +530,7 @@ migrate({checkout}): Move the `vite to esbuild` batch to `NodeNext`.
 
 **Id:** `config-cleanup`
 
-**Status:** `READY`
+**Status:** `DELIVERED`
 
 **Purpose:** Execute the `config cleanup` batch — stop shipping the presets the ecosystem has migrated away from.
 
@@ -575,7 +579,7 @@ configs(tsconfig): Remove the transitional `cli/` and `libs/` presets.
 
 ### Next
 
-`ship-consumer-configs` and `inventory-distribution-matrix` are `DONE`; `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets, and `$MATRIX` lists 47 migrating rows across 4 batches (10 `clis`, 14 `vite renames`, 11 `vite to esbuild migrations`, 12 `monorepo roots`) plus 12 excluded configs. Execution is reordered (delegator decision): `migrate-clis` and `migrate-vite-to-esbuild` run before `migrate-monorepo-roots`, because `0.2.0` removed the `cli/tsconfig.esm.json` and `cli/tsconfig.cjs.json` presets and the `clis`/`vite-to-esbuild` batches move those packages off them first. `migrate-clis` is 9/10 done — `no-comply/cli/meta-extract` is deferred until `migrate-vite-to-esbuild` migrates the purrception libs it consumes. Three rows were reclassified from `vite renames` to `vite to esbuild` (delegator decision): `no-comply/libs/meta`, `purrception/libs/lang-ts`, `purrception/libs/primitives` — only bundler-only SolidJS packages stay on `vite renames`. Execute `rename-vite-configs` next, then `migrate-vite-to-esbuild` (which unblocks the deferred `no-comply` cli row), then `migrate-monorepo-roots`, and `config-cleanup` closes the plan.
+`ship-consumer-configs` and `inventory-distribution-matrix` are `DONE`; `@noodlestan/tsconfig@0.2.0` ships the `esbuild/`, `vite/`, and `monorepo/` presets, and `$MATRIX` lists 47 migrating rows across 4 batches (10 `clis`, 14 `vite renames`, 11 `vite to esbuild migrations`, 12 `monorepo roots`) plus 12 excluded configs. Execution is reordered (delegator decision): `migrate-clis` and `migrate-vite-to-esbuild` run before `migrate-monorepo-roots`, because `0.2.0` removed the `cli/tsconfig.esm.json` and `cli/tsconfig.cjs.json` presets and the `clis`/`vite-to-esbuild` batches move those packages off them first. `migrate-clis` is 9/10 done — `no-comply/cli/meta-extract` is deferred until `migrate-vite-to-esbuild` migrates the purrception libs it consumes. Three rows were reclassified from `vite renames` to `vite to esbuild` (delegator decision): `no-comply/libs/meta`, `purrception/libs/lang-ts`, `purrception/libs/primitives` — only bundler-only SolidJS packages stay on `vite renames`. All migration iterations are `DONE` (47/47 rows + 15 follow-up fixes). `config-cleanup` is `DELIVERED` — 11 files staged in `$PROJECT`, ready for crew commit and `@noodlestan/tsconfig@0.3.0` publish.
 
 ### Blockers
 

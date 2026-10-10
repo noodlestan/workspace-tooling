@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 0.3.0
+
+### Removed
+
+- **cli/tsconfig.json** – Replaced by `esbuild/tsconfig.json`.
+- **cli/tsconfig.esm.json** – Removed; use `esbuild/tsconfig.json` with `"type": "module"`.
+- **cli/tsconfig.cjs.json** – Removed; use `esbuild/tsconfig.json` with explicit `format: "cjs"` in `build.config.mjs`.
+- **libs/tsconfig-vite.json** – Replaced by `vite/tsconfig.json`.
+- **libs/tsconfig-vite-solid.json** – Replaced by `vite/tsconfig-solid.json`.
+- **libs/tsconfig-vite-node.json** – Replaced by `esbuild/tsconfig.json`.
+
 ## 0.2.0
 
 ### Added

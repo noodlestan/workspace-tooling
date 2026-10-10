@@ -1,6 +1,6 @@
 # Workspace Tooling - TypeScript config `@noodlestan/tsconfig`
 
-**Purpose:** Define the stable `esbuild` and `vite` presets shipped by `@noodlestan/tsconfig`, how consumers extend them, and flag the transitional presets still in flux.
+**Purpose:** Define the stable `esbuild` and `vite` presets shipped by `@noodlestan/tsconfig` and how consumers extend them.
 
 ## Consumer Kinds
 
@@ -52,12 +52,9 @@ Both stable kinds apply the same strictness block; only module semantics and typ
 
 ## Transitional Presets
 
-| Preset                     | Status                                                         |
-| -------------------------- | -------------------------------------------------------------- |
-| `cli/tsconfig.json`        | **In flux.** Superseded by `esbuild`; will be removed          |
-| `libs/tsconfig.json`       | **In flux.** Superseded by `esbuild` / `vite`; will be removed |
-| `libs/tsconfig-vite*.json` | **In flux.** Superseded by the `vite` kind; will be removed    |
-| `workspace/tsconfig.json`  | **In flux.** Monorepo-root preset; will be removed             |
+| Preset                    | Status                                             |
+| ------------------------- | -------------------------------------------------- |
+| `workspace/tsconfig.json` | **In flux.** Monorepo-root preset; will be removed |
 
 Rules:
 
