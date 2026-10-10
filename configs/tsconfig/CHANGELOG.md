@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.3.0
+## 0.2.1
 
 ### Removed
 
@@ -10,6 +10,8 @@
 - **libs/tsconfig-vite.json** – Replaced by `vite/tsconfig.json`.
 - **libs/tsconfig-vite-solid.json** – Replaced by `vite/tsconfig-solid.json`.
 - **libs/tsconfig-vite-node.json** – Replaced by `esbuild/tsconfig.json`.
+
+- **workspace/tsconfig.json** – Removed; use `monorepo/tsconfig.json` instead.
 
 ## 0.2.0
 
