@@ -10,7 +10,7 @@
 
 **Purpose:** Make Noodlestan's build, TypeScript distribution, and formatting configuration a set of published packages that every repository adopts, instead of hand-written per-repo defaults.
 
-**Description:** Milestone record with 3 phases, 5 plan items, and 4 configuration packages, coordinated across `$WORKSPACE` checkouts.
+**Description:** Milestone record coordinating the tooling configuration story across `$WORKSPACE` checkouts: Establish Baseline, where consumers own their build configuration; Add More Configs, where the shared config packages are published; Adopt in Ecosystem, where every checkout adopts them.
 
 ## Mandatory Reading
 
@@ -157,13 +157,13 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 
 ## Phases
 
-| Index | Name                       | Status    |
-| ----- | -------------------------- | --------- |
-| 1     | Build Config Contract      | `DONE`    |
-| 2     | Distribute Prettier Config | `WORKING` |
-| 3     | Adopt ESM Distribution     | `WORKING` |
+| Index | Name               | Status    |
+| ----- | ------------------ | --------- |
+| 1     | Establish Baseline | `DONE`    |
+| 2     | Add More Configs   | `WORKING` |
+| 3     | Adopt in Ecosystem | `WORKING` |
 
-### Phase: 1 — Build Config Contract
+### Phase: 1 — Establish Baseline
 
 **Goal:** Consumers own their build configuration.
 
@@ -175,29 +175,30 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 
 - None.
 
-### Phase: 2 — Distribute Prettier Config
+### Phase: 2 — Add More Configs
 
-**Goal:** Every repository formats from one published source of truth.
+**Goal:** Every shared config package exists and is published.
 
-**Description:** Finish and publish `@noodlestan/prettier-config` and `@noodlestan/prettier-config-astro`, pin the pilot consumer to the released version, then replace every repository's hand-written or missing config with the `prettier` field — accepting the documented `*.mjs` re-indent as correct output.
-
-**Status:** `WORKING`
-
-**Dependencies:**
-
-- Phase 1 — Build Config Contract delivered the versioned-package pattern this phase reuses.
-
-### Phase: 3 — Adopt ESM Distribution
-
-**Goal:** Every published package satisfies the distribution ADR.
-
-**Description:** Inventory the ecosystem's packages, classify each by its consumers, migrate them off the transitional `cli/` and `libs/` tsconfig presets onto the `esbuild/` or `vite/` config chosen according to consumer build tool, move repository roots onto the `monorepo/` preset, and retire the transitional presets once nothing extends them.
+**Description:** Finish and publish `@noodlestan/prettier-config` and `@noodlestan/prettier-config-astro`, and pin the pilot consumer to the released versions.
 
 **Status:** `WORKING`
 
 **Dependencies:**
 
-- Phase 1 — Build Config Contract: migrated `esbuild/` packages need the `build.config.mjs` contract and consumer-owned declaration emit.
+- Phase 1 — Establish Baseline delivered the versioned-package pattern this phase reuses.
+
+### Phase: 3 — Adopt in Ecosystem
+
+**Goal:** Every consumer checkout adopts the published configs.
+
+**Description:** Adopt the published configs across every checkout, including the tooling repository itself: replace hand-written or missing Prettier configs with the `prettier` field, inventory the ecosystem's packages and migrate them off the transitional `cli/` and `libs/` tsconfig presets onto `esbuild/` or `vite/` according to consumer build tool, move repository roots onto `monorepo/`, and retire the transitional presets once nothing extends them. Accept the documented `*.mjs` re-indent as correct output.
+
+**Status:** `WORKING`
+
+**Dependencies:**
+
+- Phase 2 — Add More Configs publishes the config packages this phase consumes.
+- Phase 1 — Establish Baseline: migrated `esbuild/` packages need the `build.config.mjs` contract and consumer-owned declaration emit.
 
 ---
 
@@ -206,10 +207,14 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 | Phase | Resource / Record                                                                                   | Status    |
 | ----- | --------------------------------------------------------------------------------------------------- | --------- |
 | 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`    |
+| 1     | Plan: Publish Tool Index                                                                            | -         |
 | 2     | Plan: Add Prettier Config `$PROJECT/_backlog/1-done/plan-add-prettier-config/plan.md`               | `DONE`    |
 | 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                   | `DRAFT`   |
-| 2     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`           | `DRAFT`   |
+| 2     | Plan: Distribute Tooling Decisions                                                                  | -         |
+| 3     | Plan: Adopt Own Configs `$PROJECT/_backlog/4-next/plan-adopt-own-configs/plan.md`                   | `WORKING` |
 | 3     | Plan: Adopt ESM `$PROJECT/_backlog/3-now/plan-adopt-esm/plan.md`                                    | `WORKING` |
+| 3     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`           | `DRAFT`   |
+| 3     | Plan: Adopt Tooling Decisions                                                                       | -         |
 
 ## Work
 
