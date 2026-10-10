@@ -10,7 +10,7 @@
 
 **Decision:** Use npm workspaces with `"workspaces": ["cli/*", "configs/*"]`, pinned `packageManager: npm@10.2.3`, and a `private: true` root package that acts as a tooling manifest: scripts, shared dev dependencies, and workspace wiring only.
 
-**Consequences:** The root produces no artefacts and never publishes, so "tooling manifest, not build root" stays true. npm links workspace packages whose versions match root dependencies, which is how this repository dogfoods its own ESLint config. The single-package-manager constraint applies to every contributor and CI run.
+**Consequences:** The root produces no artefacts and never publishes, so "tooling manifest, not build root" stays true. npm links workspace packages whose versions match root dependencies, which is how this repository self-consumes its ESLint config. The single-package-manager constraint applies to every contributor and CI run.
 
 ## Decision: turbo as the Task Graph
 

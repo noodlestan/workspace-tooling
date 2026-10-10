@@ -41,7 +41,7 @@ commit attempt
 root package.json (private)
   ├── workspaces: cli/*, configs/*
   ├── devDependency @noodlestan/eslint-config  → linked from the workspace
-  └── .eslintrc.js → spreads @noodlestan/eslint-config  (dogfooding)
+  └── .eslintrc.js → spreads @noodlestan/eslint-config  (self-consumption)
 ```
 
 ### Consuming Noodlestan repository

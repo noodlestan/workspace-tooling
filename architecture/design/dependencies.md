@@ -15,7 +15,7 @@
 | `lefthook`                            | `2.1.9`  | Git hooks                              | root (dev)                     |
 | `@noodlestan/eslint-config`           | `0.0.8`  | This repo's own style guide            | root (dev)                     |
 
-`@noodlestan/eslint-config` is pinned to its workspace version, so npm workspaces links the local package instead of fetching it from the registry — this repository dogfoods its own configuration.
+`@noodlestan/eslint-config` is pinned to its workspace version, so npm workspaces links the local package instead of fetching it from the registry — this repository self-consumes its configuration.
 
 ## Choices
 

@@ -21,9 +21,11 @@
 
 ## Decision Records
 
-| Record                                       | Purpose                                                                            |
-| -------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [adr/distribution.md](adr/distribution.md)   | How Noodlestan published packages are shaped for their consumers                   |
-| [adr/build-model.md](adr/build-model.md)     | Build engine and wrapper design of `@noodlestan/esbuild`                           |
-| [adr/shared-config.md](adr/shared-config.md) | Shared lint/format and TypeScript configuration shipped to Noodlestan repositories |
-| [adr/repository.md](adr/repository.md)       | How this repository is organised, verified, versioned, and published               |
+| Record                                                       | Purpose                                                                            |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| [adr/distribution.md](adr/distribution.md)                   | How Noodlestan published packages are shaped for their consumers                   |
+| [adr/build-model.md](adr/build-model.md)                     | Build engine and wrapper design of `@noodlestan/esbuild`                           |
+| [adr/shared-config.md](adr/shared-config.md)                 | Shared lint/format and TypeScript configuration shipped to Noodlestan repositories |
+| [adr/repository.md](adr/repository.md)                       | How this repository is organised, verified, versioned, and published               |
+| [adr/self-consumption.md](adr/self-consumption.md)           | How this repository consumes the packages it publishes                             |
+| [adr/internal-dependencies.md](adr/internal-dependencies.md) | How packages inside this repository depend on each other                           |
