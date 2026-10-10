@@ -43,14 +43,14 @@ Scope is `Project: Noodlestan Workspace Tooling`, `Repository: Workspace Tooling
 
 ### Upstream Work
 
-| Kind      | Path                                                          | Role                                                                                                                                 |
-| --------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| ADR       | `$ADRS/self-consumption.md`                                   | `Proposed`. The repository consumes its own packages by name; entry points are validated, the `files` allow-list is not.             |
-| ADR       | `$ADRS/internal-dependencies.md`                              | `Proposed`. Internal dependencies use a wildcard range so npm workspaces always links the local copy.                                |
-| ADR       | `$ADRS/shared-config.md`                                      | `Adopted`. ESLint config as a single package; Prettier as ESLint rule plus standalone check; TSConfig scoped to consumer build tool. |
-| Milestone | `$PROJECT/_roadmap/3-now/milestone-tooling-one/milestone.md`  | `WORKING`. Coordinates this plan with the other tooling plans.                                                                       |
-| Plan      | `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md` | `DRAFT`. `$PROJECT` root Prettier adoption moves from that plan to this one; the consumer-repository adoption stays there.           |
-| Plan      | `$PROJECT/_backlog/3-now/plan-adopt-esm/plan.md`              | `WORKING`. Owns the `@noodlestan/tsconfig` presets this plan consumes.                                                               |
+| Kind      | Path                                                            | Role                                                                                                                                 |
+| --------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| ADR       | `$ADRS/self-consumption.md`                                     | `Proposed`. The repository consumes its own packages by name; entry points are validated, the `files` allow-list is not.             |
+| ADR       | `$ADRS/internal-dependencies.md`                                | `Proposed`. Internal dependencies use a wildcard range so npm workspaces always links the local copy.                                |
+| ADR       | `$ADRS/shared-config.md`                                        | `Adopted`. ESLint config as a single package; Prettier as ESLint rule plus standalone check; TSConfig scoped to consumer build tool. |
+| Milestone | `$PROJECT/_roadmap/3-now/milestone-tooling-one/milestone.md`    | `WORKING`. Coordinates this plan with the other tooling plans.                                                                       |
+| Plan      | `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`   | `DRAFT`. `$PROJECT` root Prettier adoption moves from that plan to this one; the consumer-repository adoption stays there.           |
+| Plan      | `$PROJECT/_backlog/0-archive/2026-10-10-plan-adopt-esm/plan.md` | `DONE`. Owns the `@noodlestan/tsconfig` presets this plan consumes.                                                                  |
 
 ### Required Skills
 

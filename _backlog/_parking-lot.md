@@ -4,7 +4,7 @@ WIP tracker, structured like the session parking lot: **ACTIONABLE** (in progres
 
 ## ACTIONABLE
 
-- **Plan: Add Prettier Config** — `_backlog/3-now/plan-add-prettier-config/plan.md` is `READY`; all 4 iterations `READY` with instruction files written. Next move is to delegate `scaffold-prettier-config` to `agent-worker`.
+- None current.
 
 ## PENDING
 

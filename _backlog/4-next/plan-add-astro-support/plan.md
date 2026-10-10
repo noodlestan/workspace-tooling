@@ -40,10 +40,10 @@ None.
 
 ### Upstream Work
 
-| Kind    | Path                                                     | Role                                                                                                                                                               |
-| ------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Plan    | `$ROOT/_backlog/1-done/plan-add-prettier-config/plan.md` | `DONE`. Ships `@noodlestan/prettier-config` and `@noodlestan/prettier-config-astro`; its `prettier-plugin-astro` install satisfies this plan's fixture dependency. |
-| Project | `$ROOT/_records/project.art`                             | Owns the packages changed here.                                                                                                                                    |
+| Kind    | Path                                                                   | Role                                                                                                                                                               |
+| ------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Plan    | `$ROOT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md` | `DONE`. Ships `@noodlestan/prettier-config` and `@noodlestan/prettier-config-astro`; its `prettier-plugin-astro` install satisfies this plan's fixture dependency. |
+| Project | `$ROOT/_records/project.art`                                           | Owns the packages changed here.                                                                                                                                    |
 
 ### Required Skills
 
@@ -102,7 +102,7 @@ None.
 
 ::READ `$ROOT/configs/eslint-config/src/index.cjs` (Config) — Override registration order and `ignorePatterns`, which determine whether ESLint collects `.astro` files at all. Relevant for Drafting Work Item, Executing Work Step.
 
-::READ `$ROOT/_backlog/1-done/plan-add-prettier-config/plan.md` (Plan) — Upstream plan (`DONE`) shipping the Prettier packages this plan consumes. Relevant for Planning Work Item, Executing Work Step.
+::READ `$ROOT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md` (Plan) — Upstream plan (`DONE`) shipping the Prettier packages this plan consumes. Relevant for Planning Work Item, Executing Work Step.
 
 ::READ `$WORKSPACE/knowledge/conventions/writing-commit-message.art` (Conventions) — Commit types, scopes, and rules. Relevant for Writing Commit Message.
 

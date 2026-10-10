@@ -204,17 +204,17 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 
 ## Items:
 
-| Phase | Resource / Record                                                                                   | Status    |
-| ----- | --------------------------------------------------------------------------------------------------- | --------- |
-| 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/1-done/plan-externalize-esbuild-config/plan.md` | `DONE`    |
-| 1     | Plan: Publish Tool Index                                                                            | -         |
-| 2     | Plan: Add Prettier Config `$PROJECT/_backlog/1-done/plan-add-prettier-config/plan.md`               | `DONE`    |
-| 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                   | `DRAFT`   |
-| 2     | Plan: Distribute Tooling Decisions                                                                  | -         |
-| 3     | Plan: Adopt Own Configs `$PROJECT/_backlog/4-next/plan-adopt-own-configs/plan.md`                   | `WORKING` |
-| 3     | Plan: Adopt ESM `$PROJECT/_backlog/1-done/plan-adopt-esm/plan.md`                                   | `DONE`    |
-| 3     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`           | `DRAFT`   |
-| 3     | Plan: Adopt Tooling Decisions                                                                       | -         |
+| Phase | Resource / Record                                                                                                 | Status    |
+| ----- | ----------------------------------------------------------------------------------------------------------------- | --------- |
+| 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/0-archive/2026-10-10-plan-externalize-esbuild-config/plan.md` | `DONE`    |
+| 1     | Plan: Publish Tool Index                                                                                          | -         |
+| 2     | Plan: Add Prettier Config `$PROJECT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md`               | `DONE`    |
+| 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                                 | `DRAFT`   |
+| 2     | Plan: Distribute Tooling Decisions                                                                                | -         |
+| 3     | Plan: Adopt Own Configs `$PROJECT/_backlog/4-next/plan-adopt-own-configs/plan.md`                                 | `WORKING` |
+| 3     | Plan: Adopt ESM `$PROJECT/_backlog/0-archive/2026-10-10-plan-adopt-esm/plan.md`                                   | `DONE`    |
+| 3     | Plan: Adopt Prettier Config `$PROJECT/_backlog/4-next/plan-adopt-prettier-config/plan.md`                         | `DRAFT`   |
+| 3     | Plan: Adopt Tooling Decisions                                                                                     | -         |
 
 ## Work
 
