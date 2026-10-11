@@ -199,13 +199,13 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 ## Items:
 
-| Iteration / Instructions                                                                                        | Status  |
-| --------------------------------------------------------------------------------------------------------------- | ------- |
-| Iteration: Add Astro ESLint Dependencies `plan-add-astro-support/instructions/add-astro-eslint-dependencies.md` | `DRAFT` |
-| Iteration: Create Astro ESLint Override `plan-add-astro-support/instructions/create-astro-eslint-override.md`   | `DRAFT` |
-| Iteration: Exercise Astro Fixture `plan-add-astro-support/instructions/exercise-astro-fixture.md`               | `DRAFT` |
-| Iteration: Tune Astro Rules `plan-add-astro-support/instructions/tune-astro-rules.md`                           | `DRAFT` |
-| Iteration: Publish and Pin `plan-add-astro-support/instructions/publish-and-pin.md`                             | `DRAFT` |
+| Iteration / Instructions                                                              | Status  |
+| ------------------------------------------------------------------------------------- | ------- |
+| Iteration: Add Astro ESLint Dependencies                                              | `DRAFT` |
+| Iteration: Create Astro ESLint Override                                               | `DRAFT` |
+| Iteration: Exercise Astro Fixture                                                     | `DRAFT` |
+| Iteration: Tune Astro Rules `plan-add-astro-support/instructions/tune-astro-rules.md` | `READY` |
+| Iteration: Publish and Pin `plan-add-astro-support/instructions/publish-and-pin.md`   | `READY` |
 
 ### Iteration: Add Astro ESLint Dependencies
 
@@ -213,11 +213,19 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 **Status:** `DRAFT`
 
+**Instructions Mode:** `INSTRUCTIONS_INLINED_IN_ITERATION`
+
 **Purpose:** Declare the packages ESLint needs to parse `.astro` files.
 
 **Description:** Add `eslint-plugin-astro` and `astro-eslint-parser` to the runtime `dependencies` of `@noodlestan/eslint-config`, pinned to versions compatible with the `eslint ^8.57.1` peer range. `astro-eslint-parser` must be explicit rather than transitive because the override refers to it by name in `parser` and `parserOptions.parser`. Record both as `Package Dependency` entries in `$ROOT/_records/dependencies/project-lint.art`.
 
-**Instructions:** `./plan-add-astro-support/instructions/add-astro-eslint-dependencies.md`
+**Instructions:**
+
+1. In `$ROOT/configs/eslint-config/package.json`, add `eslint-plugin-astro` and `astro-eslint-parser` to `dependencies`, pinned to versions compatible with the `eslint ^8.57.1` peer range — `astro-eslint-parser` explicit, not transitive, because the override will refer to it by name.
+2. Add `Package Dependency: ESLint Plugin Astro` and `Package Dependency: Astro ESLint Parser` to `$ROOT/_records/dependencies/project-lint.art`.
+3. Run `npm ci` in `$ROOT` and confirm both resolve.
+4. Confirm `eslint-plugin-astro` declares compatibility with the pinned `eslint` peer range.
+5. Verify the step per the plan's **Verifying Step** operating instructions.
 
 **Changes:**
 
@@ -236,11 +244,20 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 **Status:** `DRAFT`
 
+**Instructions Mode:** `INSTRUCTIONS_INLINED_IN_ITERATION`
+
 **Purpose:** Make ESLint collect and parse `.astro` files.
 
-**Description:** Create `src/config/astro.cjs` following the shape of `src/config/mdx.cjs` and `src/config/solid.cjs`: `files` matching `**/*.astro`, `parser` set to `astro-eslint-parser`, `parserOptions.parser` set to `@typescript-eslint/parser` so frontmatter is typed, `plugins` declaring `astro`, `extends` pulling in `plugin:astro/recommended`, `env.browser`, and a `rules` block for the false positives that Astro components inherently produce. Register the override in `src/index.cjs` and extend `ignorePatterns` with `**/.astro/` so Astro's generated content-collection types are never linted.
+**Description:** Create `src/config/astro.cjs` following the shape of `src/config/mdx.cjs` and `src/config/solid.cjs`: `files` matching `**/*.astro`, `parser` set to `astro-eslint-parser`, `parserOptions.parser` set to `@typescript-eslint/parser` so frontmatter is typed, `plugins` declaring `astro`, `extends` pulling in `plugin:astro/recommended`, `env.browser`, and a `rules` block for the false positives that Astro components inherently produces. Register the override in `src/index.cjs` and extend `ignorePatterns` with `**/.astro/` so Astro's generated content-collection types are never linted.
 
-**Instructions:** `./plan-add-astro-support/instructions/create-astro-eslint-override.md`
+**Instructions:**
+
+1. Read `src/config/mdx.cjs` and `src/config/solid.cjs` in `$PKG_ESLINT` as the override patterns to mirror.
+2. Create `$ROOT/configs/eslint-config/src/config/astro.cjs`: `files: ['**/*.astro']`, `parser: 'astro-eslint-parser'`, `parserOptions.parser: '@typescript-eslint/parser'`, `plugins: ['astro']`, `extends: ['plugin:astro/recommended']`, `env.browser`, and a `rules` block for the known Astro false positives.
+3. Register the override in `$PKG_ESLINT/src/index.cjs` at a position that does not shadow the TypeScript or Solid overrides.
+4. Extend `ignorePatterns` in `src/index.cjs` with `**/.astro/`.
+5. Run `npm run lint` in `$PKG_ESLINT` and confirm `eslint .` now collects `*.astro` files — ESLint 8 lints only `.js` plus the extensions its overrides match.
+6. Verify the step per the plan's **Verifying Step** operating instructions.
 
 **Changes:**
 
@@ -259,11 +276,19 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 **Status:** `DRAFT`
 
+**Instructions Mode:** `INSTRUCTIONS_INLINED_IN_ITERATION`
+
 **Purpose:** Prove the override and the Prettier Astro parser work from the CLI inside the package's own CI.
 
 **Description:** Add `$ROOT/configs/eslint-config/test/component.astro` with deliberate violations — an unused frontmatter import, an `astro/no-set-html-directive` misuse, and misindented markup — and add `*.astro` to `test/tsconfig.json`. The package's `test` script is `npm run lint`, so a deliberately dirty fixture must be formatted to a clean state for the run to pass; the fixture therefore proves the rule set parses `.astro`, not that the rules fire. Add a `*.astro` entry with `parser: astro` to `configs/eslint-config/.prettierrc` so the package's own `prettier . -c` can read it.
 
-**Instructions:** `./plan-add-astro-support/instructions/exercise-astro-fixture.md`
+**Instructions:**
+
+1. Create `$ROOT/configs/eslint-config/test/component.astro` exercising the override: an unused frontmatter import, an `astro/no-set-html-directive` misuse, and misindented markup — then format it to a clean state, because the package's `test` script is `npm run lint` and must pass.
+2. Add `.astro` to `include` in `$ROOT/configs/eslint-config/test/tsconfig.json`.
+3. Add a `*.astro` entry with `parser: astro` to `$ROOT/configs/eslint-config/.prettierrc`.
+4. Run `npm run lint` and `npm run test` in `$PKG_ESLINT` and confirm both pass with the fixture in the tree.
+5. Verify the step per the plan's **Verifying Step** operating instructions.
 
 **Changes:**
 
@@ -280,7 +305,9 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 **Id:** `tune-astro-rules`
 
-**Status:** `DRAFT`
+**Status:** `READY`
+
+**Instructions Mode:** `INSTRUCTIONS_SELF_CONTAINED_FILE`
 
 **Purpose:** Surface every real conflict between the shared Astro rules and an actual Astro codebase before publication.
 
@@ -301,6 +328,37 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 - Fix project defects in `$WEB/apps/noodlestan-web/src/**/*.astro`.
 - Confirm `parserOptions.project` resolves for `.astro` files, given that the Solid and Typescript overrides assume a CWD-relative `./tsconfig.json`.
 
+**Commits:**
+
+| ID                         | Repository / Checkout / Branch       | Policy   | Hash  | Status    |
+| -------------------------- | ------------------------------------ | -------- | ----- | --------- |
+| `tune-astro-rules-config`  | Workspace Tooling / `$ROOT` / `main` | `NOPUSH` | (TBD) | `PLANNED` |
+| `tune-astro-rules-defects` | Noodlestan Web / `$WEB` / `main`     | `NOPUSH` | (TBD) | `PLANNED` |
+
+##### Commit: `tune-astro-rules-config`
+
+**Repository:** Workspace Tooling / `$ROOT`
+
+**Message:**
+
+```
+fix(eslint-config): Tune the Astro override against `noodlestan-web`.
+
+- Adjust `src/config/astro.cjs` for the config gaps surfaced by live linting.
+```
+
+##### Commit: `tune-astro-rules-defects`
+
+**Repository:** Noodlestan Web / `$WEB`
+
+**Message:**
+
+```
+fix(noodlestan-web): Fix Astro lint defects surfaced by the shared config.
+
+- Correct `*.astro` sources in `apps/noodlestan-web/src` flagged by the tuned override.
+```
+
 **Dependencies:**
 
 - Iteration: Exercise Astro Fixture.
@@ -309,7 +367,9 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 **Id:** `publish-and-pin`
 
-**Status:** `DRAFT`
+**Status:** `READY`
+
+**Instructions Mode:** `INSTRUCTIONS_SELF_CONTAINED_FILE`
 
 **Purpose:** Publish the ESLint config and replace the local link in `$WEB` with the released version.
 
@@ -325,6 +385,39 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 - Re-run `npm run lint` in `$WEB/apps/noodlestan-web` and confirm parity with the linked run.
 - Update `$ROOT/configs/eslint-config/_records/npm-deployment.art` and `$ROOT/configs/eslint-config/README.md`.
 
+**Commits:**
+
+| ID                      | Repository / Checkout / Branch       | Policy     | Hash  | Status    |
+| ----------------------- | ------------------------------------ | ---------- | ----- | --------- |
+| `release-eslint-config` | Workspace Tooling / `$ROOT` / `main` | `NOCOMMIT` | (TBD) | `PLANNED` |
+| `pin-eslint-config`     | Noodlestan Web / `$WEB` / `main`     | `NOPUSH`   | (TBD) | `PLANNED` |
+
+##### Commit: `release-eslint-config`
+
+**Repository:** Workspace Tooling / `$ROOT`
+
+**Message:**
+
+```
+release(eslint-config): Publish `@noodlestan/eslint-config` with Astro support.
+
+- Bump the version to `0.1.0`; update `_records/npm-deployment.art` and the `README.md` Astro note.
+```
+
+**Policy:** `NOCOMMIT` — publishing to the public registry is irreversible; stage the changes and hand back for crew commit and publish.
+
+##### Commit: `pin-eslint-config`
+
+**Repository:** Noodlestan Web / `$WEB`
+
+**Message:**
+
+```
+tooling(noodlestan-web): Pin `@noodlestan/eslint-config` to the published release.
+
+- Replace the local link with the released version; confirm `npm run lint` parity.
+```
+
 **Dependencies:**
 
 - Iteration: Tune Astro Rules.
@@ -333,7 +426,7 @@ Execution is coordinated from `$WORKSPACE`. Package work runs in `$ROOT`; live t
 
 ### Next
 
-Refine the iterations into instructions files; the upstream Prettier packages are published and pinned, so planning can proceed.
+`tune-astro-rules` and `publish-and-pin` are `READY` with self-contained instructions files and commit blueprints; they can be delegated once their upstream package-side iterations are done. The three package-side iterations (`add-astro-eslint-dependencies`, `create-astro-eslint-override`, `exercise-astro-fixture`) remain `DRAFT` with inlined instructions — refine them with **Plan Iterations**, then execute in dependency order: dependencies, override, fixture, tune, publish and pin.
 
 ### Blockers
 
