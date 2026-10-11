@@ -2,7 +2,7 @@
 
 **ID:** `rename-architecture-to-knowledge`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -152,13 +152,13 @@ Execution is coordinated from `$WORKSPACE`; changes run per checkout on `main`, 
 
 | Iteration / Instructions                    | Status  |
 | ------------------------------------------- | ------- |
-| Iteration: Rename Architecture to Knowledge | `DRAFT` |
+| Iteration: Rename Architecture to Knowledge | `READY` |
 
 ### Iteration: Rename Architecture to Knowledge
 
 **Id:** `rename-architecture-to-knowledge`
 
-**Status:** `DRAFT`
+**Status:** `READY`
 
 **Purpose:** Rehome ADR directories under `knowledge/` everywhere, so `architecture` stops meaning only decision records.
 
@@ -173,6 +173,39 @@ Execution is coordinated from `$WORKSPACE`; changes run per checkout on `main`, 
 - In `$DOMAINS` and `$SKILLS`, replace `architecture/` with `knowledge/`, and `architecture reference` with `knowledge base`.
 - One complete checkout per commit, on `main`, `NOPUSH`; the `.agents` changes land as one commit in the workspace meta-repository.
 
+**Commits:**
+
+| ID                              | Repository / Checkout / Branch                   | Policy   | Hash  | Status    |
+| ------------------------------- | ------------------------------------------------ | -------- | ----- | --------- |
+| `rename-architecture-knowledge` | Each checkout / `$CHECKOUTS/{checkout}` / `main` | `NOPUSH` | (TBD) | `PLANNED` |
+| `rename-architecture-agents`    | Workspace / `$WORKSPACE` / `main`                | `NOPUSH` | (TBD) | `PLANNED` |
+
+##### Commit: `rename-architecture-knowledge`
+
+**Repository:** Each checkout containing `architecture/` (one commit per checkout)
+
+**Message:**
+
+```
+renames({checkout}): Rename `architecture/` to `knowledge/`.
+
+- Rename the directory and update the `_guide.md`.
+- Update live `_backlog/` and `_roadmap/` references; archives stay verbatim.
+```
+
+##### Commit: `rename-architecture-agents`
+
+**Repository:** Noodlestan Workspace (meta-repository)
+
+**Message:**
+
+```
+renames(rename-architecture-to-knowledge): Point `.agents` at `knowledge/`.
+
+- Replace `architecture/` references with `knowledge/` in domains and skills.
+- Replace `architecture reference` with `knowledge base`.
+```
+
 **Dependencies:**
 
 - None.
@@ -181,7 +214,7 @@ Execution is coordinated from `$WORKSPACE`; changes run per checkout on `main`, 
 
 ### Next
 
-Draft complete. Run **Plan Iterations** to add commit blueprints and move the iteration to `PLANNING`, then **Write Instructions** to generate the self-contained instruction file. This plan executes first — before `Plan: Distribute ADRs as a Package` and `Plan: Adopt Tooling Decisions`.
+The single iteration is `READY` with self-contained instructions at `./plan-rename-architecture-to-knowledge/instructions/rename-architecture-to-knowledge.md`; delegate it to `agent-worker`. This plan executes first — before `Plan: Distribute ADRs as a Package` and `Plan: Adopt Tooling Decisions`.
 
 ### Blockers
 
