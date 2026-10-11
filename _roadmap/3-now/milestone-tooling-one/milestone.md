@@ -210,11 +210,12 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 | 1     | Plan: Publish Tool Index                                                                                          | -          |
 | 2     | Plan: Add Prettier Config `$PROJECT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md`               | `DONE`     |
 | 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                                 | `DRAFT`    |
-| 2     | Plan: Distribute Tooling Decisions                                                                                | -          |
+| 2     | Plan: Rename Architecture to Knowledge `$PROJECT/_backlog/4-next/plan-rename-architecture-to-knowledge/plan.md`   | `DRAFT`    |
+| 2     | Plan: Distribute ADRs as a Package `$PROJECT/_backlog/4-next/plan-distribute-adrs-as-a-package/plan.md`           | `DRAFT`    |
 | 3     | Plan: Adopt Own Configs `$PROJECT/_backlog/4-next/plan-adopt-own-configs/plan.md`                                 | `WORKING`  |
 | 3     | Plan: Adopt ESM `$PROJECT/_backlog/0-archive/2026-10-10-plan-adopt-esm/plan.md`                                   | `DONE`     |
 | 3     | Plan: Adopt Prettier Config `$PROJECT/_backlog/3-now/plan-adopt-prettier-config/plan.md`                          | `PLANNING` |
-| 3     | Plan: Adopt Tooling Decisions                                                                                     | -          |
+| 3     | Plan: Adopt Tooling Decisions `$PROJECT/_backlog/4-next/plan-adopt-tooling-decisions/plan.md`                     | `DRAFT`    |
 
 ## Work
 
