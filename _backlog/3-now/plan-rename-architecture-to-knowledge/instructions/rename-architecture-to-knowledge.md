@@ -100,8 +100,8 @@ npm run ci # lint, test and build
 
 ## Changes
 
-- Step 1 / 3 — Rename in every repository containing `architecture/`
-- Step 2 / 3 — Rewire `.agents` in the workspace meta-repository
+- Step 1 / 3 — Rename in every repository containing `architecture/` (commit `rename-architecture-knowledge` per renamed checkout, inside Step 1)
+- Step 2 / 3 — Rewire `.agents` in the workspace meta-repository (commit `rename-architecture-agents`, inside Step 2)
 - Step 3 / 3 — Verify completion
 
 ## Steps

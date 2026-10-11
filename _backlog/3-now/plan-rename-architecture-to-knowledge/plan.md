@@ -67,6 +67,7 @@ None.
 | ---------- | ------------ | ------------------------------------------------- |
 | Repository | Repositories | `$DOMAINS/repositories/structures/repository.art` |
 | Project    | Projects     | `$DOMAINS/projects/structures/project.art`        |
+| Workspace  | Workspaces   | `$DOMAINS/workspaces/structures/workspace.art`    |
 | Plan       | Plans        | `$DOMAINS/plans/structures/plan.art`              |
 
 ### Workflows
