@@ -2,7 +2,7 @@
 
 **ID:** `adopt-prettier-config`
 
-**Status:** `DRAFT`
+**Status:** `PLANNING`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -10,7 +10,7 @@
 
 **Purpose:** The two Prettier config packages are scaffolded, released at `0.0.1`, and published; every Noodlestan repository except `$WEB` still hand-writes — or simply lacks — its own Prettier config.
 
-**Description:** Plan record with 4 iterations spanning `Package: Prettier Config`, `Package: Prettier Config Astro`, and every consumer checkout, executed from `$WORKSPACE`. The release-artefact iteration is already `DONE`; the remaining work is inventory, ecosystem adoption, and documentation.
+**Description:** Plan record with 4 iterations spanning `Package: Prettier Config`, `Package: Prettier Config Astro`, and every consumer checkout, executed from `$WORKSPACE`. The release-artefact iteration is `DONE`; the remaining 3 iterations are `PLANNING` — inventory, ecosystem adoption, and documentation.
 
 ## Mandatory Reading
 
@@ -33,7 +33,7 @@
 
 ## Summary
 
-Both Prettier config packages are released at `0.0.1` and published, and the pilot consumer `$WEB` is pinned. The remaining work is to replace every repository's hand-written or missing Prettier config with the `prettier` field pointing at `@noodlestan/prettier-config`.
+Both Prettier config packages are released at `0.0.1` and published, and the pilot consumer `$WEB` is pinned. The remaining work is to replace every repository's hand-written or missing Prettier config with the `prettier` field pointing at `@noodlestan/prettier-config`; the two Astro application packages additionally adopt `@noodlestan/prettier-config-astro`.
 
 Scope is both config packages, `$PROJECT` itself, and the consumer checkouts enumerated by the inventory iteration; upstream is `Plan: Add Prettier Config`, which delivered the packages and the proven `$WEB` pilot.
 
@@ -111,7 +111,7 @@ Scope is both config packages, `$PROJECT` itself, and the consumer checkouts enu
 
 ## Scope
 
-Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefacts are landed and published, the inventory fixes the adoption list, and each repository adopts the base config with one complete commit.
+Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefacts are landed and published, the inventory fixes the adoption list, and each repository adopts the base config with one complete commit. The two Astro application packages additionally adopt the Astro variant.
 
 ### (Scope) Project: Noodlestan Workspace Tooling
 
@@ -174,13 +174,14 @@ Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefac
 
 **Changes:**
 
-- Replace `.prettierrc*` with `"prettier": "@noodlestan/prettier-config"` in the checkout's `package.json`; add the dependency in the root `devDependencies`.
-- Run `npm run lint` and accept the expected `*.mjs` re-indent as correct output; anything beyond it is a defect in `$PROJECT`.
-- One complete checkout per commit on branch `adopt-prettier-config`.
+- Replace `.prettierrc*` with `"prettier": "@noodlestan/prettier-config"` in the checkout's root `package.json`; add the dependency in the root `devDependencies`.
+- The two Astro application packages — `$WEB/apps/noodlestan-web` (already adopted) and `artificials/apps/art-md-web` — set `"prettier": "@noodlestan/prettier-config-astro"` in their own `package.json`; the Astro variant is installed at the application package, never at a monorepo root.
+- Run `npm run lint:fix` and accept the expected `*.mjs` re-indent as correct output; anything beyond it is a defect in `$PROJECT`.
+- One complete checkout per commit on branch `main`; commits are `NOPUSH`.
 
 **Operations:**
 
-- Run `npm run lint` in each checkout after adoption, before its commit.
+- Run `npm run lint:fix` in each checkout after adoption, before its commit.
 
 **Dependencies:**
 
@@ -188,18 +189,18 @@ Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefac
 
 ## Execution Context
 
-Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `main`; ecosystem adoption runs per checkout on branch `adopt-prettier-config`, one complete checkout per commit. `$WEB` is already migrated by the upstream plan and is verified, not re-migrated.
+Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `main`; ecosystem adoption runs per checkout on branch `main`, one complete checkout per commit, with a `NOPUSH` policy — commits are created but never pushed. `$WEB` is already migrated by the upstream plan and is verified, not re-migrated.
 
 ---
 
 ## Items:
 
-| Iteration / Instructions               | Status  |
-| -------------------------------------- | ------- |
-| Iteration: Finalise Release Artefacts  | `DONE`  |
-| Iteration: Inventory Prettier Configs  | `DRAFT` |
-| Iteration: Adopt Base Config Ecosystem | `DRAFT` |
-| Iteration: Document Adoption           | `DRAFT` |
+| Iteration / Instructions               | Status     |
+| -------------------------------------- | ---------- |
+| Iteration: Finalise Release Artefacts  | `DONE`     |
+| Iteration: Inventory Prettier Configs  | `PLANNING` |
+| Iteration: Adopt Base Config Ecosystem | `PLANNING` |
+| Iteration: Document Adoption           | `DRAFT`    |
 
 ### Iteration: Finalise Release Artefacts
 
@@ -226,18 +227,40 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Id:** `inventory-prettier-configs`
 
-**Status:** `DRAFT`
+**Status:** `PLANNING`
+
+**Instructions Mode:** `INSTRUCTIONS_INLINED_IN_ITERATION`
 
 **Purpose:** Fix the authoritative adoption list and the expected diff per repository before changing any of them.
 
-**Description:** Scan every checkout under `$CHECKOUTS` for its current Prettier setup — hand-written `.prettierrc*`, a `prettier` field, an ESLint-carried config, or nothing — plus whether Astro files exist and how far the current formatting is from the shipped rules. All repositories adopt; the inventory only decides variant and expected diff.
+**Description:** Scan every checkout under `$CHECKOUTS` for its current Prettier setup — hand-written `.prettierrc*`, a `prettier` field, an ESLint-carried config, or nothing — plus whether Astro application packages exist and how far the current formatting is from the shipped rules. All repositories adopt the base config; the two Astro application packages additionally adopt the Astro variant. The inventory only decides variant and expected diff.
 
 **Changes:**
 
-- Record per checkout: current config path, its rules delta against `$PRETTIER/src/index.json`, presence of `.astro` files, and expected adoption diff.
+- Record per checkout: current config path, its rules delta against `$PRETTIER/src/index.json`, and expected adoption diff.
+- Record the Astro application packages separately: `$WEB/apps/noodlestan-web` (already adopted) and `artificials/apps/art-md-web` (to adopt the Astro variant); the Astro variant is never applied at a monorepo root.
 - Flag every checkout where adoption re-indents `*.mjs`, and flag any wider diff as a pre-existing divergence to be judged, not silently absorbed.
-- Write `./plan-adopt-prettier-config__matrix.md` with the full matrix and per-checkout adoption commands.
+- Write `./plan-adopt-prettier-config__matrix.md` with the full matrix, the Astro application rows, and per-checkout adoption commands.
 - Mark `$WEB` as already adopted.
+
+**Commits:**
+
+| ID                 | Repository / Checkout / Branch          | Policy       | Hash  | Status    |
+| ------------------ | --------------------------------------- | ------------ | ----- | --------- |
+| `inventory-matrix` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `PLANNED` |
+
+##### Commit: `inventory-matrix`
+
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+plan(adopt-prettier-config): Fix the Prettier adoption matrix.
+
+- Record the base-config adoption list and the two Astro application packages.
+- Flag the `*.mjs` re-indent and the `ops` `*.art`/`*.tart` divergence.
+```
 
 **Dependencies:**
 
@@ -247,18 +270,49 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Id:** `adopt-base-config-ecosystem`
 
-**Status:** `DRAFT`
+**Status:** `PLANNING`
 
-**Purpose:** Replace every repository's config with the published base package.
+**Instructions Mode:** `INSTRUCTIONS_SELF_CONTAINED_FILE`
 
-**Description:** For each matrix row, swap the hand-written config for `"prettier": "@noodlestan/prettier-config"`, run the repo's lint, accept the documented `*.mjs` re-indent, and commit the complete checkout. `$PROJECT` itself goes last so the root migration is validated against every package already published.
+**Purpose:** Replace every repository's config with the published base package, and the two Astro application packages with the Astro variant.
+
+**Description:** For each matrix row, swap the hand-written config for `"prettier": "@noodlestan/prettier-config"`, run the repo's `lint:fix`, accept the documented `*.mjs` re-indent, and commit the complete checkout on `main` with a `NOPUSH` policy. The `artificials` checkout adopts the base config at its root and the Astro variant in `apps/art-md-web` in the same commit. `$PROJECT` itself goes last so the root migration is validated against every package already published.
 
 **Changes:**
 
-- Per checkout: delete `.prettierrc*`, add the `prettier` field and the `devDependencies` entry, run `npm run lint`, inspect the diff.
+- Per checkout: delete `.prettierrc*`, add the `prettier` field and the `devDependencies` entry, run `npm run lint:fix`, inspect the diff.
 - Treat `*.mjs` re-indentation as correct output; stop and report any other change as a defect in `$PROJECT`.
+- `artificials`: adopt the base config at the root and `@noodlestan/prettier-config-astro` in `apps/art-md-web`, in the same commit.
 - Migrate `$PROJECT` root last: replace `$PROJECT/.prettierrc`, accepting the re-indent of the `.mjs` files under `cli/esbuild-cli/`.
-- Commit one checkout at a time on branch `adopt-prettier-config`; update the matrix row after each.
+- Commit one checkout at a time on branch `main` with a `NOPUSH` policy; record the commit hash in the matrix row after each.
+
+**Commits:**
+
+| ID                  | Repository / Checkout / Branch                   | Policy   | Hash  | Status    |
+| ------------------- | ------------------------------------------------ | -------- | ----- | --------- |
+| `adopt-base-config` | Each checkout / `$CHECKOUTS/{checkout}` / `main` | `NOPUSH` | (TBD) | `PLANNED` |
+
+##### Commit: `adopt-base-config`
+
+**Repository:** Each consumer checkout (one commit per checkout)
+
+**Message:**
+
+```
+configs({checkout}): Adopt @noodlestan/prettier-config.
+
+- Replace the hand-written `.prettierrc` with the `prettier` field.
+- Add the dependency and apply the `*.mjs` re-indent from `npm run lint:fix`.
+```
+
+For `artificials`, the same commit also adopts the Astro variant in `apps/art-md-web`:
+
+```
+configs(artificials): Adopt @noodlestan/prettier-config and the Astro variant.
+
+- Replace the root `.prettierrc` with the `prettier` field.
+- Set `@noodlestan/prettier-config-astro` in `apps/art-md-web`.
+```
 
 **Dependencies:**
 
@@ -274,12 +328,11 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Purpose:** Make the adoption recipe reproducible for the next repository added to the ecosystem.
 
-**Description:** Record the recipe — the `prettier` field, the dependency, the expected diff, and the lint command — in the package guide and the project README, and close the matrix.
+**Description:** Record the recipe — the `prettier` field, the dependency, the expected diff, and the `lint:fix` command — in the package guide and the project README, and close the matrix. **Not planned** — this iteration is kept `DRAFT`; its instructions and commits are deliberately not written here. The exact changes are:
 
-**Changes:**
-
-- Update `$PRETTIER/_guide.md` and `$PROJECT/README.md` with the consumer adoption recipe and the `*.mjs` re-indent expectation.
-- Update `$PRETTIER_ASTRO/_guide.md` with when a repository reaches for the Astro variant.
+- `$PRETTIER/_guide.md` — the consumer adoption recipe: the `prettier` field, the dependency, `npm run lint:fix`, and the expected `*.mjs` re-indent.
+- `$PRETTIER_ASTRO/_guide.md` — when an application package reaches for the Astro variant (application packages only, never monorepo roots).
+- `$PROJECT/README.md` — the package list and the adoption recipe for a new repository.
 - Confirm every matrix row is `DONE` and no `.prettierrc*` remains outside the config packages.
 
 **Dependencies:**
@@ -290,7 +343,7 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 ### Next
 
-`Finalise Release Artefacts` is `DONE` (release artefacts committed and published at `0.0.1`; upstream `publish-and-pin` satisfied). The remaining 3 iterations are `DRAFT`. Run **Plan Iterations** (`plan more`) to refine purposes, changes, and commit blueprints, then **Write Instructions** to produce delegatable instruction files. Sequencing: inventory the configs, adopt the base config ecosystem, then document adoption.
+`Finalise Release Artefacts` is `DONE` (release artefacts committed and published at `0.0.1`; upstream `publish-and-pin` satisfied). `Inventory Prettier Configs` and `Adopt Base Config Ecosystem` are `PLANNING`; `Document Adoption` is `DRAFT` and intentionally left unplanned. Run **Write Instructions** to produce the delegatable instruction files (inlined for the inventory, self-contained for the ecosystem adoption), then execute: inventory the configs, adopt the base config ecosystem, then document adoption.
 
 ### Blockers
 
@@ -362,7 +415,7 @@ npm run ci # lint, test and build
 
 ### Not In Scope
 
-- **Astro config rollout** — `Plan: Add Astro Support` is the consumer of `@noodlestan/prettier-config-astro`; this plan only lands its release artefacts.
+- **Astro config rollout** — `Plan: Add Astro Support` is the consumer of `@noodlestan/prettier-config-astro`; this plan only lands its release artefacts and adopts the variant in the two existing Astro application packages.
 - **`.prettierignore` policy** — a shared ignore file is a separate concern inherited as open from the upstream plan.
 - **ESLint config adoption** — `@noodlestan/eslint-config` distribution is separate work.
 - **ESM migration** — module-format work across the ecosystem belongs to `Plan: Adopt ESM`.
@@ -379,6 +432,7 @@ npm run ci # lint, test and build
 - **The `*.mjs` re-indent is proven in `$WEB`** — its config already matched the shipped rules byte-for-byte; every other repository must expect the diff as correct output.
 - **Two divergent rule sets predate the packages** — `$WEB/.prettierrc` (tabs for JS-family) versus `$PROJECT/configs/eslint-config/.prettierrc` (`tabWidth: 4` with 2-space overrides); the shipped rules follow `$WEB`, so adopting in `$PROJECT` re-indents rather than being a no-op.
 - **Prettier resolves config by walking up from the file** — a package's own config is only used if its `package.json` carries the `prettier` field; the root config otherwise wins.
+- **The Astro variant is an application-package concern** — `@noodlestan/prettier-config-astro` is installed directly in packages that are Astro applications (`$WEB/apps/noodlestan-web`, `artificials/apps/art-md-web`), never at a monorepo root; every monorepo root adopts the base config.
 
 ### Decisions
 
@@ -386,13 +440,15 @@ npm run ci # lint, test and build
 - **Release artefacts land before publish** — changelogs and fixtures are committed before upstream's publish run; nothing is back-filled after `npm run art-work publish`.
 - **Publishing stays upstream** — `Plan: Add Prettier Config`'s `publish-and-pin` ran the release; this plan landed the release artefacts first and adopts after, so no file and no npm gate is worked by both plans.
 - **One complete checkout per commit** — adoption commits are independently verifiable and revertable.
+- **Adoption commits are `NOPUSH` on `main`** — each checkout commits directly on `main` and is never pushed by this plan.
 - **The `*.mjs` re-indent is correct output** — a wider diff stops the migration and is judged as a defect in `$PROJECT` or a pre-existing divergence, never absorbed silently.
+- **Document Adoption stays unplanned** — its purpose and exact changes are recorded, but no instructions or commits are written for it.
 
 ### Knowledge to Update
 
 - `$PRETTIER/CHANGELOG.md` and `$PRETTIER_ASTRO/CHANGELOG.md` — final `0.0.1` release notes.
 - `$PRETTIER/_guide.md` — consumer adoption recipe and expected diff.
-- `$PRETTIER_ASTRO/_guide.md` — when a repository reaches for the Astro variant.
+- `$PRETTIER_ASTRO/_guide.md` — when an application package reaches for the Astro variant.
 - `$PROJECT/README.md` — package list and adoption instructions for new repositories.
 - `$PROJECT/_guide.md` — Prettier row in the projects table if adoption changes the documented layout.
 
