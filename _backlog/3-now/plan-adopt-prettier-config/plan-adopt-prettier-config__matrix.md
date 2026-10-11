@@ -4,25 +4,25 @@
 
 Every monorepo root adopts `@noodlestan/prettier-config` via the `prettier` field.
 
-| Checkout          | Current config       | `prettier` field              | `@noodlestan/prettier-config` dep | Expected adoption diff                                           | Status |
-| ----------------- | -------------------- | ----------------------------- | --------------------------------- | ---------------------------------------------------------------- | ------ |
-| art-domains       | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                      | TODO   |
-| art-js            | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (12 files)                                     | TODO   |
-| art-lib           | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (2 files)                                      | TODO   |
-| art-md            | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (17 files)                                     | TODO   |
-| art-work          | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (3 files)                                      | TODO   |
-| artificials       | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (1 file); also adopts Astro variant in app     | TODO   |
-| artisans          | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                      | TODO   |
-| conventions       | `.prettierrc` (hand) | NONE                          | `0.0.1` (present, unwired)        | re-indent `*.mjs` (0 files)                                      | TODO   |
-| management        | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                      | TODO   |
-| no-comply         | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (58 files)                                     | TODO   |
-| noodlestan-web    | `prettier` field     | `@noodlestan/prettier-config` | `0.0.1`                           | none (already adopted)                                           | DONE   |
-| ops               | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files); **loses `*.art`/`*.tart` override** | TODO   |
-| purrception       | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (8 files)                                      | TODO   |
-| purrfect          | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                      | TODO   |
-| purrpose          | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                      | TODO   |
-| purrtrait         | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                      | TODO   |
-| workspace-tooling | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (11 files)                                     | TODO   |
+| Checkout          | Current config       | `prettier` field              | `@noodlestan/prettier-config` dep | Expected adoption diff                                                       | Status |
+| ----------------- | -------------------- | ----------------------------- | --------------------------------- | ---------------------------------------------------------------------------- | ------ |
+| art-domains       | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                                  | TODO   |
+| art-js            | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (12 files)                                                 | TODO   |
+| art-lib           | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (2 files)                                                  | TODO   |
+| art-md            | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (17 files)                                                 | TODO   |
+| art-work          | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (3 files)                                                  | TODO   |
+| artificials       | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (1 file); also adopts Astro variant in app                 | TODO   |
+| artisans          | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                                  | TODO   |
+| conventions       | `.prettierrc` (hand) | NONE                          | `0.0.1` (present, unwired)        | re-indent `*.mjs` (0 files)                                                  | TODO   |
+| management        | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                                  | TODO   |
+| no-comply         | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (58 files)                                                 | TODO   |
+| noodlestan-web    | `prettier` field     | `@noodlestan/prettier-config` | `0.0.1`                           | none (already adopted)                                                       | DONE   |
+| ops               | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files); `*.art`/`*.tart` override lands in base `0.1.0` | TODO   |
+| purrception       | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (8 files)                                                  | TODO   |
+| purrfect          | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                                  | TODO   |
+| purrpose          | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                                  | TODO   |
+| purrtrait         | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (0 files)                                                  | TODO   |
+| workspace-tooling | `.prettierrc` (hand) | NONE                          | NONE                              | re-indent `*.mjs` (11 files)                                                 | TODO   |
 
 ## Astro Variant — Application Packages
 
@@ -74,7 +74,7 @@ Capture the commit hash per checkout as the adoption iteration runs. One commit 
 Replay once per checkout, one commit per checkout on branch `main` with a `NOPUSH` policy. `{checkout}` comes from the matrix.
 
 1. Setup the checkout — `cd $CHECKOUTS/{checkout} && npm ci` — expected: a clean tree on `main`.
-2. Authorised dependency bump — `npm install -D @noodlestan/prettier-config@0.0.1` (checkout root) — expected: rewrites `package.json` and `package-lock.json`; rides along in the same commit.
+2. Authorised dependency bump — `npm install -D @noodlestan/prettier-config@0.1.0` (checkout root) — expected: installs or updates the dependency and rewrites `package.json` and `package-lock.json`; rides along in the same commit. For `conventions` this updates the existing `0.0.1` dep.
 3. Config swap — delete `.prettierrc*` and add `"prettier": "@noodlestan/prettier-config"` to the checkout root `package.json`.
 4. Lint — `npm run lint:fix` — expected: passes; the diff contains only the expected `*.mjs` re-indent (tabs). Anything wider is a defect in `$PROJECT` or a pre-existing divergence to judge, never absorbed silently.
 5. Commit — stage every file changed for the checkout's row, commit with the iteration blueprint message, and do **not** push (`NOPUSH`); then record the hash in the Commit Log and set the row to `DONE` (that edit stays uncommitted for the planner).
@@ -83,20 +83,20 @@ Replay once per checkout, one commit per checkout on branch `main` with a `NOPUS
 
 For `artificials`, the same commit also adopts the Astro variant in `apps/art-md-web`:
 
-1. `npm install -D @noodlestan/prettier-config-astro@0.0.1` in `apps/art-md-web`.
+1. `npm install -D @noodlestan/prettier-config-astro@0.1.0` in `apps/art-md-web`.
 2. Add `"prettier": "@noodlestan/prettier-config-astro"` to `apps/art-md-web/package.json`.
 3. `npm run lint:fix` from the checkout root.
 
 `noodlestan-web/apps/noodlestan-web` is already adopted and is verified, not re-migrated.
 
-### Outcome for `ops` (DIVERGENCE)
+### Outcome for `ops` (RESOLVED)
 
-`ops/.prettierrc` carries an extra override for `*.art`/`*.tart` (`parser: "markdown"`) that the shipped base rules do **not** include. Adopting the base config would silently drop that override. This is a pre-existing divergence to be judged before adoption — either the base package gains the override, or `ops` keeps a local extension, or the divergence is accepted and the `.art`/`.tart` files fall back to default markdown handling.
+`ops/.prettierrc` carries an extra override for `*.art`/`*.tart` (`parser: "markdown"`) that the shipped base rules do **not** include. Adopting the base config would silently drop that override. **Resolved in favour of the ecosystem**: `Iteration: Publish Art Tart Override` lifts the override into the base package and publishes `0.1.0`, so `ops` adopts the base config without losing it. Expected diff unchanged: re-indent `*.mjs` (0 files).
 
 ### Outcome for `conventions` (PARTIAL)
 
-`conventions` already declares `@noodlestan/prettier-config@0.0.1` in `devDependencies` but has **no** `prettier` field and still carries a hand-written `.prettierrc`. The dependency is present but unwired. Adoption here is a config swap only (no dependency bump needed).
+`conventions` already declares `@noodlestan/prettier-config@0.0.1` in `devDependencies` but has **no** `prettier` field and still carries a hand-written `.prettierrc`. The dependency is present but unwired. Adoption here is a config swap plus a dependency update to `0.1.0`.
 
 ### Outcome for `noodlestan-web` (ALREADY ADOPTED)
 
-`noodlestan-web` is the pilot consumer: root `prettier` field set to `@noodlestan/prettier-config`, dependency pinned at `0.0.1`; its Astro application package `apps/noodlestan-web` sets `@noodlestan/prettier-config-astro`. Verified, not re-migrated.
+`noodlestan-web` is the pilot consumer: root `prettier` field set to `@noodlestan/prettier-config`, dependency pinned at `0.0.1`; its Astro application package `apps/noodlestan-web` sets `@noodlestan/prettier-config-astro`. Verified, not re-migrated; upgrading both pins to `0.1.0` is a deliberate follow-up.

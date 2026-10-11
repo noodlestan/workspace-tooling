@@ -2,7 +2,7 @@
 
 **ID:** `adopt-prettier-config`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -10,7 +10,7 @@
 
 **Purpose:** The two Prettier config packages are scaffolded, released at `0.0.1`, and published; every Noodlestan repository except `$WEB` still hand-writes — or simply lacks — its own Prettier config.
 
-**Description:** Plan record with 4 iterations spanning `Package: Prettier Config`, `Package: Prettier Config Astro`, and every consumer checkout, executed from `$WORKSPACE`. The release-artefact iteration is `DONE`; the remaining 3 iterations are `PLANNING` — inventory, ecosystem adoption, and documentation.
+**Description:** Plan record with 5 iterations spanning `Package: Prettier Config`, `Package: Prettier Config Astro`, and every consumer checkout, executed from `$WORKSPACE`. The release-artefact iteration is `DONE`; the publish, inventory, and adoption iterations are `PLANNING`, and documentation is `DRAFT`.
 
 ## Mandatory Reading
 
@@ -33,7 +33,7 @@
 
 ## Summary
 
-Both Prettier config packages are released at `0.0.1` and published, and the pilot consumer `$WEB` is pinned. The remaining work is to replace every repository's hand-written or missing Prettier config with the `prettier` field pointing at `@noodlestan/prettier-config`; the two Astro application packages additionally adopt `@noodlestan/prettier-config-astro`.
+Both Prettier config packages are published at `0.0.1`, and the pilot consumer `$WEB` is pinned. `Iteration: Publish Art Tart Override` lifts the `ops` `*.art`/`*.tart` markdown override into the base package and republishes both packages at `0.1.0`. The remaining work is to replace every repository's hand-written or missing Prettier config with the `prettier` field pointing at `@noodlestan/prettier-config@0.1.0`; the two Astro application packages additionally adopt `@noodlestan/prettier-config-astro@0.1.0`.
 
 Scope is both config packages, `$PROJECT` itself, and the consumer checkouts enumerated by the inventory iteration; upstream is `Plan: Add Prettier Config`, which delivered the packages and the proven `$WEB` pilot.
 
@@ -147,6 +147,7 @@ Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefac
 
 - `DONE` — the rewritten `CHANGELOG.md` `0.0.1` entry describing the shipped rules and both entry points is committed (`e6105b9`).
 - `DONE` — `test/example.mjs` is formatted by the package's own rules (tabs in the `*.mjs` override) and the `ci` script leaves fixtures unchanged.
+- `0.1.0` adds the `*.art`/`*.tart` → `parser: "markdown"` override and republishes (Iteration: Publish Art Tart Override).
 
 ### (Scope) Package: Prettier Config Astro
 
@@ -165,6 +166,7 @@ Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefac
 
 - `DONE` — the rewritten `CHANGELOG.md` `0.0.1` entry describing the Astro override, the base spread, and the peer dependency is committed (`3afa85a`).
 - `DONE` — `_guide.md` is dropped from `files` in `package.json`; the base package matches.
+- `0.1.0` republishes with the base dependency updated to `0.1.0`; rules unchanged (Iteration: Publish Art Tart Override).
 
 ### (Scope) Consumer Checkouts: Prettier Adoption
 
@@ -195,12 +197,13 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 ## Items:
 
-| Iteration / Instructions               | Status     |
-| -------------------------------------- | ---------- |
-| Iteration: Finalise Release Artefacts  | `DONE`     |
-| Iteration: Inventory Prettier Configs  | `PLANNING` |
-| Iteration: Adopt Base Config Ecosystem | `PLANNING` |
-| Iteration: Document Adoption           | `DRAFT`    |
+| Iteration / Instructions               | Status  |
+| -------------------------------------- | ------- |
+| Iteration: Finalise Release Artefacts  | `DONE`  |
+| Iteration: Inventory Prettier Configs  | `READY` |
+| Iteration: Publish Art Tart Override   | `READY` |
+| Iteration: Adopt Base Config Ecosystem | `READY` |
+| Iteration: Document Adoption           | `DRAFT` |
 
 ### Iteration: Finalise Release Artefacts
 
@@ -227,7 +230,7 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Id:** `inventory-prettier-configs`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Instructions Mode:** `INSTRUCTIONS_INLINED_IN_ITERATION`
 
@@ -245,9 +248,9 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Commits:**
 
-| ID                 | Repository / Checkout / Branch          | Policy       | Hash  | Status    |
-| ------------------ | --------------------------------------- | ------------ | ----- | --------- |
-| `inventory-matrix` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `PLANNED` |
+| ID                 | Repository / Checkout / Branch          | Policy       | Hash  | Status     |
+| ------------------ | --------------------------------------- | ------------ | ----- | ---------- |
+| `inventory-matrix` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
 
 ##### Commit: `inventory-matrix`
 
@@ -266,15 +269,62 @@ plan(adopt-prettier-config): Fix the Prettier adoption matrix.
 
 - None.
 
+### Iteration: Publish Art Tart Override
+
+**Id:** `publish-art-tart-override`
+
+**Status:** `READY`
+
+**Instructions Mode:** `INSTRUCTIONS_INLINED_IN_ITERATION`
+
+**Purpose:** Ship the `*.art`/`*.tart` markdown override in the base package so `ops` adopts without losing it, and release both packages at `0.1.0`.
+
+**Description:** `ops/.prettierrc` carries an override the shipped base rules lack: `*.art`/`*.tart` files formatted with `parser: "markdown"`. The matrix flags adopting the base config as losing that override. Resolve the divergence in favour of the ecosystem: add the override to `$PRETTIER/src/index.cjs`, record it in a `0.1.0` changelog entry, and bump the package to `0.1.0`. `$PRETTIER_ASTRO` exact-pins the base package at `0.0.1`, so it is republished at `0.1.0` with the pin updated and its rules unchanged — otherwise Astro consumers would install a nested base `0.0.1` without the override. Run `npm run art-work publish` from `$WORKSPACE` after crew approval.
+
+**Changes:**
+
+- Add the override to `$PRETTIER/src/index.cjs` — a `*.art`/`*.tart` entry in `overrides` setting `parser: 'markdown'`.
+- Add a `## 0.1.0` entry to `$PRETTIER/CHANGELOG.md` describing the override; keep the `0.0.1` entry.
+- Bump `$PRETTIER/package.json` to `0.1.0`.
+- Update `$PRETTIER_ASTRO/package.json`: dependency `@noodlestan/prettier-config` `0.0.1` → `0.1.0`, version bumped to `0.1.0`; add the matching `## 0.1.0` entry to `$PRETTIER_ASTRO/CHANGELOG.md`. Rules unchanged — the Astro overrides already spread the base overrides.
+- Run `npm run ci` in both packages; fixtures must be unchanged apart from the shipped files.
+- Run `npm run art-work publish` from `$WORKSPACE` after crew approval.
+- Update both `_records/npm-deployment.art` records to the `0.1.0` deployment.
+
+**Commits:**
+
+| ID                          | Repository / Checkout / Branch          | Policy     | Hash  | Status     |
+| --------------------------- | --------------------------------------- | ---------- | ----- | ---------- |
+| `release-art-tart-override` | Workspace Tooling / `$PROJECT` / `main` | `NOCOMMIT` | (TBD) | `AUTHORED` |
+
+##### Commit: `release-art-tart-override`
+
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+release(prettier-config): 0.1.0 — `*.art`/`*.tart` override.
+
+- Format `*.art` and `*.tart` with `parser: "markdown"`, lifting the `ops` divergence.
+- Republish the Astro variant at `0.1.0` with its base pin updated; rules unchanged.
+```
+
+**Policy:** `NOCOMMIT` — publishing to the public registry is irreversible; stage the changes and hand back for crew commit and publish.
+
+**Dependencies:**
+
+- Iteration: Finalise Release Artefacts — `DONE`; the `0.0.1` release artefacts are committed and published.
+
 ### Iteration: Adopt Base Config Ecosystem
 
 **Id:** `adopt-base-config-ecosystem`
 
-**Status:** `PLANNING`
+**Status:** `READY`
 
 **Instructions Mode:** `INSTRUCTIONS_SELF_CONTAINED_FILE`
 
-**Purpose:** Replace every repository's config with the published base package, and the two Astro application packages with the Astro variant.
+**Purpose:** Replace every repository's config with the published base package at `0.1.0`, and the two Astro application packages with the Astro variant at `0.1.0`.
 
 **Description:** For each matrix row, swap the hand-written config for `"prettier": "@noodlestan/prettier-config"`, run the repo's `lint:fix`, accept the documented `*.mjs` re-indent, and commit the complete checkout on `main` with a `NOPUSH` policy. The `artificials` checkout adopts the base config at its root and the Astro variant in `apps/art-md-web` in the same commit. `$PROJECT` itself goes last so the root migration is validated against every package already published.
 
@@ -288,9 +338,9 @@ plan(adopt-prettier-config): Fix the Prettier adoption matrix.
 
 **Commits:**
 
-| ID                  | Repository / Checkout / Branch                   | Policy   | Hash  | Status    |
-| ------------------- | ------------------------------------------------ | -------- | ----- | --------- |
-| `adopt-base-config` | Each checkout / `$CHECKOUTS/{checkout}` / `main` | `NOPUSH` | (TBD) | `PLANNED` |
+| ID                  | Repository / Checkout / Branch                   | Policy   | Hash  | Status     |
+| ------------------- | ------------------------------------------------ | -------- | ----- | ---------- |
+| `adopt-base-config` | Each checkout / `$CHECKOUTS/{checkout}` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
 
 ##### Commit: `adopt-base-config`
 
@@ -318,6 +368,7 @@ configs(artificials): Adopt @noodlestan/prettier-config and the Astro variant.
 
 - Iteration: Finalise Release Artefacts — `DONE`; the release artefacts are committed and published at `0.0.1`.
 - `Plan: Add Prettier Config` — Iteration: Publish and Pin must have published `0.0.1`.
+- Iteration: Publish Art Tart Override — both packages published at `0.1.0`.
 - Iteration: Inventory Prettier Configs.
 
 ### Iteration: Document Adoption
@@ -343,7 +394,7 @@ configs(artificials): Adopt @noodlestan/prettier-config and the Astro variant.
 
 ### Next
 
-`Finalise Release Artefacts` is `DONE` (release artefacts committed and published at `0.0.1`; upstream `publish-and-pin` satisfied). `Inventory Prettier Configs` and `Adopt Base Config Ecosystem` are `PLANNING`; `Document Adoption` is `DRAFT` and intentionally left unplanned. Run **Write Instructions** to produce the delegatable instruction files (inlined for the inventory, self-contained for the ecosystem adoption), then execute: inventory the configs, adopt the base config ecosystem, then document adoption.
+`Finalise Release Artefacts` is `DONE` (release artefacts committed and published at `0.0.1`; upstream `publish-and-pin` satisfied). `Publish Art Tart Override`, `Inventory Prettier Configs`, and `Adopt Base Config Ecosystem` are `PLANNING`; `Document Adoption` is `DRAFT` and intentionally left unplanned. Run **Write Instructions** to produce the delegatable instruction files (inlined for the publish and inventory iterations, self-contained for the ecosystem adoption), then execute: publish `0.1.0`, inventory the configs, adopt the base config ecosystem, then document adoption.
 
 ### Blockers
 
@@ -423,13 +474,14 @@ npm run ci # lint, test and build
 ### Evidence
 
 - **Release artefacts match the shipped rules** — `Finalise Release Artefacts` is `DONE`; both package `ci` scripts pass twice in a row with no diff.
-- **Adopters run on released versions** — every adopted checkout installs `@noodlestan/prettier-config` at `0.0.1` from npm, not a symlink.
+- **Adopters run on released versions** — every adopted checkout installs `@noodlestan/prettier-config` at `0.1.0` from npm, not a symlink.
 - **Adoption diffs are explainable** — every per-checkout diff contains only the expected `*.mjs` re-indent; anything else is reported as a defect in `$PROJECT`.
 - **No hand-written configs remain** — a scan for `.prettierrc*` outside the config packages returns zero matches.
 
 ### Findings
 
 - **The `*.mjs` re-indent is proven in `$WEB`** — its config already matched the shipped rules byte-for-byte; every other repository must expect the diff as correct output.
+- **The Astro variant exact-pins the base package** — `@noodlestan/prettier-config-astro` declares `@noodlestan/prettier-config: 0.0.1` exactly, so a base-only bump would leave Astro consumers on a nested `0.0.1` without the override; both packages ship `0.1.0` together.
 - **Two divergent rule sets predate the packages** — `$WEB/.prettierrc` (tabs for JS-family) versus `$PROJECT/configs/eslint-config/.prettierrc` (`tabWidth: 4` with 2-space overrides); the shipped rules follow `$WEB`, so adopting in `$PROJECT` re-indents rather than being a no-op.
 - **Prettier resolves config by walking up from the file** — a package's own config is only used if its `package.json` carries the `prettier` field; the root config otherwise wins.
 - **The Astro variant is an application-package concern** — `@noodlestan/prettier-config-astro` is installed directly in packages that are Astro applications (`$WEB/apps/noodlestan-web`, `artificials/apps/art-md-web`), never at a monorepo root; every monorepo root adopts the base config.
@@ -437,6 +489,7 @@ npm run ci # lint, test and build
 ### Decisions
 
 - **All repositories adopt** — inventory decides the variant and the expected diff, never whether to adopt.
+- **The `ops` `*.art`/`*.tart` override ships in the base package** — the divergence is resolved in favour of the ecosystem: base `0.1.0` gains `parser: "markdown"` for `*.art`/`*.tart`, and the Astro variant is republished with its pin updated so no consumer installs two base versions.
 - **Release artefacts land before publish** — changelogs and fixtures are committed before upstream's publish run; nothing is back-filled after `npm run art-work publish`.
 - **Publishing stays upstream** — `Plan: Add Prettier Config`'s `publish-and-pin` ran the release; this plan landed the release artefacts first and adopts after, so no file and no npm gate is worked by both plans.
 - **One complete checkout per commit** — adoption commits are independently verifiable and revertable.
@@ -446,7 +499,7 @@ npm run ci # lint, test and build
 
 ### Knowledge to Update
 
-- `$PRETTIER/CHANGELOG.md` and `$PRETTIER_ASTRO/CHANGELOG.md` — final `0.0.1` release notes.
+- `$PRETTIER/CHANGELOG.md` and `$PRETTIER_ASTRO/CHANGELOG.md` — `0.1.0` release notes for the `*.art`/`*.tart` override and the base-pin update.
 - `$PRETTIER/_guide.md` — consumer adoption recipe and expected diff.
 - `$PRETTIER_ASTRO/_guide.md` — when an application package reaches for the Astro variant.
 - `$PROJECT/README.md` — package list and adoption instructions for new repositories.
@@ -455,7 +508,7 @@ npm run ci # lint, test and build
 ### Follow Ups
 
 - **Shared ignore convention** — decide a single `.prettierignore` policy across repositories, still open from the upstream plan.
-- **Version bumps after `0.0.1`** — rule changes ship as new versions; adopters upgrade deliberately per the shared-config ADR.
+- **Version bumps after `0.1.0`** — rule changes ship as new versions; adopters upgrade deliberately per the shared-config ADR.
 - **Astro variant adoption** — tracked by `Plan: Add Astro Support` in `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`.
 
 ### Feedback
