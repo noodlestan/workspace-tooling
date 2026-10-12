@@ -41,10 +41,10 @@ None.
 
 ### Upstream Work
 
-| Kind | Path                                                                              | Role                                                                                                               |
-| ---- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Plan | `$WORKSPACE_TOOLING/_backlog/4-next/plan-distribute-adrs-as-a-package/plan.md`    | `DRAFT`; provides the `@noodlestan/tooling-adrs` package and the `./plan__project-migration.md` adoption findings. |
-| Plan | `$WORKSPACE_TOOLING/_backlog/3-now/plan-rename-architecture-to-knowledge/plan.md` | `READY`; every repository's ADR directory is already named `knowledge/` before this plan executes.                 |
+| Kind | Path                                                                               | Role                                                                                                               |
+| ---- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Plan | `$WORKSPACE_TOOLING/_backlog/4-next/plan-distribute-adrs-as-a-package/plan.md`     | `DRAFT`; provides the `@noodlestan/tooling-adrs` package and the `./plan__project-migration.md` adoption findings. |
+| Plan | `$WORKSPACE_TOOLING/_backlog/1-done/plan-rename-architecture-to-knowledge/plan.md` | `DONE`; every repository's ADR directory is already named `knowledge/` before this plan executes.                  |
 
 ### Required Skills
 

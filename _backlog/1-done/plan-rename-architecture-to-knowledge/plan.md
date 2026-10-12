@@ -2,7 +2,7 @@
 
 **ID:** `rename-architecture-to-knowledge`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -151,15 +151,23 @@ Execution is coordinated from `$WORKSPACE`; changes run per checkout on `main`, 
 
 ## Items:
 
-| Iteration / Instructions                    | Status  |
-| ------------------------------------------- | ------- |
-| Iteration: Rename Architecture to Knowledge | `READY` |
+| Iteration / Instructions                    | Status |
+| ------------------------------------------- | ------ |
+| Iteration: Rename Architecture to Knowledge | `DONE` |
 
 ### Iteration: Rename Architecture to Knowledge
 
 **Id:** `rename-architecture-to-knowledge`
 
-**Status:** `READY`
+**Status:** `DONE`
+
+**Report:** `./plan-rename-architecture-to-knowledge/instructions/rename-architecture-to-knowledge__report.md`
+
+**Delegations:**
+
+| Timestamp  | Worker         | Instructions                                                                               | Mode          | Status |
+| ---------- | -------------- | ------------------------------------------------------------------------------------------ | ------------- | ------ |
+| 2026-10-12 | `agent-worker` | `./plan-rename-architecture-to-knowledge/instructions/rename-architecture-to-knowledge.md` | `interactive` | `DONE` |
 
 **Purpose:** Rehome ADR directories under `knowledge/` everywhere, so `architecture` stops meaning only decision records.
 
@@ -176,14 +184,29 @@ Execution is coordinated from `$WORKSPACE`; changes run per checkout on `main`, 
 
 **Commits:**
 
-| ID                              | Repository / Checkout / Branch                   | Policy   | Hash  | Status    |
-| ------------------------------- | ------------------------------------------------ | -------- | ----- | --------- |
-| `rename-architecture-knowledge` | Each checkout / `$CHECKOUTS/{checkout}` / `main` | `NOPUSH` | (TBD) | `PLANNED` |
-| `rename-architecture-agents`    | Workspace / `$WORKSPACE` / `main`                | `NOPUSH` | (TBD) | `PLANNED` |
+| ID                              | Repository / Checkout / Branch                   | Policy   | Hash                            | Status      |
+| ------------------------------- | ------------------------------------------------ | -------- | ------------------------------- | ----------- |
+| `rename-architecture-knowledge` | Each checkout / `$CHECKOUTS/{checkout}` / `main` | `NOPUSH` | 10 commits — see Commit section | `COMMITTED` |
+| `rename-architecture-agents`    | Workspace / `$WORKSPACE` / `main`                | `NOPUSH` | `5e6d3a3`                       | `COMMITTED` |
 
 ##### Commit: `rename-architecture-knowledge`
 
 **Repository:** Each checkout containing `architecture/` (one commit per checkout)
+
+**Status:** `COMMITTED` — not pushed, per `NOPUSH`. One commit per renamed checkout:
+
+| Checkout            | Hash      |
+| ------------------- | --------- |
+| `art-domains`       | `1d0e30b` |
+| `art-js`            | `7b6374f` |
+| `art-lib`           | `e319623` |
+| `art-md`            | `2895f8b` |
+| `art-work`          | `4064600` |
+| `conventions`       | `53ac891` |
+| `no-comply`         | `117522d` |
+| `noodlestan-web`    | `a0c33a0` |
+| `ops`               | `608ebc3` |
+| `workspace-tooling` | `8fb557c` |
 
 **Message:**
 
@@ -197,6 +220,8 @@ renames({checkout}): Rename `architecture/` to `knowledge/`.
 ##### Commit: `rename-architecture-agents`
 
 **Repository:** Noodlestan Workspace (meta-repository)
+
+**Status:** `COMMITTED` — not pushed, per `NOPUSH`. Hash: `5e6d3a3`.
 
 **Message:**
 
@@ -215,7 +240,7 @@ renames(rename-architecture-to-knowledge): Point `.agents` at `knowledge/`.
 
 ### Next
 
-The single iteration is `READY` with self-contained instructions at `./plan-rename-architecture-to-knowledge/instructions/rename-architecture-to-knowledge.md`; delegate it to `agent-worker`. This plan executes first — before `Plan: Distribute ADRs as a Package` and `Plan: Adopt Tooling Decisions`.
+- None — the plan is `DONE`. Downstream work continues in `Plan: Distribute ADRs as a Package` and `Plan: Adopt Tooling Decisions`, which now address `knowledge/` only.
 
 ### Blockers
 
@@ -286,6 +311,9 @@ npm run ci # lint, test and build
 - No `architecture/` directory remains at any repository root or package.
 - `$DOMAINS` and `$SKILLS` hold no `architecture/` references and no occurrence of the phrase `architecture reference`.
 - Every affected `_guide.md` points at `knowledge/`, and no live artefact under `_backlog/` or `_roadmap/` outside the archives references `architecture/`.
+- Delivered: 10 checkouts renamed (44 directories via `git mv`), 11 `NOPUSH` commits on `main`, none pushed; every repository sits 1 commit ahead of `origin/main`.
+- Per-checkout `npm run lint` and workspace `npm run ci` pass; archives (`0-archive`, `1-done`) and this plan's own directory were untouched in every commit.
+- Worker report: `./plan-rename-architecture-to-knowledge/instructions/rename-architecture-to-knowledge__report.md`.
 
 ### Findings
 
@@ -307,4 +335,10 @@ npm run ci # lint, test and build
 
 ### Feedback
 
-- None.
+Worker judgment calls worth noting (full detail in the report):
+
+- `art-md` — two live CHANGELOG release bullets referenced `architecture/api.md`; reworded to `knowledge/api.md` since they sit outside the exempt archive paths. Flag if historical release notes should stay verbatim.
+- `.agents` — two illustrative examples could not be replaced literally (`instructions.tart` had a doubly-nested `knowledge/architecture/` path; `compose-work-context.art` had `architecture/` beside `knowledge/` — duplicate removed).
+- `.agents` — "an architecture reference" → "a knowledge base", with the article adjusted to "a" for grammar.
+- `noodlestan-web` — the prose "does not maintain a dedicated architecture reference" in `apps/noodlestan-web/_guide.md` was left as-is: not a path reference, and the phrase replacement is mandated only for `.agents`.
+- Stale `node_modules` in `art-js`, `art-lib`, `no-comply`, and `workspace-tooling` broke pre-commit CI hooks; each repaired with `npm ci` in the checkout. No `--no-verify` used, no lockfile modified.
