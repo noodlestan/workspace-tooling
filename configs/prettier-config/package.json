@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/prettier-config",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Noodlestan's base Prettier formatting configuration.",
   "author": "Noodlestan Collective",
   "license": "MIT",

@@ -8,6 +8,12 @@ module.exports = {
 	arrowParens: 'avoid',
 	overrides: [
 		{
+			files: ['*.art', '*.tart'],
+			options: {
+				parser: 'markdown',
+			},
+		},
+		{
 			files: ['*.js', '*.cjs', '*.mjs', '*.ts', '*.mts', '*.tsx'],
 			options: {
 				useTabs: true,
