@@ -2,7 +2,7 @@
 
 **ID:** `adopt-prettier-config`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -200,7 +200,7 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 | Iteration / Instructions               | Status  |
 | -------------------------------------- | ------- |
 | Iteration: Finalise Release Artefacts  | `DONE`  |
-| Iteration: Inventory Prettier Configs  | `READY` |
+| Iteration: Inventory Prettier Configs  | `DONE`  |
 | Iteration: Publish Art Tart Override   | `READY` |
 | Iteration: Adopt Base Config Ecosystem | `READY` |
 | Iteration: Document Adoption           | `DRAFT` |
@@ -230,7 +230,7 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Id:** `inventory-prettier-configs`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Instructions Mode:** `INSTRUCTIONS_INLINED_IN_ITERATION`
 
@@ -248,9 +248,9 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 **Commits:**
 
-| ID                 | Repository / Checkout / Branch          | Policy       | Hash  | Status     |
-| ------------------ | --------------------------------------- | ------------ | ----- | ---------- |
-| `inventory-matrix` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` | (TBD) | `AUTHORED` |
+| ID                 | Repository / Checkout / Branch          | Policy       | Hash      | Status      |
+| ------------------ | --------------------------------------- | ------------ | --------- | ----------- |
+| `inventory-matrix` | Workspace Tooling / `$PROJECT` / `main` | `AUTONOMOUS` | `711f449` | `COMMITTED` |
 
 ##### Commit: `inventory-matrix`
 
@@ -394,7 +394,9 @@ configs(artificials): Adopt @noodlestan/prettier-config and the Astro variant.
 
 ### Next
 
-`Finalise Release Artefacts` is `DONE` (release artefacts committed and published at `0.0.1`; upstream `publish-and-pin` satisfied). `Publish Art Tart Override`, `Inventory Prettier Configs`, and `Adopt Base Config Ecosystem` are `PLANNING`; `Document Adoption` is `DRAFT` and intentionally left unplanned. Run **Write Instructions** to produce the delegatable instruction files (inlined for the publish and inventory iterations, self-contained for the ecosystem adoption), then execute: publish `0.1.0`, inventory the configs, adopt the base config ecosystem, then document adoption.
+`Finalise Release Artefacts` and `Inventory Prettier Configs` are `DONE` (release artefacts published at `0.0.1`; the adoption matrix committed and pushed as `711f449`). `Publish Art Tart Override` and `Adopt Base Config Ecosystem` are `READY` and next in line; `Document Adoption` is `DRAFT` and intentionally left unplanned. Delegate `publish-art-tart-override`, then `adopt-base-config-ecosystem`, then document adoption.
+
+**Delegation:** `inventory-prettier-configs` — `DONE`. Delegated and integrated 2026-10-12 (inlined instructions, agent mode `agent-worker`, worker session `ses_ed04c8b4dffeCCcEFUIb9l7Gjs`). Crew directed delegation to proceed as-is without rendering the missing `**Instructions:**` blocks. Outcome: commit `711f449` pushed; matrix completed at `./plan-adopt-prettier-config__matrix.md` (+90/−32); no report file (instructions inlined).
 
 ### Blockers
 
@@ -473,6 +475,8 @@ npm run ci # lint, test and build
 
 ### Evidence
 
+- **The matrix is measured, not asserted** — `inventory-prettier-configs` is `DONE` (`711f449` pushed); each checkout's expected diff was produced by running its own Prettier against the shipped rules, and every flag (`MJS` re-indent, `DRIFT`, `ASTRO`, `OPS`) is recorded per row in `./plan-adopt-prettier-config__matrix.md`.
+
 - **Release artefacts match the shipped rules** — `Finalise Release Artefacts` is `DONE`; both package `ci` scripts pass twice in a row with no diff.
 - **Adopters run on released versions** — every adopted checkout installs `@noodlestan/prettier-config` at `0.1.0` from npm, not a symlink.
 - **Adoption diffs are explainable** — every per-checkout diff contains only the expected `*.mjs` re-indent; anything else is reported as a defect in `$PROJECT`.
@@ -513,4 +517,6 @@ npm run ci # lint, test and build
 
 ### Feedback
 
-- None.
+- **The shipped entry is `src/index.cjs`, not `src/index.json`** — the inventory change named `index.json`; the package has no such file. The matrix records the delta against `index.cjs`.
+- **A worker may not edit `plan.md`** — so a delegator edit that leaves `plan.md` non-prettier-clean blocks every worker commit in `$PROJECT`, whose pre-commit runs `prettier . -c`. Format the plan before delegating.
+- **`inventory` proceeded without `**Instructions:**` blocks** — crew directed delegation as-is, treating `Purpose`/`Description`/`Changes`/`Commits` as the inlined instructions. It worked, but the block remains unwritten for future replays.
