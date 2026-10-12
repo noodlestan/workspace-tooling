@@ -197,13 +197,13 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 ## Items:
 
-| Iteration / Instructions               | Status  |
-| -------------------------------------- | ------- |
-| Iteration: Finalise Release Artefacts  | `DONE`  |
-| Iteration: Inventory Prettier Configs  | `DONE`  |
-| Iteration: Publish Art Tart Override   | `READY` |
-| Iteration: Adopt Base Config Ecosystem | `READY` |
-| Iteration: Document Adoption           | `DRAFT` |
+| Iteration / Instructions               | Status    |
+| -------------------------------------- | --------- |
+| Iteration: Finalise Release Artefacts  | `DONE`    |
+| Iteration: Inventory Prettier Configs  | `DONE`    |
+| Iteration: Publish Art Tart Override   | `DONE`    |
+| Iteration: Adopt Base Config Ecosystem | `WORKING` |
+| Iteration: Document Adoption           | `DRAFT`   |
 
 ### Iteration: Finalise Release Artefacts
 
@@ -273,7 +273,7 @@ plan(adopt-prettier-config): Fix the Prettier adoption matrix.
 
 **Id:** `publish-art-tart-override`
 
-**Status:** `READY`
+**Status:** `DONE`
 
 **Instructions Mode:** `INSTRUCTIONS_INLINED_IN_ITERATION`
 
@@ -293,34 +293,40 @@ plan(adopt-prettier-config): Fix the Prettier adoption matrix.
 
 **Commits:**
 
-| ID                          | Repository / Checkout / Branch          | Policy     | Hash  | Status     |
-| --------------------------- | --------------------------------------- | ---------- | ----- | ---------- |
-| `release-art-tart-override` | Workspace Tooling / `$PROJECT` / `main` | `NOCOMMIT` | (TBD) | `AUTHORED` |
+| ID                                         | Repository / Checkout / Branch          | Policy     | Hash      | Status      |
+| ------------------------------------------ | --------------------------------------- | ---------- | --------- | ----------- |
+| `release-art-tart-override-prettier`       | Workspace Tooling / `$PROJECT` / `main` | `NOCOMMIT` | `a29f92a` | `COMMITTED` |
+| `release-art-tart-override-prettier-astro` | Workspace Tooling / `$PROJECT` / `main` | `NOCOMMIT` | `5296062` | `COMMITTED` |
 
-##### Commit: `release-art-tart-override`
+##### Commit: `release-art-tart-override-prettier`
 
 **Repository:** Workspace Tooling
 
 **Message:**
 
 ```
-release(prettier-config): 0.1.0 — `*.art`/`*.tart` override.
-
-- Format `*.art` and `*.tart` with `parser: "markdown"`, lifting the `ops` divergence.
-- Republish the Astro variant at `0.1.0` with its base pin updated; rules unchanged.
+release(prettier-config): 0.1.0.
 ```
 
 **Policy:** `NOCOMMIT` — publishing to the public registry is irreversible; stage the changes and hand back for crew commit and publish.
 
-**Dependencies:**
+##### Commit: `release-art-tart-override-prettier-astro`
 
-- Iteration: Finalise Release Artefacts — `DONE`; the `0.0.1` release artefacts are committed and published.
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+release(prettier-config-astro): 0.1.0.
+```
+
+**Policy:** `NOCOMMIT` — publishing to the public registry is irreversible; stage the changes and hand back for crew commit and publish.
 
 ### Iteration: Adopt Base Config Ecosystem
 
 **Id:** `adopt-base-config-ecosystem`
 
-**Status:** `READY`
+**Status:** `WORKING`
 
 **Instructions Mode:** `INSTRUCTIONS_SELF_CONTAINED_FILE`
 
@@ -394,9 +400,13 @@ configs(artificials): Adopt @noodlestan/prettier-config and the Astro variant.
 
 ### Next
 
-`Finalise Release Artefacts` and `Inventory Prettier Configs` are `DONE` (release artefacts published at `0.0.1`; the adoption matrix committed and pushed as `711f449`). `Publish Art Tart Override` and `Adopt Base Config Ecosystem` are `READY` and next in line; `Document Adoption` is `DRAFT` and intentionally left unplanned. Delegate `publish-art-tart-override`, then `adopt-base-config-ecosystem`, then document adoption.
+`Finalise Release Artefacts`, `Inventory Prettier Configs`, and `Publish Art Tart Override` are `DONE` — the matrix landed as `711f449` and both packages are published at `0.1.0` (`a29f92a`, `5296062`). `Adopt Base Config Ecosystem` is `WORKING`; `Document Adoption` is `DRAFT` and intentionally left unplanned and comes after.
 
 **Delegation:** `inventory-prettier-configs` — `DONE`. Delegated and integrated 2026-10-12 (inlined instructions, agent mode `agent-worker`, worker session `ses_ed04c8b4dffeCCcEFUIb9l7Gjs`). Crew directed delegation to proceed as-is without rendering the missing `**Instructions:**` blocks. Outcome: commit `711f449` pushed; matrix completed at `./plan-adopt-prettier-config__matrix.md` (+90/−32); no report file (instructions inlined).
+
+**Delegation:** `publish-art-tart-override` — `DONE`. Delegated 2026-10-12 (inlined instructions, agent mode `agent-worker`), staged under the `NOCOMMIT` policy and handed back; crew committed `a29f92a` and `5296062`, published `0.1.0`, and integrated as `cb73921`. Split into two release commits rather than the single blueprint.
+
+**Delegation:** `adopt-base-config-ecosystem` — `WORKING`. Delegated 2026-10-12 (agent mode `agent-worker`, self-contained instructions `./instructions/adopt-base-config-ecosystem.md`, report expected at `./instructions/adopt-base-config-ecosystem__report.md`). Commit blueprint `adopt-base-config` is `NOPUSH`; one commit per checkout, `$PROJECT` migrated last.
 
 ### Blockers
 
