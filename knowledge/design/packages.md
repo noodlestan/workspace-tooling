@@ -1,14 +1,16 @@
 # Workspace Tooling - Packages
 
-**Purpose:** Describe the surface of the packages in this repository — layout, exports, bins, and publishability — and how Noodlestan repositories consume each one.
+**Purpose:** Describe the surface of the packages in this repository — layout, exports, and bins.
 
 ## Package Surface
 
-| Package                     | Path                    | Version | Public | Consumed as                                             |
-| --------------------------- | ----------------------- | ------- | ------ | ------------------------------------------------------- |
-| `@noodlestan/esbuild`       | `cli/esbuild-cli`       | `0.1.0` | yes    | `npm i -D @noodlestan/esbuild`, bins and `/plugins`     |
-| `@noodlestan/eslint-config` | `configs/eslint-config` | `0.0.8` | yes    | `require('@noodlestan/eslint-config')` from `.eslintrc` |
-| `@noodlestan/tsconfig`      | `configs/tsconfig`      | `0.1.0` | yes    | `extends` a preset path from a consumer `tsconfig.json` |
+| Package                             | Path                            | Version | Public | Consumed as                                             |
+| ----------------------------------- | ------------------------------- | ------- | ------ | ------------------------------------------------------- |
+| `@noodlestan/esbuild`               | `cli/esbuild-cli`               | `0.1.0` | yes    | `npm i -D @noodlestan/esbuild`, bins and `/plugins`     |
+| `@noodlestan/eslint-config`         | `configs/eslint-config`         | `0.0.8` | yes    | `require('@noodlestan/eslint-config')` from `.eslintrc` |
+| `@noodlestan/tsconfig`              | `configs/tsconfig`              | `0.1.0` | yes    | `extends` a preset path from a consumer `tsconfig.json` |
+| `@noodlestan/prettier-config`       | `configs/prettier-config`       | `0.1.0` | yes    | `"prettier"` field in `package.json`                    |
+| `@noodlestan/prettier-config-astro` | `configs/prettier-config-astro` | `0.1.0` | yes    | `"prettier"` field in an application `package.json`     |
 
 The root package (`@noodlestan/workspace-tooling`, `0.0.11`) is `private: true`. It is a tooling manifest for the monorepo: workspace definition, scripts, and shared dev dependencies. It produces no artefacts and never publishes.
 
@@ -31,31 +33,21 @@ The root package (`@noodlestan/workspace-tooling`, `0.0.11`) is `private: true`.
 - No `main` or `exports`: consumers point `extends` at files inside the installed package (for example `@noodlestan/tsconfig/esbuild/tsconfig.json`).
 - Preset directories are published as-is; see [typescript.md](typescript.md) for the stable kinds.
 
-## How Noodlestan Repositories Consume Them
+### `@noodlestan/prettier-config`
 
-1. Install the packages as dev dependencies.
-2. Extend the style guide from the repository's ESLint entry file (see [linting.md](linting.md)).
-3. Extend a preset from each package's `tsconfig.json` (see [typescript.md](typescript.md)).
-4. Add the build bins to package scripts and author `build.config.mjs` (see [build.md](build.md)).
+- `main`, `exports` and the package's own `prettier` field: `./src/index.cjs` — it formats itself with the rules it ships.
+- `files`: `src`, `README.md`, `LICENSE-MIT`.
+- `peerDependencies`: `prettier ^3.8.4` — the consumer supplies the engine, the config supplies the rules.
+
+### `@noodlestan/prettier-config-astro`
+
+- `main`, `exports` and `prettier`: `./src/index.cjs`, which spreads the base rules and adds the Astro overrides.
+- `files`: `src`, `README.md`, `LICENSE-MIT`.
+- `dependencies`: `@noodlestan/prettier-config` `0.1.0` — exact, so Astro consumers never install a second base version.
+- `peerDependencies`: `prettier ^3.8.4`, `prettier-plugin-astro ^1.1.0`.
 
 ## Inside This Repository
 
 - npm workspaces resolve `cli/*` and `configs/*`. A root dev dependency whose version matches the workspace package (for example `@noodlestan/eslint-config 0.0.8`) links to the local package instead of the registry.
 - The root `package.json` also declares `noodlestan/esbuild-cli` and `noodlestan/esbuild-cli-watch`, pointing at `cli/esbuild-cli/bin/*`, so the bins are available when the repository is consumed from a git URL.
 - Package facts live in `_records/` next to each package; the records are the source of truth for what exists and what publishes.
-
-## Publishability
-
-| Rule                             | Applies to                                                                                    |
-| -------------------------------- | --------------------------------------------------------------------------------------------- |
-| `publishConfig.access: public`   | all three packages                                                                            |
-| `private: true`                  | root only                                                                                     |
-| Independent version per package  | all three packages                                                                            |
-| `LICENSE-MIT` shipped in `files` | all three packages                                                                            |
-| Changelog                        | `@noodlestan/esbuild`, `@noodlestan/tsconfig` (see [adr/repository.md](../adr/repository.md)) |
-
-## Out of Scope
-
-- Application code and Noodlestan product repositories.
-- Framework-specific lint rules beyond the Solid/Astro stack described in [linting.md](linting.md).
-- Publishing automation (tags, release PRs): releases are manual today, and the decision is recorded in [adr/repository.md](../adr/repository.md).

@@ -1,4 +1,4 @@
-# Noodlestan TS Config
+# @noodlestan/tsconfig
 
 > Enforcing consistency and strict standards across all Noodlestan packages.
 

@@ -14,8 +14,7 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 - `_records/project.art` — the project record.
 - `_records/repository.art` — the repository record.
 - `_backlog/backlog.art` — the Backlog: Workspace Tooling record.
-- `knowledge/index.md` — knowledge, architecture, and decision records.
-- `knowledge/overview.md` — toolchain overview, rules, constraints, and options.
+- `knowledge/index.md` — knowledge, architecture, and decision records.options.
 
 ## Repository Layout
 

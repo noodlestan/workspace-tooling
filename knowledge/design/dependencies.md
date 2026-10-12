@@ -4,6 +4,8 @@
 
 ## Toolchain Inventory
 
+## Constraints
+
 | Dependency                            | Version  | Role                                   | Declared in                    |
 | ------------------------------------- | -------- | -------------------------------------- | ------------------------------ |
 | `esbuild`                             | `0.28.0` | Build engine (exact pin)               | root and `@noodlestan/esbuild` |
@@ -32,10 +34,3 @@
 | ESLint is on 8.x with the legacy config format                                        | Intentional today; flat config is a decision record |
 | `.nvmrc` pins `v24.15.0` while `engines` allows `>=22` and esbuild targets `node24`   | Consistent: develop on 24, support 22+              |
 | `@noodlestan/esbuild` ships `.mjs` sources with no build step                         | Deliberate: the wrapper builds other packages       |
-| No package has a test suite (`test` scripts echo)                                     | Known gap; `test/` fixtures are linted only         |
-
-## Constraints
-
-- Adding a runtime dependency to a published package changes what consumers install; it requires a decision record in [adr/repository.md](../adr/repository.md).
-- Version choices for published output follow [adr/distribution.md](../adr/distribution.md).
-- The build engine and wrapper dependency surface follow [adr/build-model.md](../adr/build-model.md).

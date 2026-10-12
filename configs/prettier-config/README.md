@@ -1,4 +1,4 @@
-# Noodlestan Prettier Config
+# @noodlestan/prettier-config
 
 > Noodlestan's canonical base Prettier formatting configuration.
 
@@ -18,9 +18,7 @@ Then point your repository or package at the config from the `prettier` field of
 }
 ```
 
-**⚠️ Note:** delete your repository's or library's own `.prettierrc` (or `.prettierrc.json`,
-`.prettierrc.js`, …). A local Prettier config file shadows the `prettier` field of
-`package.json`.
+**⚠️ Note:** delete your repository's or library's own `.prettierrc` (or `.prettierrc.json`, `.prettierrc.js`, …). A local Prettier config file shadows the `prettier` field of `package.json`.
 
 ### Peer Depedencies
 

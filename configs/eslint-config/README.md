@@ -1,4 +1,4 @@
-# Noodlestan ESLint Config
+# @noodlestan/eslint-config
 
 > Noodlestan's opinionated style guide configuration (ESLint + Prettier).
 

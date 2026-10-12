@@ -48,23 +48,6 @@ Read the purpose line before applying a statement: a rule about the wrapper's in
 
 ## How It Works
 
-### Layout
-
-```
-knowledge/
-├── index.md        — this directory's index
-├── overview.md     — this document
-├── components.md   — components and their contracts
-├── principles.md   — principles, constraints, and known gaps
-├── design/         — detailed design documents
-└── adr/            — decision records
-
-_backlog/           — planning artefacts (Workflow: Planning Work)
-_records/           — project, repository, and namespace records
-cli/                — CLI packages (npm workspaces: cli/*)
-configs/            — configuration packages (npm workspaces: configs/*)
-```
-
 ### Verification
 
 1. Lefthook runs a `pre-commit` hook: `npm run clean`, then `npm run extract`, then `npm run ci`.
@@ -76,9 +59,3 @@ configs/            — configuration packages (npm workspaces: configs/*)
 1. The root package stays `private`; only the three leaf packages publish, each with `publishConfig.access: public`.
 2. Versions are independent per package and released from this repository.
 3. Consumers install the published packages; npm workspaces link them inside this monorepo.
-
-## Principles and Constraints
-
-- [principles.md](principles.md) holds the principles, the hard constraints, and the known gaps that bind every document here.
-- [components.md](components.md) holds the component map and the contracts between them.
-- Detailed design lives in [design/](design/); binding choices live in [adr/](adr/).
