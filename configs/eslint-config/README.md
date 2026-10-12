@@ -39,7 +39,7 @@ const config = require('@noodlestan/eslint-config');
 module.exports = { ...config };
 ```
 
-The config supplies the rules; your repository owns the `eslint`, `prettier`, and `typescript` versions through the declared peer dependencies. See [architecture/design/linting.md](../../architecture/design/linting.md) for how the config is composed and validated.
+The config supplies the rules; your repository owns the `eslint`, `prettier`, and `typescript` versions through the declared peer dependencies. See [knowledge/design/linting.md](../../knowledge/design/linting.md) for how the config is composed and validated.
 
 ## Development
 

@@ -27,7 +27,7 @@
 | `$PROJECT`   | `checkouts/workspace-tooling` | Monorepo that hosts the packages and this plan.         |
 | `$CONFIGS`   | `$PROJECT/configs`            | The four configuration packages.                        |
 | `$CLI`       | `$PROJECT/cli/esbuild-cli`    | `@noodlestan/esbuild` package.                          |
-| `$ADRS`      | `$PROJECT/architecture/adr`   | Decision records captured and implemented by this plan. |
+| `$ADRS`      | `$PROJECT/knowledge/adr`      | Decision records captured and implemented by this plan. |
 
 ## Summary
 
@@ -145,7 +145,7 @@ The whole monorepo: the root and all 5 packages adopt each shared config where i
 **Changes:**
 
 - Add a packaging check to the repository verification so the `files` allow-list is exercised.
-- Update `README.md`, `_guide.md`, and `architecture/index.md`.
+- Update `README.md`, `_guide.md`, and `knowledge/index.md`.
 
 ### (Scope) Configuration Packages
 
@@ -331,7 +331,7 @@ Execution occurs from `$PROJECT/` on branch `main` (or a dedicated branch). All 
 
 **Changes:**
 
-- Update `$PROJECT/_guide.md`, `$PROJECT/README.md`, and `architecture/index.md` to describe self-consumption and the packaging check.
+- Update `$PROJECT/_guide.md`, `$PROJECT/README.md`, and `knowledge/index.md` to describe self-consumption and the packaging check.
 - Update the `_records` for every package whose dependencies or config changed.
 - Run `npm run ci` from `$PROJECT` and confirm it is green.
 
@@ -445,7 +445,7 @@ npm run ci # lint, test and build
 
 ### Knowledge to Update
 
-- `$PROJECT/architecture/index.md` — register the self-consumption and internal-dependencies ADRs.
+- `$PROJECT/knowledge/index.md` — register the self-consumption and internal-dependencies ADRs.
 - `$PROJECT/_guide.md` — describe self-consumption and the packaging check.
 - `$PROJECT/README.md` — consumer and maintainer guidance for the local link.
 - Package `_records` — reflect changed dependencies and scripts.

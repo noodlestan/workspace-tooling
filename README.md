@@ -20,8 +20,8 @@ The declared namespaced esbuild bins are linked by npm as `esbuild-cli` and
 ## Architecture
 
 Documents and decision records for this repository live in
-[architecture/index.md](architecture/index.md) — start with
-[architecture/overview.md](architecture/overview.md) for the toolchain,
+[knowledge/index.md](knowledge/index.md) — start with
+[knowledge/overview.md](knowledge/overview.md) for the toolchain,
 its rules, and the options available to consuming repositories.
 
 ## Development

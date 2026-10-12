@@ -51,7 +51,7 @@ Read the purpose line before applying a statement: a rule about the wrapper's in
 ### Layout
 
 ```
-architecture/
+knowledge/
 ├── index.md        — this directory's index
 ├── overview.md     — this document
 ├── components.md   — components and their contracts

@@ -48,7 +48,7 @@ Scope is both config packages, `$PROJECT` itself, and the consumer checkouts enu
 | Kind              | Path                                                                      | Role                                                                                                                                                  |
 | ----------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Plan              | `$PROJECT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md` | `DONE`; created both packages, proved the base config in `$WEB`, published `0.0.1`, and pinned `$WEB`. Its `publish-and-pin` dependency is satisfied. |
-| ADR               | `$PROJECT/architecture/adr/shared-config.md`                              | Prettier as both an ESLint rule and a standalone check; config ships as a versioned package.                                                          |
+| ADR               | `$PROJECT/knowledge/adr/shared-config.md`                                 | Prettier as both an ESLint rule and a standalone check; config ships as a versioned package.                                                          |
 | Milestone         | `$ROADMAP/3-now/milestone-tooling-one/milestone.md`                       | Coordinates this plan with the other tooling plans.                                                                                                   |
 | Committed release | `git log` in `$PROJECT` (`e6105b9`, `3afa85a`)                            | The release artefacts (CHANGELOG, `files`, fixture) are committed and published at `0.0.1`; nothing remains unstaged.                                 |
 
@@ -99,7 +99,7 @@ Scope is both config packages, `$PROJECT` itself, and the consumer checkouts enu
 
 ### Knowledge
 
-::READ `$PROJECT/architecture/adr/shared-config.md` (ADR) — One formatting source of truth, two enforcement points, config published as a versioned package. Relevant for Planning Work Item.
+::READ `$PROJECT/knowledge/adr/shared-config.md` (ADR) — One formatting source of truth, two enforcement points, config published as a versioned package. Relevant for Planning Work Item.
 
 ::READ `$PRETTIER/_guide.md` (Guide) — Package layout, rules, and the `prettier` field adoption recipe consumers follow. Relevant for Executing Work Step, Verifying Step.
 

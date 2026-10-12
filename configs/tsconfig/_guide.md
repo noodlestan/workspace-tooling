@@ -8,7 +8,7 @@ Agents SHOULD scan these files for definitions and resource locations when faced
 
 - `_guide.md` — this file: package overview, layout, records, and operating instructions.
 - `README.md` — package readme.
-- `../../architecture/design/typescript.md` — consumer kinds, presets, and how consumers extend them.
+- `../../knowledge/design/typescript.md` — consumer kinds, presets, and how consumers extend them.
 
 ## Package Layout
 

@@ -31,18 +31,18 @@
 
 Deliver the tooling configuration story end to end: the build config contract is already externalised (`DONE`), the Prettier config packages are published and pinned in the pilot consumer with ecosystem adoption still open (`WORKING`), and the ecosystem-wide adoption of Node-compatible ESM distribution is underway (`WORKING`), shipping `@noodlestan/tsconfig@0.2.0` with the new presets.
 
-Scope is `Project: Noodlestan Workspace Tooling` with its configuration packages and every consumer checkout; upstream is the distribution, shared-config, and build ADRs in `$PROJECT/architecture/`.
+Scope is `Project: Noodlestan Workspace Tooling` with its configuration packages and every consumer checkout; upstream is the distribution, shared-config, and build ADRs in `$PROJECT/knowledge/`.
 
 ## Context
 
 ### Upstream Work
 
-| Kind    | Path                                         | Role                                                                                                |
-| ------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| ADR     | `$PROJECT/architecture/adr/distribution.md`  | The distribution decisions being adopted across the ecosystem.                                      |
-| ADR     | `$PROJECT/architecture/adr/shared-config.md` | TSConfig scoped to consumer build tool, Prettier enforcement, config shipped as versioned packages. |
-| ADR     | `$PROJECT/architecture/adr/build-model.md`   | Build toolchain decisions behind the externalised build config contract.                            |
-| Backlog | `$PROJECT/_backlog/backlog.art`              | Holds the plan items this milestone coordinates.                                                    |
+| Kind    | Path                                      | Role                                                                                                |
+| ------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| ADR     | `$PROJECT/knowledge/adr/distribution.md`  | The distribution decisions being adopted across the ecosystem.                                      |
+| ADR     | `$PROJECT/knowledge/adr/shared-config.md` | TSConfig scoped to consumer build tool, Prettier enforcement, config shipped as versioned packages. |
+| ADR     | `$PROJECT/knowledge/adr/build-model.md`   | Build toolchain decisions behind the externalised build config contract.                            |
+| Backlog | `$PROJECT/_backlog/backlog.art`           | Holds the plan items this milestone coordinates.                                                    |
 
 ### Required Skills
 
@@ -84,9 +84,9 @@ Scope is `Project: Noodlestan Workspace Tooling` with its configuration packages
 
 ### Knowledge
 
-::READ `$PROJECT/architecture/adr/distribution.md` (ADR) — Node-compatible ESM, compiled JS, declarations, and the TypeScript-source exemption. Relevant for Planning Work Item, Verifying Completion.
+::READ `$PROJECT/knowledge/adr/distribution.md` (ADR) — Node-compatible ESM, compiled JS, declarations, and the TypeScript-source exemption. Relevant for Planning Work Item, Verifying Completion.
 
-::READ `$PROJECT/architecture/adr/shared-config.md` (ADR) — Consumer-build-tool TSConfig scoping, Prettier as ESLint rule plus standalone check, config as versioned package. Relevant for Planning Work Item.
+::READ `$PROJECT/knowledge/adr/shared-config.md` (ADR) — Consumer-build-tool TSConfig scoping, Prettier as ESLint rule plus standalone check, config as versioned package. Relevant for Planning Work Item.
 
 ::READ `$PROJECT/_guide.md` (Guide) — Repository layout, records management, and `npm run ci` verification. Relevant for Setting Up, Verifying Completion.
 

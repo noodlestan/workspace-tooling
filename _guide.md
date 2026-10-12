@@ -14,8 +14,8 @@ Agents SHOULD scan these files for relevant clarifications when faced with ambig
 - `_records/project.art` — the project record.
 - `_records/repository.art` — the repository record.
 - `_backlog/backlog.art` — the Backlog: Workspace Tooling record.
-- `architecture/index.md` — architecture documents and decision records index.
-- `architecture/overview.md` — toolchain overview, rules, constraints, and options.
+- `knowledge/index.md` — knowledge, architecture, and decision records.
+- `knowledge/overview.md` — toolchain overview, rules, constraints, and options.
 
 ## Repository Layout
 
@@ -24,7 +24,6 @@ _guide.md           — this file
 _backlog/           — backlog record and planning artefacts, by state directory
 _records/           — project, repository, license, dependencies, scaffolders, and scripts records
 _backlog/           — Backlog: Workspace Tooling planning artefacts
-architecture/       — architecture documents and decision records
 cli/                — CLI packages
 configs/            — shared configuration packages
 ```
@@ -51,9 +50,9 @@ Records are co-located with the resources they describe in `_records/` directori
 
 ## Knowledge References
 
-This repository maintains architecture references at:
+This repository maintains knowledge references at:
 
-- `architecture/index.md` — Repository-level architecture index.
+- `knowledge/index.md` — Repository-level knowledge index.
 
 ## Conventions
 
