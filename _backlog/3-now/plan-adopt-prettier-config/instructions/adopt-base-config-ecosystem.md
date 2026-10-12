@@ -92,7 +92,7 @@ RULE: Do not invent commit types or scopes or assume a combination is valid. Alw
 Run from each adopted checkout root:
 
 ```bash
-npm run lint # must pass; the diff may contain only the expected *.mjs re-indent.
+npm run lint # must pass; the diff = the expected *.mjs re-indent plus any *.art/*.tart markdown formatting.
 ```
 
 ### Operating Instructions: Verifying Completion
@@ -119,15 +119,15 @@ For each `{checkout}` row in `$MATRIX` with status `TODO`, in matrix order, run 
 
 #### Adoption Workflow — per `{checkout}`
 
-| #   | On                                                                      | Do                                                                                                                                                                                                 | Expected                                                                       |
-| --- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| 1   | `$CHECKOUTS/{checkout}`                                                 | `npm ci`                                                                                                                                                                                           | clean tree on `main`                                                           |
-| 2   | checkout root                                                           | `npm install -D @noodlestan/prettier-config@0.1.0` — installs or updates the dependency, rewriting `package.json` and `package-lock.json`; for `conventions` this updates the existing `0.0.1` dep | dep at `0.1.0`; lock rewritten; both files ride along in the commit            |
-| 3   | checkout root                                                           | delete `.prettierrc*`; add `"prettier": "@noodlestan/prettier-config"` to the root `package.json`                                                                                                  | no hand-written config remains                                                 |
-| 4   | _only if the checkout has an Astro application package — `artificials`_ | in `apps/art-md-web`: `npm install -D @noodlestan/prettier-config-astro@0.1.0`, and add `"prettier": "@noodlestan/prettier-config-astro"` to its `package.json`                                    | Astro variant installed at the application package, never at the monorepo root |
-| 5   | checkout root                                                           | `npm run lint:fix`                                                                                                                                                                                 | passes; diff = only the expected `*.mjs` re-indent (tabs)                      |
-| 6   | checkout                                                                | stage every file changed for this checkout and commit with the message below; do **not** push                                                                                                      | `NOPUSH` commit on `main`                                                      |
-| 7   | `$MATRIX`                                                               | set the row to `DONE` and record the commit hash in the Commit Log                                                                                                                                 | the matrix edit stays uncommitted for the planner                              |
+| #   | On                                                                      | Do                                                                                                                                                                                                              | Expected                                                                       |
+| --- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 1   | `$CHECKOUTS/{checkout}`                                                 | `npm ci`                                                                                                                                                                                                        | clean tree on `main`                                                           |
+| 2   | checkout root                                                           | `npm install -D --save-exact @noodlestan/prettier-config@0.1.0` — installs or updates the dependency, rewriting `package.json` and `package-lock.json`; for `conventions` this updates the existing `0.0.1` dep | dep at `0.1.0`; lock rewritten; both files ride along in the commit            |
+| 3   | checkout root                                                           | delete `.prettierrc*`; add `"prettier": "@noodlestan/prettier-config"` to the root `package.json`                                                                                                               | no hand-written config remains                                                 |
+| 4   | _only if the checkout has an Astro application package — `artificials`_ | in `apps/art-md-web`: `npm install -D --save-exact @noodlestan/prettier-config-astro@0.1.0`, and add `"prettier": "@noodlestan/prettier-config-astro"` to its `package.json`                                    | Astro variant installed at the application package, never at the monorepo root |
+| 5   | checkout root                                                           | `npm run lint:fix`                                                                                                                                                                                              | passes; diff = `*.mjs` re-indent (tabs) + any `*.art`/`*.tart` first-format    |
+| 6   | checkout                                                                | stage every file changed for this checkout and commit with the message below; do **not** push                                                                                                                   | `NOPUSH` commit on `main`                                                      |
+| 7   | `$MATRIX`                                                               | set the row to `DONE` and record the commit hash in the Commit Log                                                                                                                                              | the matrix edit stays uncommitted for the planner                              |
 
 #### Commit Messages
 
@@ -151,7 +151,9 @@ configs(artificials): Adopt @noodlestan/prettier-config and the Astro variant.
 
 RULE: One complete checkout per commit. Do not batch checkouts into a single commit.
 
-RULE: If `npm run lint:fix` produces any change beyond the expected `*.mjs` re-indent, stop and REPORT A BLOCKER with the offending files.
+RULE: The expected diff is the `*.mjs` re-indent (tabs) plus any first-time formatting of `*.art`/`*.tart` files — base `0.1.0` parses them as markdown, so a missing final newline is correct output to accept, not a defect. If `npm run lint:fix` produces any change beyond those two, stop and REPORT A BLOCKER with the offending files.
+
+RULE: Install the config packages with `npm install -D --save-exact {package}` — pins are exact (`0.1.0`), never a caret range.
 
 ---
 

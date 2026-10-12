@@ -178,7 +178,7 @@ Changes in 2 packages and every checkout under `$CHECKOUTS`: the release artefac
 
 - Replace `.prettierrc*` with `"prettier": "@noodlestan/prettier-config"` in the checkout's root `package.json`; add the dependency in the root `devDependencies`.
 - The two Astro application packages — `$WEB/apps/noodlestan-web` (already adopted) and `artificials/apps/art-md-web` — set `"prettier": "@noodlestan/prettier-config-astro"` in their own `package.json`; the Astro variant is installed at the application package, never at a monorepo root.
-- Run `npm run lint:fix` and accept the expected `*.mjs` re-indent as correct output; anything beyond it is a defect in `$PROJECT`.
+- Run `npm run lint:fix` and accept the expected `*.mjs` re-indent — plus any first-time `*.art`/`*.tart` markdown formatting — as correct output; anything beyond those is a defect in `$PROJECT`.
 - One complete checkout per commit on branch `main`; commits are `NOPUSH`.
 
 **Operations:**
@@ -197,13 +197,13 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 ## Items:
 
-| Iteration / Instructions               | Status    |
-| -------------------------------------- | --------- |
-| Iteration: Finalise Release Artefacts  | `DONE`    |
-| Iteration: Inventory Prettier Configs  | `DONE`    |
-| Iteration: Publish Art Tart Override   | `DONE`    |
-| Iteration: Adopt Base Config Ecosystem | `WORKING` |
-| Iteration: Document Adoption           | `DRAFT`   |
+| Iteration / Instructions               | Status  |
+| -------------------------------------- | ------- |
+| Iteration: Finalise Release Artefacts  | `DONE`  |
+| Iteration: Inventory Prettier Configs  | `DONE`  |
+| Iteration: Publish Art Tart Override   | `DONE`  |
+| Iteration: Adopt Base Config Ecosystem | `DONE`  |
+| Iteration: Document Adoption           | `DRAFT` |
 
 ### Iteration: Finalise Release Artefacts
 
@@ -326,7 +326,7 @@ release(prettier-config-astro): 0.1.0.
 
 **Id:** `adopt-base-config-ecosystem`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Instructions Mode:** `INSTRUCTIONS_SELF_CONTAINED_FILE`
 
@@ -337,16 +337,17 @@ release(prettier-config-astro): 0.1.0.
 **Changes:**
 
 - Per checkout: delete `.prettierrc*`, add the `prettier` field and the `devDependencies` entry, run `npm run lint:fix`, inspect the diff.
-- Treat `*.mjs` re-indentation as correct output; stop and report any other change as a defect in `$PROJECT`.
+- Treat `*.mjs` re-indentation and any first-time `*.art`/`*.tart` markdown formatting as correct output; stop and report any other change as a defect in `$PROJECT`.
+- Install the config packages with `npm install -D --save-exact {package}` — exact `0.1.0` pins, never a caret range.
 - `artificials`: adopt the base config at the root and `@noodlestan/prettier-config-astro` in `apps/art-md-web`, in the same commit.
 - Migrate `$PROJECT` root last: replace `$PROJECT/.prettierrc`, accepting the re-indent of the `.mjs` files under `cli/esbuild-cli/`.
 - Commit one checkout at a time on branch `main` with a `NOPUSH` policy; record the commit hash in the matrix row after each.
 
 **Commits:**
 
-| ID                  | Repository / Checkout / Branch                   | Policy   | Hash  | Status     |
-| ------------------- | ------------------------------------------------ | -------- | ----- | ---------- |
-| `adopt-base-config` | Each checkout / `$CHECKOUTS/{checkout}` / `main` | `NOPUSH` | (TBD) | `AUTHORED` |
+| ID                  | Repository / Checkout / Branch                   | Policy   | Hash       | Status      |
+| ------------------- | ------------------------------------------------ | -------- | ---------- | ----------- |
+| `adopt-base-config` | Each checkout / `$CHECKOUTS/{checkout}` / `main` | `NOPUSH` | see matrix | `COMMITTED` |
 
 ##### Commit: `adopt-base-config`
 
@@ -399,14 +400,6 @@ configs(artificials): Adopt @noodlestan/prettier-config and the Astro variant.
 ## Work
 
 ### Next
-
-`Finalise Release Artefacts`, `Inventory Prettier Configs`, and `Publish Art Tart Override` are `DONE` — the matrix landed as `711f449` and both packages are published at `0.1.0` (`a29f92a`, `5296062`). `Adopt Base Config Ecosystem` is `WORKING`; `Document Adoption` is `DRAFT` and intentionally left unplanned and comes after.
-
-**Delegation:** `inventory-prettier-configs` — `DONE`. Delegated and integrated 2026-10-12 (inlined instructions, agent mode `agent-worker`, worker session `ses_ed04c8b4dffeCCcEFUIb9l7Gjs`). Crew directed delegation to proceed as-is without rendering the missing `**Instructions:**` blocks. Outcome: commit `711f449` pushed; matrix completed at `./plan-adopt-prettier-config__matrix.md` (+90/−32); no report file (instructions inlined).
-
-**Delegation:** `publish-art-tart-override` — `DONE`. Delegated 2026-10-12 (inlined instructions, agent mode `agent-worker`), staged under the `NOCOMMIT` policy and handed back; crew committed `a29f92a` and `5296062`, published `0.1.0`, and integrated as `cb73921`. Split into two release commits rather than the single blueprint.
-
-**Delegation:** `adopt-base-config-ecosystem` — `WORKING`. Delegated 2026-10-12 (agent mode `agent-worker`, self-contained instructions `./instructions/adopt-base-config-ecosystem.md`, report expected at `./instructions/adopt-base-config-ecosystem__report.md`). Commit blueprint `adopt-base-config` is `NOPUSH`; one commit per checkout, `$PROJECT` migrated last.
 
 ### Blockers
 
@@ -509,6 +502,8 @@ npm run ci # lint, test and build
 - **One complete checkout per commit** — adoption commits are independently verifiable and revertable.
 - **Adoption commits are `NOPUSH` on `main`** — each checkout commits directly on `main` and is never pushed by this plan.
 - **The `*.mjs` re-indent is correct output** — a wider diff stops the migration and is judged as a defect in `$PROJECT` or a pre-existing divergence, never absorbed silently.
+- **`*.art`/`*.tart` first-formats are correct output** — base `0.1.0` parses them as markdown, so adoption adds a final newline to previously unparsed files; crew judged this on `art-md` as a sign the override ships correctly. Anything still wider remains a blocker.
+- **Config packages are exact-pinned** — adoption installs with `npm install -D --save-exact {package}` at `0.1.0`, matching the pilot's exact-pin practice; `^0.1.0` ranges are rejected.
 - **Document Adoption stays unplanned** — its purpose and exact changes are recorded, but no instructions or commits are written for it.
 
 ### Knowledge to Update

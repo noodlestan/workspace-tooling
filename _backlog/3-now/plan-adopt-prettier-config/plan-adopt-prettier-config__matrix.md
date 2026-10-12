@@ -16,6 +16,7 @@ Produced by `Iteration: Inventory Prettier Configs`; consumed by `Iteration: Ado
 | Flag      | Meaning                                                                                                                      |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `MJS×n`   | Adoption re-indents `n` `*.mjs` files — expected output, accepted as correct.                                                |
+| `ART×n`   | `n` `*.art`/`*.tart` files get first-time markdown formatting under base `0.1.0` — expected output, accepted as correct.     |
 | `ASTRO×n` | `n` `*.astro` files get first-time formatting when the Astro variant lands — a wider diff to judge, never absorbed silently. |
 | `DRIFT`   | Pre-existing formatting drift outside the `*.mjs` re-indent — a wider diff to judge, never absorbed silently.                |
 | `OPS`     | `ops` relies on the `*.art`/`*.tart` → `parser: "markdown"` override, absent from base `0.0.1`; lands in base `0.1.0`.       |
@@ -27,23 +28,23 @@ Every monorepo root adopts `@noodlestan/prettier-config` via the `prettier` fiel
 
 | Checkout          | Current config path     | Rules delta vs base       | `prettier` field              | `@noodlestan/prettier-config` dep | Expected adoption diff                                                               | Flags               | Status |
 | ----------------- | ----------------------- | ------------------------- | ----------------------------- | --------------------------------- | ------------------------------------------------------------------------------------ | ------------------- | ------ |
-| art-domains       | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | TODO   |
-| art-js            | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 7 `*.mjs` (all `build.config.mjs`)                                         | `MJS×7`             | TODO   |
-| art-lib           | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 1 `*.mjs` (`libs/fs-records/build.config.mjs`)                             | `MJS×1`             | TODO   |
-| art-md            | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 7 `*.mjs` (all `build.config.mjs`)                                         | `MJS×7`             | TODO   |
-| art-work          | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 1 `*.mjs` (`cli/work/build.config.mjs`)                                    | `MJS×1`             | TODO   |
-| artificials       | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 1 `*.mjs` (`astro.config.mjs`); plus 12 `*.astro` first-format in the app  | `MJS×1`, `ASTRO×12` | TODO   |
-| artisans          | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | TODO   |
-| conventions       | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | `0.0.1` (present, unwired)        | none — no tracked `*.mjs`; dependency update `0.0.1` → `0.1.0`                       | `WIRE`              | TODO   |
-| management        | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | TODO   |
-| no-comply         | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 2 `*.mjs` (both `build.config.mjs`)                                        | `MJS×2`             | TODO   |
+| art-domains       | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | DONE   |
+| art-js            | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 7 `*.mjs` (all `build.config.mjs`)                                         | `MJS×7`             | DONE   |
+| art-lib           | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 1 `*.mjs` (`libs/fs-records/build.config.mjs`)                             | `MJS×1`             | DONE   |
+| art-md            | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 7 `*.mjs` (all `build.config.mjs`) + 3 `*.art` first-format                | `MJS×7`, `ART×3`    | DONE   |
+| art-work          | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 1 `*.mjs` (`cli/work/build.config.mjs`)                                    | `MJS×1`             | DONE   |
+| artificials       | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 1 `*.mjs` (`astro.config.mjs`); plus 12 `*.astro` first-format in the app  | `MJS×1`, `ASTRO×12` | DONE   |
+| artisans          | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | DONE   |
+| conventions       | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | `0.0.1` (present, unwired)        | none — no tracked `*.mjs`; dependency update `0.0.1` → `0.1.0`                       | `WIRE`              | DONE   |
+| management        | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | DONE   |
+| no-comply         | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 2 `*.mjs` (both `build.config.mjs`)                                        | `MJS×2`             | DONE   |
 | noodlestan-web    | `package.json#prettier` | none — adopted            | `@noodlestan/prettier-config` | `0.0.1`                           | none — already adopted; verified clean                                               | —                   | DONE   |
-| ops               | `.prettierrc` (root)    | `+*.mjs`; `art/tart` only | NONE                          | NONE                              | none — config swap only; base `0.1.0` must carry the `*.art`/`*.tart` override first | `OPS`               | TODO   |
-| purrception       | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 4 `*.mjs` (all `build.config.mjs`)                                         | `MJS×4`             | TODO   |
-| purrfect          | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | TODO   |
-| purrpose          | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | TODO   |
-| purrtrait         | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | TODO   |
-| workspace-tooling | `.prettierrc` (root)    | `+*.mjs` (root)           | NONE                          | NONE                              | re-indent 9 `*.mjs` under `cli/esbuild-cli/` + rewrite of pre-existing `plan.md`     | `MJS×9`, `DRIFT`    | TODO   |
+| ops               | `.prettierrc` (root)    | `+*.mjs`; `art/tart` only | NONE                          | NONE                              | none — config swap only; base `0.1.0` must carry the `*.art`/`*.tart` override first | `OPS`               | DONE   |
+| purrception       | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | re-indent 4 `*.mjs` (all `build.config.mjs`)                                         | `MJS×4`             | DONE   |
+| purrfect          | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | DONE   |
+| purrpose          | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | DONE   |
+| purrtrait         | `.prettierrc` (root)    | `+*.mjs`                  | NONE                          | NONE                              | none — no tracked `*.mjs`                                                            | —                   | DONE   |
+| workspace-tooling | `.prettierrc` (root)    | `+*.mjs` (root)           | NONE                          | NONE                              | re-indent 9 `*.mjs` under `cli/esbuild-cli/` + rewrite of pre-existing `plan.md`     | `MJS×9`, `DRIFT`    | DONE   |
 
 Nested configuration found during the scan, outside the root rows:
 
@@ -56,28 +57,28 @@ Nested configuration found during the scan, outside the root rows:
 | Application package                  | Current config path         | `prettier` field                    | `@noodlestan/prettier-config-astro` dep | Expected adoption diff                                               | Status |
 | ------------------------------------ | --------------------------- | ----------------------------------- | --------------------------------------- | -------------------------------------------------------------------- | ------ |
 | `noodlestan-web/apps/noodlestan-web` | `package.json#prettier`     | `@noodlestan/prettier-config-astro` | `0.0.1`                                 | none — already adopted; 19 `*.astro` verified clean                  | DONE   |
-| `artificials/apps/art-md-web`        | NONE (no config, no plugin) | NONE                                | NONE                                    | first-format 12 tracked `*.astro` — wider diff to judge (`ASTRO×12`) | TODO   |
+| `artificials/apps/art-md-web`        | NONE (no config, no plugin) | NONE                                | NONE                                    | first-format 12 tracked `*.astro` — wider diff to judge (`ASTRO×12`) | DONE   |
 
 ## Per-Checkout Adoption Commands
 
 Replay per checkout after both packages are published at `0.1.0` (Recipe steps 1–5; the commit itself is Recipe step 5). `{checkout}` is instantiated below; the expected diff comes from the matrix row.
 
-- `art-domains` — `cd $CHECKOUTS/art-domains && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `art-js` — `cd $CHECKOUTS/art-js && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `art-lib` — `cd $CHECKOUTS/art-lib && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `art-md` — `cd $CHECKOUTS/art-md && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `art-work` — `cd $CHECKOUTS/art-work && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `artificials` — root base config plus the Astro variant in the app, one commit: `cd $CHECKOUTS/artificials && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm install -D -w apps/art-md-web @noodlestan/prettier-config-astro@0.1.0 && npm pkg set -w apps/art-md-web prettier="@noodlestan/prettier-config-astro" && npm run lint:fix`
-- `artisans` — `cd $CHECKOUTS/artisans && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `conventions` — `cd $CHECKOUTS/conventions && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix` — the install updates the existing `0.0.1` dep (`WIRE` resolved).
-- `management` — `cd $CHECKOUTS/management && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `no-comply` — `cd $CHECKOUTS/no-comply && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `ops` — `cd $CHECKOUTS/ops && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix` — only after base `0.1.0` ships the `*.art`/`*.tart` override, else its 4 `.art` files lose markdown formatting (`OPS`).
-- `purrception` — `cd $CHECKOUTS/purrception && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `purrfect` — `cd $CHECKOUTS/purrfect && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `purrpose` — `cd $CHECKOUTS/purrpose && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `purrtrait` — `cd $CHECKOUTS/purrtrait && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
-- `workspace-tooling` — run **last**, after the publish and every other checkout: `cd $CHECKOUTS/workspace-tooling && npm ci && npm install -D @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix` — root `.prettierrc` only; `configs/eslint-config/.prettierrc` stays; the flagged `plan.md` rewrite must be judged before its commit (`DRIFT`).
+- `art-domains` — `cd $CHECKOUTS/art-domains && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `art-js` — `cd $CHECKOUTS/art-js && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `art-lib` — `cd $CHECKOUTS/art-lib && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `art-md` — `cd $CHECKOUTS/art-md && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `art-work` — `cd $CHECKOUTS/art-work && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `artificials` — root base config plus the Astro variant in the app, one commit: `cd $CHECKOUTS/artificials && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm install -D --save-exact -w apps/art-md-web @noodlestan/prettier-config-astro@0.1.0 && npm pkg set -w apps/art-md-web prettier="@noodlestan/prettier-config-astro" && npm run lint:fix`
+- `artisans` — `cd $CHECKOUTS/artisans && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `conventions` — `cd $CHECKOUTS/conventions && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix` — the install updates the existing `0.0.1` dep (`WIRE` resolved).
+- `management` — `cd $CHECKOUTS/management && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `no-comply` — `cd $CHECKOUTS/no-comply && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `ops` — `cd $CHECKOUTS/ops && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix` — only after base `0.1.0` ships the `*.art`/`*.tart` override, else its 4 `.art` files lose markdown formatting (`OPS`).
+- `purrception` — `cd $CHECKOUTS/purrception && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `purrfect` — `cd $CHECKOUTS/purrfect && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `purrpose` — `cd $CHECKOUTS/purrpose && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `purrtrait` — `cd $CHECKOUTS/purrtrait && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix`
+- `workspace-tooling` — run **last**, after the publish and every other checkout: `cd $CHECKOUTS/workspace-tooling && npm ci && npm install -D --save-exact @noodlestan/prettier-config@0.1.0 && rm .prettierrc && npm pkg set prettier="@noodlestan/prettier-config" && npm run lint:fix` — root `.prettierrc` only; `configs/eslint-config/.prettierrc` stays; the flagged `plan.md` rewrite must be judged before its commit (`DRIFT`).
 - `noodlestan-web` — no adoption commands; already adopted. Verify with `npm run lint` only.
 
 ## Batch Summary
@@ -99,38 +100,38 @@ Capture the commit hash per checkout as the adoption iteration runs. One commit 
 
 | Checkout          | Commit hash | Status |
 | ----------------- | ----------- | ------ |
-| art-domains       | (TBD)       | TODO   |
-| art-js            | (TBD)       | TODO   |
-| art-lib           | (TBD)       | TODO   |
-| art-md            | (TBD)       | TODO   |
-| art-work          | (TBD)       | TODO   |
-| artificials       | (TBD)       | TODO   |
-| artisans          | (TBD)       | TODO   |
-| conventions       | (TBD)       | TODO   |
-| management        | (TBD)       | TODO   |
-| no-comply         | (TBD)       | TODO   |
-| ops               | (TBD)       | TODO   |
-| purrception       | (TBD)       | TODO   |
-| purrfect          | (TBD)       | TODO   |
-| purrpose          | (TBD)       | TODO   |
-| purrtrait         | (TBD)       | TODO   |
-| workspace-tooling | (TBD)       | TODO   |
+| art-domains       | 26b4a77     | DONE   |
+| art-js            | ee775a9     | DONE   |
+| art-lib           | f029b44     | DONE   |
+| art-md            | ee4691a     | DONE   |
+| art-work          | 06e5077     | DONE   |
+| artificials       | 426f5be     | DONE   |
+| artisans          | 4bd42af     | DONE   |
+| conventions       | 7108784     | DONE   |
+| management        | 6f2c2da     | DONE   |
+| no-comply         | af3e838     | DONE   |
+| ops               | 49982ac     | DONE   |
+| purrception       | a810da7     | DONE   |
+| purrfect          | a287d30     | DONE   |
+| purrpose          | be089c5     | DONE   |
+| purrtrait         | c84910b     | DONE   |
+| workspace-tooling | 8d5d0c2     | DONE   |
 
 ## Recipe
 
 Replay once per checkout, one commit per checkout on branch `main` with a `NOPUSH` policy. `{checkout}` comes from the matrix; the instantiated command sequences are listed under Per-Checkout Adoption Commands.
 
 1. Setup the checkout — `cd $CHECKOUTS/{checkout} && npm ci` — expected: a clean tree on `main`.
-2. Authorised dependency bump — `npm install -D @noodlestan/prettier-config@0.1.0` (checkout root) — expected: installs or updates the dependency and rewrites `package.json` and `package-lock.json`; rides along in the same commit. For `conventions` this updates the existing `0.0.1` dep.
+2. Authorised dependency bump — `npm install -D --save-exact @noodlestan/prettier-config@0.1.0` (checkout root) — expected: installs or updates the dependency and rewrites `package.json` and `package-lock.json`; rides along in the same commit. For `conventions` this updates the existing `0.0.1` dep.
 3. Config swap — delete `.prettierrc*` and add `"prettier": "@noodlestan/prettier-config"` to the checkout root `package.json`.
-4. Lint — `npm run lint:fix` — expected: passes; the diff contains only the expected `*.mjs` re-indent (tabs). Anything wider is a defect in `$PROJECT` or a pre-existing divergence to judge, never absorbed silently.
+4. Lint — `npm run lint:fix` — expected: passes; the diff contains the expected `*.mjs` re-indent (tabs) plus any first-time `*.art`/`*.tart` markdown formatting under base `0.1.0` (a missing final newline is correct output). Anything wider is a defect in `$PROJECT` or a pre-existing divergence to judge, never absorbed silently.
 5. Commit — stage every file changed for the checkout's row, commit with the iteration blueprint message, and do **not** push (`NOPUSH`); then record the hash in the Commit Log and set the row to `DONE` (that edit stays uncommitted for the planner).
 
 ### Astro application packages
 
 For `artificials`, the same commit also adopts the Astro variant in `apps/art-md-web`:
 
-1. `npm install -D -w apps/art-md-web @noodlestan/prettier-config-astro@0.1.0` (from the checkout root).
+1. `npm install -D --save-exact -w apps/art-md-web @noodlestan/prettier-config-astro@0.1.0` (from the checkout root).
 2. `npm pkg set -w apps/art-md-web prettier="@noodlestan/prettier-config-astro"`.
 3. `npm run lint:fix` from the checkout root — expect the 12 tracked `*.astro` first-format alongside the `*.mjs` re-indent; judge the `*.astro` output, never absorb it silently.
 
