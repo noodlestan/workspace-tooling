@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/prettier-config-astro",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Noodlestan's Prettier formatting configuration with Astro support.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "ci": "npm run lint"
   },
   "dependencies": {
-    "@noodlestan/prettier-config": "0.0.1"
+    "@noodlestan/prettier-config": "0.1.0"
   },
   "peerDependencies": {
     "prettier": "^3.8.4",
