@@ -2,7 +2,7 @@
 
 **ID:** `adopt-prettier-config`
 
-**Status:** `WORKING`
+**Status:** `DONE`
 
 **Template:** `$DOMAINS/plans/templates/plan.tart`
 
@@ -197,13 +197,13 @@ Execution occurs from `$WORKSPACE/`. Package work runs in `$PROJECT` on branch `
 
 ## Items:
 
-| Iteration / Instructions               | Status  |
-| -------------------------------------- | ------- |
-| Iteration: Finalise Release Artefacts  | `DONE`  |
-| Iteration: Inventory Prettier Configs  | `DONE`  |
-| Iteration: Publish Art Tart Override   | `DONE`  |
-| Iteration: Adopt Base Config Ecosystem | `DONE`  |
-| Iteration: Document Adoption           | `DRAFT` |
+| Iteration / Instructions               | Status |
+| -------------------------------------- | ------ |
+| Iteration: Finalise Release Artefacts  | `DONE` |
+| Iteration: Inventory Prettier Configs  | `DONE` |
+| Iteration: Publish Art Tart Override   | `DONE` |
+| Iteration: Adopt Base Config Ecosystem | `DONE` |
+| Iteration: Document Adoption           | `DONE` |
 
 ### Iteration: Finalise Release Artefacts
 
@@ -382,16 +382,43 @@ configs(artificials): Adopt @noodlestan/prettier-config and the Astro variant.
 
 **Id:** `document-adoption`
 
-**Status:** `DRAFT`
+**Status:** `DONE`
 
-**Purpose:** Make the adoption recipe reproducible for the next repository added to the ecosystem.
+**Purpose:** Consolidate `knowledge/*` so it explains how the toolchain works after the Prettier migration.
 
-**Description:** Record the recipe — the `prettier` field, the dependency, the expected diff, and the `lint:fix` command — in the package guide and the project README, and close the matrix. **Not planned** — this iteration is kept `DRAFT`; its instructions and commits are deliberately not written here. The exact changes are:
+**Description:** Compress pass over `knowledge/*`. Provide pointers to package READMEs. Explain how things work, not how they are adopted. Redundant and duplicated sections were deleted across the design and reference documents.
 
-- `$PRETTIER/_guide.md` — the consumer adoption recipe: the `prettier` field, the dependency, `npm run lint:fix`, and the expected `*.mjs` re-indent.
-- `$PRETTIER_ASTRO/_guide.md` — when an application package reaches for the Astro variant (application packages only, never monorepo roots).
-- `$PROJECT/README.md` — the package list and the adoption recipe for a new repository.
-- Confirm every matrix row is `DONE` and no `.prettierrc*` remains outside the config packages.
+**Changes:**
+
+- `knowledge/*` Explains how the toolchain works — engine, contract, defaults, outputs — while installation, examples, and per-option usage stay in each package's README.
+- The package surface covers every published package, including both Prettier config packages and their exports, peers, and pins.
+- Linting documentation covers the base and Astro Prettier configs, the rules they carry, their scope, and how a repository extends them.
+- Build documentation keeps only what a README cannot: command surface, validation, execution model, and outputs.
+- Sections duplicated from package READMEs were dropped rather than restated.
+- Redundant prose and repeated facts were compressed out of the remaining documents.
+- The planned guide and README adoption recipes were dropped rather than written.
+
+**Commits:**
+
+| ID                  | Repository / Checkout / Branch          | Policy   | Hash      | Status      |
+| ------------------- | --------------------------------------- | -------- | --------- | ----------- |
+| `document-adoption` | Workspace Tooling / `$PROJECT` / `main` | `MANUAL` | `d806c14` | `COMMITTED` |
+
+##### Commit: `document-adoption`
+
+**Repository:** Workspace Tooling
+
+**Message:**
+
+```
+docs(workspace-tooling): Consolidate the tooling knowledge base.
+
+- Describe how the toolchain works; installation and usage stay in package READMEs.
+- Document both Prettier config packages in the surface and linting docs.
+- Drop the sections duplicated from package READMEs and compress the rest.
+```
+
+**Policy:** `MANUAL` — the crew executed this commit as `d806c14`, landing it with the README standardisation.
 
 **Dependencies:**
 

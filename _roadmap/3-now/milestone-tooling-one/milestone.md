@@ -127,8 +127,6 @@ The packages that carry the configuration to the ecosystem.
 
 ### (Scope) Consumer Checkouts
 
-Repositories that adopt the configuration; the exact adoption set per plan is fixed by each plan's inventory iteration. Prettier adoption covers every checkout; ESM adoption covers the packages extending transitional tsconfig presets.
-
 | Repository        | Record                                                   | Status |
 | ----------------- | -------------------------------------------------------- | ------ |
 | Art JS            | `$WORKSPACE/_records/repositories/art-js.art`            | -      |
@@ -204,18 +202,18 @@ Execution is coordinated from `$WORKSPACE`. All plan work runs in `$PROJECT` or 
 
 ## Items:
 
-| Phase | Resource / Record                                                                                                 | Status     |
-| ----- | ----------------------------------------------------------------------------------------------------------------- | ---------- |
-| 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/0-archive/2026-10-10-plan-externalize-esbuild-config/plan.md` | `DONE`     |
-| 1     | Plan: Publish Tool Index                                                                                          | -          |
-| 2     | Plan: Add Prettier Config `$PROJECT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md`               | `DONE`     |
-| 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                                 | `DRAFT`    |
-| 2     | Plan: Rename Architecture to Knowledge `$PROJECT/_backlog/1-done/plan-rename-architecture-to-knowledge/plan.md`   | `DONE`     |
-| 2     | Plan: Distribute ADRs as a Package `$PROJECT/_backlog/4-next/plan-distribute-adrs-as-a-package/plan.md`           | `DRAFT`    |
-| 3     | Plan: Adopt Own Configs `$PROJECT/_backlog/4-next/plan-adopt-own-configs/plan.md`                                 | `WORKING`  |
-| 3     | Plan: Adopt ESM `$PROJECT/_backlog/0-archive/2026-10-10-plan-adopt-esm/plan.md`                                   | `DONE`     |
-| 3     | Plan: Adopt Prettier Config `$PROJECT/_backlog/3-now/plan-adopt-prettier-config/plan.md`                          | `PLANNING` |
-| 3     | Plan: Adopt Tooling Decisions `$PROJECT/_backlog/4-next/plan-adopt-tooling-decisions/plan.md`                     | `DRAFT`    |
+| Phase | Resource / Record                                                                                                 | Status    |
+| ----- | ----------------------------------------------------------------------------------------------------------------- | --------- |
+| 1     | Plan: Externalize Esbuild Config `$PROJECT/_backlog/0-archive/2026-10-10-plan-externalize-esbuild-config/plan.md` | `DONE`    |
+| 1     | Plan: Publish Tool Index                                                                                          | -         |
+| 2     | Plan: Add Prettier Config `$PROJECT/_backlog/0-archive/2026-10-10-plan-add-prettier-config/plan.md`               | `DONE`    |
+| 2     | Plan: Add Astro Support `$PROJECT/_backlog/4-next/plan-add-astro-support/plan.md`                                 | `DRAFT`   |
+| 2     | Plan: Rename Architecture to Knowledge `$PROJECT/_backlog/1-done/plan-rename-architecture-to-knowledge/plan.md`   | `DONE`    |
+| 2     | Plan: Distribute ADRs as a Package `$PROJECT/_backlog/4-next/plan-distribute-adrs-as-a-package/plan.md`           | `DRAFT`   |
+| 3     | Plan: Adopt Own Configs `$PROJECT/_backlog/4-next/plan-adopt-own-configs/plan.md`                                 | `WORKING` |
+| 3     | Plan: Adopt ESM `$PROJECT/_backlog/0-archive/2026-10-10-plan-adopt-esm/plan.md`                                   | `DONE`    |
+| 3     | Plan: Adopt Prettier Config `$PROJECT/_backlog/1-done/plan-adopt-prettier-config/plan.md`                         | `DONE`    |
+| 3     | Plan: Adopt Tooling Decisions `$PROJECT/_backlog/4-next/plan-adopt-tooling-decisions/plan.md`                     | `DRAFT`   |
 
 ## Work
 
