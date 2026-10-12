@@ -1,3 +1,3 @@
 export const cjsConfig = {
-  format: 'cjs',
+	format: 'cjs',
 };
