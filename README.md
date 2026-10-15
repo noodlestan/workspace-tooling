@@ -4,6 +4,8 @@
 
 Esbuild CLI wrapper, ESLint config, and base TypeScript configs.
 
+**Keywords:** build-configs, esbuild, eslint, prettier, typescript.
+
 ## Packages
 
 | Package                             | Location                        | Purpose                                                                                                      |

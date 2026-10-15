@@ -2,6 +2,11 @@
   "name": "@noodlestan/prettier-config",
   "version": "0.1.0",
   "description": "Noodlestan's base Prettier formatting configuration.",
+  "keywords": [
+    "prettier",
+    "config",
+    "formatting"
+  ],
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,

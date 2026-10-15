@@ -2,6 +2,10 @@
   "name": "@noodlestan/tsconfig",
   "version": "0.2.1",
   "description": "Base TypeScript configurations for Noodlestan packages (esbuild and vite presets).",
+  "keywords": [
+    "typescript",
+    "config"
+  ],
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,

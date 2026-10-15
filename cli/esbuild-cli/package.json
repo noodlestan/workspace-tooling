@@ -2,6 +2,11 @@
   "name": "@noodlestan/esbuild",
   "version": "0.1.0",
   "description": "esbuild build/watch wrapper for Noodlestan packages",
+  "keywords": [
+    "esbuild",
+    "cli",
+    "build"
+  ],
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,

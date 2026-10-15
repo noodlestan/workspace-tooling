@@ -20,6 +20,12 @@
 
 **Private:** `false`
 
+**Keywords:**
+
+- esbuild
+- cli
+- build
+
 **Deployment:** NPM Package Deployment: ESBuild CLI
 
 **Files:**

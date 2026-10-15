@@ -21,6 +21,14 @@
 - Package: Prettier Config
 - Package: TS Config
 
+**Keywords:**
+
+- build-configs
+- esbuild
+- eslint
+- prettier
+- typescript
+
 **Private:** `true`
 
 **Management:** Uses Workflow: Planning Work with one backlog at `_backlog/`.

@@ -2,6 +2,11 @@
   "name": "@noodlestan/eslint-config",
   "version": "0.0.8",
   "description": "Noodlestan's opinionated style guide configuration (ESLint + Prettier).",
+  "keywords": [
+    "eslint",
+    "config",
+    "linting"
+  ],
   "author": "Noodlestan Collective",
   "license": "MIT",
   "repository": {

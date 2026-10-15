@@ -2,6 +2,11 @@
   "name": "@noodlestan/prettier-config-astro",
   "version": "0.1.0",
   "description": "Noodlestan's Prettier formatting configuration with Astro support.",
+  "keywords": [
+    "prettier",
+    "astro",
+    "formatting"
+  ],
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,
