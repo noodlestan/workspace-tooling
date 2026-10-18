@@ -5,7 +5,9 @@
   "keywords": [
     "prettier",
     "astro",
-    "formatting"
+    "formatting",
+    "tooling",
+    "configs"
   ],
   "author": "Noodlestan Collective",
   "license": "MIT",

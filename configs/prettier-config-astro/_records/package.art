@@ -25,6 +25,8 @@
 - prettier
 - astro
 - formatting
+- tooling
+- configs
 
 **Deployment:** NPM Package Deployment: Prettier Config Astro
 

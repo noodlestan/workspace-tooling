@@ -22,9 +22,11 @@
 
 **Keywords:**
 
-- esbuild
 - cli
+- esbuild
 - build
+- tooling
+- configs
 
 **Deployment:** NPM Package Deployment: ESBuild CLI
 

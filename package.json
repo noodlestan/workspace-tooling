@@ -3,11 +3,8 @@
   "version": "0.0.11",
   "description": "Esbuild CLI wrapper, ESLint config, and base TypeScript configs.",
   "keywords": [
-    "build-configs",
-    "esbuild",
-    "eslint",
-    "prettier",
-    "typescript"
+    "tooling",
+    "configs"
   ],
   "author": "Noodlestan Collective",
   "license": "MIT",

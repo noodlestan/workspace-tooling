@@ -23,8 +23,9 @@
 **Keywords:**
 
 - eslint
-- config
 - linting
+- tooling
+- configs
 
 **Deployment:** NPM Package Deployment: ESLint Config
 

@@ -23,11 +23,8 @@
 
 **Keywords:**
 
-- build-configs
-- esbuild
-- eslint
-- prettier
-- typescript
+- tooling
+- configs
 
 **Private:** `true`
 

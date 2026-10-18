@@ -4,8 +4,9 @@
   "description": "Noodlestan's opinionated style guide configuration (ESLint + Prettier).",
   "keywords": [
     "eslint",
-    "config",
-    "linting"
+    "linting",
+    "tooling",
+    "configs"
   ],
   "author": "Noodlestan Collective",
   "license": "MIT",

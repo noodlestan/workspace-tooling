@@ -4,7 +4,8 @@
   "description": "Base TypeScript configurations for Noodlestan packages (esbuild and vite presets).",
   "keywords": [
     "typescript",
-    "config"
+    "tooling",
+    "configs"
   ],
   "author": "Noodlestan Collective",
   "license": "MIT",

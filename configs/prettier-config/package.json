@@ -4,8 +4,9 @@
   "description": "Noodlestan's base Prettier formatting configuration.",
   "keywords": [
     "prettier",
-    "config",
-    "formatting"
+    "formatting",
+    "tooling",
+    "configs"
   ],
   "author": "Noodlestan Collective",
   "license": "MIT",
