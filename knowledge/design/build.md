@@ -15,17 +15,17 @@ Both bins resolve `build.config.mjs` from the consumer's working directory. Ther
 
 ## Config Contract
 
-The default export is an object with an optional `common` block shared by every target and at least one target, `cjs` or `esm`. `entryPoints` is mandatory, in `common` or in the target.
+The default export is an object with an optional `common` block shared by every target and a `targets` array (or legacy `cjs`/`esm` keys for backward compatibility). Each target is an object with at least a `name` (or is derived) and its own esbuild options. `entryPoints` is mandatory, in `common` or in the target.
 
-**Merge order** — later wins: wrapper `commonConfig` defaults → the consumer's `common` block → the target default (`cjsConfig` / `esmConfig`) → the consumer's `cjs` or `esm` block.
+**Merge order** — later wins: wrapper `commonConfig` defaults → the consumer's `common` block → target-type defaults (e.g. `cjs`/`esm`/custom) → the target-specific config.
 
-**Validation** — the wrapper fails fast, printing a `🟥` message and exiting `1`, when `build.config.mjs` is missing, the default export is not an object, neither `cjs` nor `esm` is declared, or both targets resolve to the same `outdir`.
+**Validation** — the wrapper fails fast, printing a `🟥` message and exiting `1`, when `build.config.mjs` is missing, the default export is not an object, no targets are declared, targets resolve to conflicting outdirs (when required), or targets are misconfigured.
 
-**Wrapper-owned defaults** — `bundle: false`, `sourcemap: true`, `logLevel: 'info'`, `platform: 'node'`, `target: 'node24'`, `outdir: 'dist/'`, and empty `plugins`, `external`, `define`. `format`, `outExtension` and `outdir` are fixed per target. The full option table, and which options consumers override, are in the README.
+**Wrapper-owned defaults** — `bundle: false`, `sourcemap: true`, `logLevel: 'info'`, `platform: 'node'`, `target: 'node24'`, `outdir: 'dist/'`, and empty `plugins`, `external`, `define`. `format`, `outExtension` may be set by target defaults or by the consumer. The full option table, and which options consumers override, are in the README.
 
 ## Execution Model
 
-- **Build.** Targets run sequentially — `cjs` first, then `esm` — each calling `esbuild.build`. The first failure is printed to `stderr` and terminates the process with exit code `1`.
+- **Build.** Targets run in the order declared in `targets` (or in a stable order), each calling `esbuild.build`. The first failure is printed to `stderr` and terminates the process with exit code `1`.
 - **Watch.** Every target gets its own `esbuild.context` and `ctx.watch()`. Contexts start in parallel and are awaited together; a rejection prints the error and exits `1`.
 
 Both paths are one-shot processes: a config is loaded, work is performed, and the process either exits (build) or stays resident (watch). Nothing is persisted by the wrapper.
@@ -39,9 +39,9 @@ Declaration emit is deliberately not built in: it is a consumer decision impleme
 ## Outputs
 
 - Everything lands in `dist/` unless a target overrides `outdir`.
-- The `esm` target emits `.mjs` via `outExtension`; the `cjs` target emits `.js`.
+- Targets control `format` and `outExtension`; common patterns include ESM emitting `.mjs` and CJS emitting `.js`.
 - Source maps are on by default.
-- Because `cjs` and `esm` must use different outdirs, the two formats never overwrite each other.
+- Targets with colliding `outdir` should be avoided unless explicitly intended; the wrapper may enforce distinct outdirs for conflicting formats depending on configuration.
 
 ## Constraints
 
