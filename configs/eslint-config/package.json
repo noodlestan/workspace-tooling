@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/eslint-config",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Noodlestan's opinionated style guide configuration (ESLint + Prettier).",
   "keywords": [
     "eslint",
@@ -48,7 +48,7 @@
   },
   "peerDependencies": {
     "eslint": "^8.57.1",
-    "prettier": "^3.8.4",
+    "prettier": "^3.9.10",
     "typescript": "^5.9.3"
   },
   "devDependencies": {

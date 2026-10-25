@@ -1,7 +1,7 @@
 # CHANGELOG
 
-## Unreleased
+## 0.0.9
 
-### Added
+### Changed
 
-- Placeholder `CHANGELOG.md`. Remove this entry when next version CHANGELOG is generated.
+- **Update dependencies** - `prettier@3.9.10`, `solid-js@1.9.17`, `esbuild@0.28.2` cleans up npm audit.
