@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.1.1
+
+### Changed
+
+- **Update dependencies** - `esbuild@0.28.2` cleans up npm audit.
+
 ## 0.1.0
 
 ### Added

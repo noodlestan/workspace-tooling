@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/esbuild",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "esbuild build/watch wrapper for Noodlestan packages",
   "keywords": [
     "cli",
