@@ -6,7 +6,7 @@
 
 **Purpose:** JavaScript bundler and minifier.
 
-**Version:** `0.28.0`
+**Version:** `0.28.2`
 
 ## Package Dependency: Esbuild Plugin File Path Extensions
 

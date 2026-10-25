@@ -33,9 +33,9 @@
 **Files:**
 
 - `src`
-- `_guide.md`
 - `README.md`
 - `LICENSE-MIT`
+- `CHANGELOG.md`
 
 **Language:** JavaScript (CJS)
 

@@ -15,7 +15,7 @@
     "url": "git+https://github.com/noodlestan/workspace-tooling.git",
     "directory": "configs/eslint-config"
   },
-  "main": ".eslintrc.cjs",
+  "private": false,
   "publishConfig": {
     "access": "public"
   },
@@ -23,8 +23,13 @@
     "src",
     ".eslintrc.cjs",
     "README.md",
-    "LICENSE-MIT"
+    "LICENSE-MIT",
+    "CHANGELOG.md"
   ],
+  "engines": {
+    "node": ">=22"
+  },
+  "main": ".eslintrc.cjs",
   "scripts": {
     "lint": "prettier . -c && eslint .",
     "lint:fix": "prettier . -c --write && eslint . --fix",
@@ -50,8 +55,7 @@
     "@types/eslint": "9.6.1",
     "@types/node": "24.13.0",
     "@typescript-eslint/parser": "8.61.0",
-    "lefthook": "2.1.9",
     "eslint": "8.57.1",
-    "solid-js": "1.9.13"
+    "solid-js": "1.9.17"
   }
 }

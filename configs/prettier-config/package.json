@@ -10,21 +10,30 @@
   ],
   "author": "Noodlestan Collective",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noodlestan/workspace-tooling.git",
+    "directory": "configs/prettier-config"
+  },
   "private": false,
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE-MIT",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
   "main": "./src/index.cjs",
-  "prettier": "./src/index.cjs",
   "exports": {
     ".": "./src/index.cjs",
     "./package.json": "./package.json"
   },
-  "files": [
-    "src",
-    "README.md",
-    "LICENSE-MIT"
-  ],
+  "prettier": "./src/index.cjs",
   "scripts": {
     "lint": "prettier . -c",
     "lint:fix": "prettier . -c --write",
@@ -32,6 +41,6 @@
     "ci": "npm run lint"
   },
   "peerDependencies": {
-    "prettier": "^3.8.4"
+    "prettier": "^3.9.10"
   }
 }
