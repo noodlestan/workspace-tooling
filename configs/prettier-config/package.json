@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/prettier-config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Noodlestan's base Prettier formatting configuration.",
   "keywords": [
     "prettier",

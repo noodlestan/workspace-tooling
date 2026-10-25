@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.1.1
+
+### Changed
+
+- **Update dependencies** - `prettier@3.9.10` cleans up npm audit.
+
 ## 0.1.0
 
 ### Added
