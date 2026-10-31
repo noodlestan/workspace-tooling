@@ -1,0 +1,19 @@
+# Module
+
+## Namespace: Noodlestan
+
+**Purpose:** Publish the shared Noodlestan ecosystem conventions, tools, and components under one canonical npm scope.
+
+**Description:** Packages published from multiple Noodlestan repositories `noodlestan/conventions`, `noodlestan/noodlestan-web`, and `noodlestan/workspace-tooling`.
+
+**Canonical Name:** `@noodlestan`
+
+**Owner:** Project: Noodlestan Management
+
+**Author:** Noodlestan Collective
+
+**Scaffolders:**
+
+- None.
+
+**License:** License: Noodlestan 2026 MIT
