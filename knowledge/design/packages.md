@@ -12,7 +12,7 @@
 | `@noodlestan/prettier-config`       | `configs/prettier-config`       | `0.1.0` | yes    | `"prettier"` field in `package.json`                    |
 | `@noodlestan/prettier-config-astro` | `configs/prettier-config-astro` | `0.1.0` | yes    | `"prettier"` field in an application `package.json`     |
 
-The root package (`@noodlestan/workspace-tooling`, `0.0.11`) is `private: true`. It is a tooling manifest for the monorepo: workspace definition, scripts, and shared dev dependencies. It produces no artefacts and never publishes.
+The root package (`noodlestan/workspace-tooling`, `0.0.11`) is `private: true`. It is a tooling manifest for the monorepo: workspace definition, scripts, and shared dev dependencies. It produces no artefacts and never publishes.
 
 ## Exports and Bins
 
