@@ -1,5 +1,5 @@
 {
-  "name": "@noodlestan/workspace-tooling",
+  "name": "noodlestan/workspace-tooling",
   "version": "0.0.11",
   "description": "Esbuild CLI wrapper, ESLint config, and base TypeScript configs.",
   "keywords": [
