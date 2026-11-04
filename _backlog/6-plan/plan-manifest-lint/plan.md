@@ -18,7 +18,7 @@
 
 ::READ `$DOMAINS/plans/structures/plan.art` (Structure)
 
-::READ `$MANAGEMENT/_ops/packages/policy.md`
+::READ `$WORKSPACE/checkouts/ops/knowledge/design/manifest-policy.md`
 
 ::READ `https://npmpackagejsonlint.org/docs/api`
 

@@ -18,11 +18,11 @@
 
 ::READ `$DOMAINS/milestones/structures/milestone.art` (Structure) — Defines the milestone structure and nested types.
 
-::READ `$MANAGEMENT/_ops/packages/policy.md`
+::READ `$WORKSPACE/checkouts/ops/knowledge/design/manifest-policy.md`
 
-::READ `$MANAGEMENT/_ops/packages/inventory.md`
+::READ `$WORKSPACE/checkouts/ops/knowledge/package-inventory.md`
 
-::READ `$MANAGEMENT/_ops/packages/dependencies.md`
+::READ `$WORKSPACE/checkouts/ops/knowledge/design/dependencies.md`
 
 ---
 
@@ -30,7 +30,7 @@
 
 **Upstream:**
 
-- Policy: `$MANAGEMENT/_ops/packages/policy.md`
+- Policy: `$WORKSPACE/checkouts/ops/knowledge/design/manifest-policy.md`
 - npm-package-json-lint: https://npmpackagejsonlint.org/docs/api
 
 **Scope:**

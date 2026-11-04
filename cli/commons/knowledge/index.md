@@ -1,12 +1,6 @@
-# Knowledge: Commons CLI
+# Knowledge: Commons Registry Tools
 
-## Documents
+The Commons Registry Indexer and Commons Registry Peer are hosted in `noodlestan/noodle-commons`. Their specifications are maintained in that repository:
 
-| Document                                     | Purpose                                                                                  |
-| -------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `overview.md` _(planned)_                    | What `@noodlestan/commons` is, its command surface, and its endpoint-first reading rules |
-| `dependencies.md` _(planned)_                | The registry endpoints and manifest data sources it consumes                             |
-| `design/cli.md` _(planned)_                  | Commands, exit codes, configuration, overrides                                           |
-| `design/reference-resolution.md` _(planned)_ | Source artefact → object → endpoint → lookup resolution map                              |
-
-Package home: `$WORKSPACE_TOOLING/cli/commons`.
+- Commons Registry Indexer (`@noodle-commons/indexer`, binary `commons-indexer-cli`): `$WORKSPACE/checkouts/noodle-commons/knowledge/design/commons-indexer.md`
+- Commons Registry Peer (`@noodle-commons/peer`, binary `commons-peer-cli`): `$WORKSPACE/checkouts/noodle-commons/knowledge/design/commons-peer.md`

@@ -18,9 +18,9 @@
 
 ::READ `$DOMAINS/plans/structures/plan.art` (Structure)
 
-::READ `$MANAGEMENT/_ops/packages/policy.md`
+::READ `$WORKSPACE/checkouts/ops/knowledge/design/manifest-policy.md`
 
-::READ `$MANAGEMENT/_ops/packages/inventory.md`
+::READ `$WORKSPACE/checkouts/ops/knowledge/package-inventory.md`
 
 ---
 

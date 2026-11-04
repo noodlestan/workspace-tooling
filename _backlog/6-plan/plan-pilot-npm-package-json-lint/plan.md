@@ -12,13 +12,13 @@
 
 **Purpose:** Pilot npm-package-json-lint in workspace-tooling and create the shared Noodlestan config package.
 
-**Description:** Test https://npmpackagejsonlint.org/docs/api in workspace-tooling. Create `configs/package-json-lint` as package `@noodlestan/package-json-lint-config` (canonical). Encode policy rules from `$MANAGEMENT/_ops/packages/policy.md` into the config. Validate against existing manifests.
+**Description:** Test https://npmpackagejsonlint.org/docs/api in workspace-tooling. Create `configs/package-json-lint` as package `@noodlestan/package-json-lint-config` (canonical). Encode policy rules from `$WORKSPACE/checkouts/ops/knowledge/design/manifest-policy.md` into the config. Validate against existing manifests.
 
 ## Mandatory Reading
 
 ::READ `$DOMAINS/plans/structures/plan.art` (Structure) — Describe the work-item changes through a series of iterations and commits with detailed instructions.
 
-::READ `$MANAGEMENT/_ops/packages/policy.md`
+::READ `$WORKSPACE/checkouts/ops/knowledge/design/manifest-policy.md`
 
 ::READ `https://npmpackagejsonlint.org/docs/api`
 
@@ -29,7 +29,7 @@
 **Upstream:**
 
 - Milestone: `../_roadmap/4-next/milestone-manifest-lint/milestone.md`
-- Policy: `$MANAGEMENT/_ops/packages/policy.md`
+- Policy: `$WORKSPACE/checkouts/ops/knowledge/design/manifest-policy.md`
 - npm-package-json-lint API docs
 
 **Scope:**
